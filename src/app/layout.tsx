@@ -1,4 +1,5 @@
 // Packages
+import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
@@ -6,10 +7,13 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { cn } from '@/lib/utils';
 
 // Components
-import { MainLayout } from '@/components/layouts';
+const MainLayout = dynamic(() => import('../components/layouts/main-layout').then((mod) => mod.MainLayout), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 // Style
-import './index.css';
+import '@/index.css';
 
 // Assets
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-sans' });
