@@ -1,0 +1,18 @@
+{
+  "name": "Next-Nostr-Starter-Kit",
+  "short_name": "Next-Nostr-Starter-Kit",
+  "description": "",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#000",
+  "icons": [
+    {
+      "src": "/",
+      "sizes": "1000x1000",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait",
+  "prefer_related_applications": false
+}
