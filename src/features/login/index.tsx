@@ -12,9 +12,13 @@ export function Login() {
   const router = useRouter();
 
   // Validate if have active session
-
   const { activeUser } = useActiveUser();
   const { loginWithExtention } = useLogin();
+
+  if (activeUser) {
+    router.push('/');
+    return null;
+  }
 
   return (
     <>
@@ -35,11 +39,9 @@ export function Login() {
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='extension'>
               <div className='flex flex-col gap-2'>
-                {!activeUser && (
-                  <Button className='w-full' onClick={() => loginWithExtention()} disabled={false}>
-                    Login with extension
-                  </Button>
-                )}
+                <Button className='w-full' onClick={() => loginWithExtention()} disabled={false}>
+                  Login with extension
+                </Button>
                 <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
                   Back to home
                 </Button>
