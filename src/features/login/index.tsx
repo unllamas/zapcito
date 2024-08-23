@@ -2,20 +2,18 @@
 
 // Packages
 import { useRouter } from 'next/navigation';
-import { useLogin } from 'nostr-hooks';
+import { useActiveUser, useLogin } from 'nostr-hooks';
 
 // Components
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useUser } from '@/hooks/use-user';
 
 export function Login() {
   const router = useRouter();
 
   // Validate if have active session
-  const { activeUser } = useUser();
-  if (activeUser?.pubkey) router.push('/');
 
+  const { activeUser } = useActiveUser();
   const { loginWithExtention } = useLogin();
 
   return (
@@ -37,15 +35,17 @@ export function Login() {
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='extension'>
               <div className='flex flex-col gap-2'>
-                <Button className='w-full' onClick={() => loginWithExtention()} disabled={false}>
-                  Login with extension
-                </Button>
+                {!activeUser && (
+                  <Button className='w-full' onClick={() => loginWithExtention()} disabled={false}>
+                    Login with extension
+                  </Button>
+                )}
                 <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
                   Back to home
                 </Button>
               </div>
               <div className='flex flex-col text-sm text-center'>
-                <p className='text-gray-500'>Don't have one installed yet?</p>
+                <p className='text-gray-500'>Not have one installed yet?</p>
                 <div className='flex justify-center items-center gap-1 text-sm'>
                   <span>We recommend installing </span>
                   <Button variant='link' size='sm' className='p-0 text-md' asChild>

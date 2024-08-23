@@ -1,18 +1,11 @@
-'use client';
-
 // Packages
 import Link from 'next/link';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
-
-// Libs and hooks
-import { useUser } from '@/hooks/use-user';
 
 // Components
 import { Button } from '@/components/ui/button';
 
 export function Home() {
-  const { activeUser } = useUser();
-
   return (
     <>
       <div className='flex flex-col justify-center items-center gap-6 max-w-[400px] h-full mx-auto'>
@@ -25,11 +18,9 @@ export function Home() {
               <p className='ml-2'>GitHub</p>
             </Link>
           </Button>
-          {!activeUser && (
-            <Button variant='secondary' asChild>
-              <Link href='/login'>Login test</Link>
-            </Button>
-          )}
+          <Button variant='secondary' asChild>
+            <Link href='/login'>Login test</Link>
+          </Button>
         </div>
       </div>
     </>
