@@ -91,7 +91,6 @@ features
     - [x] Autologin
 - [ ] Profile
     - [x] Get profile
-    - [ ] Get profiles
     - [ ] Edit profile
 - [ ] Events
     - [ ] Get events
@@ -103,6 +102,10 @@ features
 - [ ] Local databases
     - [x] Auth
     - [ ] Profiles
+
+## License
+
+**Next-Nostr-Starter-Kit** is open-source software licensed under the MIT license.
 
 ## 🩷 Donations
 
