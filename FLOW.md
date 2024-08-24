@@ -33,13 +33,15 @@ This document is work in progress. Information is probably outdated. Dont't trus
 
 The database is managed using `Dexie`, a library that simplifies interaction with [IndexedDB](https://developer.mozilla.org/es/docs/Web/API/IndexedDB_API). 
 
-In this case, the database is named `example` and contains a single table called `auth`, which stores objects with the following fields:
-
-- `id`: Public key on hex.
-- `secret`: Private key on hex.
+In this case, the database is named `example` and contains a single table called `auth`:
 
 ``` javascript
 import Dexie, { Table } from 'dexie';
+
+export interface Auth {
+  id: string; // Public key on hex
+  secret: string; // Private key on hex
+}
 
 class ExampleDB extends Dexie {
   auth!: Table<Auth, string>;
