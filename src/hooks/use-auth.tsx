@@ -10,7 +10,7 @@ import { useAuthStore } from '@/stores/use-auth-store';
 import { useProfile } from './use-profile';
 
 // Types
-import { Auth } from '@/lib/indexeddb';
+import { Auth } from '@/lib/database';
 
 export const useAuth = () => {
   const router = useRouter();

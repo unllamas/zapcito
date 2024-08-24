@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Auth, database } from '@/lib/indexeddb';
+import { Auth, database } from '@/lib/database';
 
 // Define store interfaces
 interface AuthProps {
