@@ -42,7 +42,7 @@ In this case, the database is named `example` and contains a single table called
 const database = new Dexie('example');
 
 database.version(1).stores({
-  auth: '++id, count',
+  auth: 'id, count',
 });
 
 export const database
