@@ -118,7 +118,7 @@ features
     - [ ] Edit event
 - [ ] Relays
     - [ ] Add or remove relays
-- [ ] Local databases
+- [ ] Database Structure
     - [x] Auth
     - [ ] Profiles
 
