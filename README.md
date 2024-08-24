@@ -75,4 +75,5 @@ features
     └── components
     └── config
     └── hooks
+    └── index.(tsx)
 ```
