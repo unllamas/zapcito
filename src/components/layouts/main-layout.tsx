@@ -4,6 +4,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
+import { LaWalletProvider } from '@lawallet/react';
 import { useActiveUser, useAutoLogin, useLogin, useNostrHooks } from 'nostr-hooks';
 
 // Components
@@ -20,17 +21,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+// Config
+import { paymentConfig } from '@/config/payment';
+
 // Icons
 import { ExitIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
-import { config } from '@/config/payment';
-import { LaWalletConfig } from '@lawallet/react';
 
 function UserAuth() {
   useAutoLogin();
 
   // const router = useRouter();
   const { logout } = useLogin();
-
   const { activeUser } = useActiveUser({ fetchProfile: true });
 
   return (
@@ -110,7 +111,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   useNostrHooks();
 
   return (
-    <LaWalletConfig config={config}>
+    <LaWalletProvider config={paymentConfig}>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
         <div className='flex justify-end items-center max-w-[1024px] h-full mx-auto'>
           <div className='flex items-center gap-2'>
@@ -126,6 +127,6 @@ export function MainLayout({ children }: MainLayoutProps) {
       </nav>
 
       {children}
-    </LaWalletConfig>
+    </LaWalletProvider>
   );
 }

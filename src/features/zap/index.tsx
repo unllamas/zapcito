@@ -40,10 +40,10 @@ export function Zap() {
               <div className='flex flex-col gap-2 px-4'>
                 <h3 className='font-bold text-md text-center'>Select a value</h3>
                 <div className='grid grid-cols-3 gap-1'>
-                  {ZAP_AMOUNTS?.map((zap) => {
+                  {ZAP_AMOUNTS?.map((zap, key) => {
                     return (
                       <Button
-                        key={zap.id}
+                        key={key}
                         className='flex-1'
                         size='sm'
                         variant={amount === zap.amount ? 'secondary' : 'outline'}

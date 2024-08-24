@@ -4,7 +4,7 @@ import { RELAYS } from './constants';
 
 const signer = createSignerWithPrivateKey(process.env.SIGNER_KEY || '');
 
-export const config = createConfig({
+export const paymentConfig = createConfig({
   federationId: 'lawallet.ar',
   endpoints: {
     lightningDomain: 'https://lawallet.ar',

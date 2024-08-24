@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useZap as useZapHandle } from '@lawallet/react';
 import { toast } from 'sonner';
 
-import { config } from '@/config/payment';
-
 // Internal
 import { DEFAULT_PUBKEY } from '../config/constants';
 
@@ -15,7 +13,6 @@ export const useZap = () => {
 
   const { invoice, createZapInvoice } = useZapHandle({
     receiverPubkey: DEFAULT_PUBKEY,
-    config,
   });
 
   const handleGenerate = async () => {
@@ -36,7 +33,7 @@ export const useZap = () => {
     setComment('');
     setTimeout(() => {
       setScreen('information');
-    }, 1000);
+    }, 1200);
   };
 
   const handleCopy = (value: string) => {
