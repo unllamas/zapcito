@@ -7,6 +7,7 @@ import { useActiveUser, useLogin } from 'nostr-hooks';
 // Components
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 
 export function Login() {
   const router = useRouter();
@@ -23,7 +24,7 @@ export function Login() {
   return (
     <>
       <div className='flex justify-center items-center h-screen w-full bg-background'>
-        <div className='container mx-auto flex max-w-md flex-col items-center gap-4 px-4'>
+        <div className='flex flex-col items-center gap-4 max-w-md px-4'>
           <div className='flex flex-col gap-2 text-center'>
             <h2 className='text-semibold text-lg'>Login</h2>
             <p className='text-gray-500'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -43,7 +44,8 @@ export function Login() {
                   Login with extension
                 </Button>
                 <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
-                  Back to home
+                  <ArrowLeftIcon />
+                  <p className='ml-2'>Back to home</p>
                 </Button>
               </div>
               <div className='flex flex-col text-sm text-center'>

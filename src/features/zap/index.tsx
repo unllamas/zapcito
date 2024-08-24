@@ -15,6 +15,7 @@ import { Textarea } from '@/components/ui/textarea';
 
 // Mock
 import { ZAP_AMOUNTS } from './config';
+import { CopyIcon, LightningBoltIcon } from '@radix-ui/react-icons';
 
 export function Zap() {
   // Flow
@@ -27,7 +28,10 @@ export function Zap() {
     <>
       <Drawer onClose={reset} open={open && screen !== 'finished'} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <Button className='flex-1'>Zapeame</Button>
+          <Button className='flex-1'>
+            <LightningBoltIcon />
+            <p className='ml-2'>Zap me!</p>
+          </Button>
         </DrawerTrigger>
         <DrawerContent className='max-w-[400px] mx-auto'>
           {/* Content */}
@@ -112,7 +116,8 @@ export function Zap() {
                   Pay con wallet
                 </Button>
                 <Button className='w-full' onClick={() => copy(invoice?.bolt11.toLowerCase())}>
-                  Copy
+                  <CopyIcon />
+                  <p className='ml-2'>Copy</p>
                 </Button>
               </div>
             )}
