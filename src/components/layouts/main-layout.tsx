@@ -22,11 +22,13 @@ import {
 
 // Icons
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { config } from '@/config/payment';
+import { LaWalletConfig } from '@lawallet/react';
 
 function UserAuth() {
   useAutoLogin();
 
-  const router = useRouter();
+  // const router = useRouter();
   const { logout } = useLogin();
 
   const { activeUser } = useActiveUser({ fetchProfile: true });
@@ -71,12 +73,12 @@ function UserAuth() {
                 )}
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className='bg-card' />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push(`/p/${activeUser?.pubkey || activeUser?.npub}`)}>
+              {/* <DropdownMenuItem onClick={() => router.push(`/p/${activeUser?.pubkey || activeUser?.npub}`)}>
                 Profile
-                {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
-              </DropdownMenuItem>
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </DropdownMenuItem> */}
               {/* <DropdownMenuItem>
               Billing
               <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
@@ -87,7 +89,7 @@ function UserAuth() {
             </DropdownMenuItem> */}
               {/* <DropdownMenuItem>New Team</DropdownMenuItem> */}
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator /> */}
             <DropdownMenuItem onClick={logout}>
               Cerrar sesión
               {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
@@ -107,7 +109,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   useNostrHooks();
 
   return (
-    <>
+    <LaWalletConfig config={config}>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
         <div className='flex justify-end items-center max-w-[1024px] h-full mx-auto'>
           <div className='flex items-center gap-2'>
@@ -123,6 +125,6 @@ export function MainLayout({ children }: MainLayoutProps) {
       </nav>
 
       {children}
-    </>
+    </LaWalletConfig>
   );
 }
