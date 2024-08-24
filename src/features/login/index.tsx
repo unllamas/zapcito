@@ -82,19 +82,19 @@ export function Login() {
             </TabsContent> */}
             <TabsContent className='flex flex-col gap-4' value='secret'>
               <div className='flex flex-col gap-2'>
-                <Label htmlFor='secret'>Tu clave secreta</Label>
+                <Label htmlFor='secret'>Your private key</Label>
                 <div className='relative w-full'>
                   <Input
                     className='pr-[70px]'
                     id='secret'
                     type='password'
-                    placeholder='Formato hex o nsec...'
+                    placeholder='Format hex or nsec...'
                     value={secret}
                     onChange={(e) => setSecret(e.target.value)}
                   />
                   <div className='absolute top-0 right-[2px] flex items-center h-full'>
                     <Button variant='ghost' size='sm' onClick={handlePasteInput}>
-                      Pegar
+                      Paste
                     </Button>
                   </div>
                 </div>
