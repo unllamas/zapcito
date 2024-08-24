@@ -42,9 +42,8 @@ See the section about [deployment](https://vitejs.dev/guide/static-deploy) for m
 
 ## 🔐 Environment Variables
 
-The **Next-Nostr-Starter-Kit** uses environment variables to manage configuration settings. These variables are stored in a `.env` file in the root directory of the project.
 
-Setting up the `.env` file:
+Create `.env` file:
 
 ```sh
 # Analytics
