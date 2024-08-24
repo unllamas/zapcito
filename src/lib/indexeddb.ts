@@ -1,9 +1,8 @@
 import Dexie, { Table } from 'dexie';
 
-// Define interfaces
 export interface Auth {
-  id: string;
-  secret: string;
+  id: string; // Public key on hex
+  secret: string; // Private key on hex
 }
 
 // Create db
