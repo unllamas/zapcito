@@ -101,7 +101,7 @@ features
 - [ ] Relays
     - [ ] Add or remove relays
 - [ ] Local databases
-    - [x] User
+    - [x] Auth
     - [ ] Profiles
 
 ## 🩷 Donations
