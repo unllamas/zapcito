@@ -103,6 +103,10 @@ features
     - [x] Auth
     - [ ] Profiles
 
+### Supports NIP's 
+
+- [x] NIP-01: Basic protocol flow description
+
 ## License
 
 **Next-Nostr-Starter-Kit** is open-source software licensed under the MIT license.
