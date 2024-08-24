@@ -77,8 +77,5 @@ features
     └── components      # Example folder
     └── config          # Example folder
     └── hooks           # Example folder
-    └── lib             # Example folder
-    └── store           # Example folder
-    └── types           # Example folder
     └── index.(tsx)
 ```

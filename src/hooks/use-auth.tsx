@@ -41,15 +41,17 @@ export const useAuth = () => {
 
     try {
       const pubkey: string = getPublicKey(secretKey);
-      const username: string = await getUsername(pubkey, config);
+      // const username: string = await getUsername(pubkey, config);
 
-      if (!username.length) {
-        toast.warning('No user found.');
-        setLoading(false);
-        return;
-      }
+      // console.log('username', username);
 
-      identity.initializeFromPrivateKey(secretKey, username).then((res) => {
+      // if (!username.length) {
+      //   toast.warning('No user found.');
+      //   setLoading(false);
+      //   return;
+      // }
+
+      identity.initializeFromPrivateKey(secretKey).then((res) => {
         if (res) {
           const IdentityToSave: Auth = {
             id: pubkey,
