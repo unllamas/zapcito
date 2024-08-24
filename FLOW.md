@@ -39,11 +39,18 @@ In this case, the database is named `example` and contains a single table called
 - `secret`: Private key on hex.
 
 ``` javascript
-const database = new Dexie('example');
+import Dexie, { Table } from 'dexie';
 
-database.version(1).stores({
-  auth: 'id, count',
-});
+class ExampleDB extends Dexie {
+  auth!: Table<Auth, string>;
 
-export const database
+  constructor() {
+    super('example');
+    this.version(1).stores({
+      auth: 'id, secret',
+    });
+  }
+}
+
+export const database = new ExampleDB();
 ```
