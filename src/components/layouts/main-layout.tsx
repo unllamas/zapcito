@@ -63,8 +63,8 @@ function UserAuth() {
               <div className='flex flex-col space-y-1'>
                 {!profile?.displayName && (!profile?.lud16 || !profile?.nip05) ? (
                   <>
-                    <p className='text-sm font-medium leading-none'>Hola,</p>
-                    <p className='text-xs leading-none text-muted-foreground'>Annonymous</p>
+                    <p className='text-sm font-medium leading-none'>Hello,</p>
+                    <p className='text-xs leading-none text-muted-foreground'>Anonymous</p>
                   </>
                 ) : (
                   <>
