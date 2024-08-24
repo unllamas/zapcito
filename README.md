@@ -83,6 +83,7 @@ features
 ## 📋 Roadmap
 
 - [x] Generate invoice
+    - [x] Pay with extension
 - [ ] Auth system
     - [x] Login with private key
     - [ ] Login with extension
