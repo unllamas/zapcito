@@ -85,6 +85,7 @@ features
 - [x] Generate invoice
     - [x] Pay with extension
 - [ ] Auth system
+    - [ ] Generate new private key
     - [x] Login with private key
     - [ ] Login with extension
     - [x] Autologin

@@ -1,8 +1,7 @@
 // Packages
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useConfig, useIdentity, useNostr } from '@lawallet/react';
-import { getUsername } from '@lawallet/react/actions';
+import { useIdentity, useNostr } from '@lawallet/react';
 import { getPublicKey } from '@lawallet/nostr-tools';
 import { toast } from 'sonner';
 
@@ -23,7 +22,6 @@ export const useAuth = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   // Internal
-  const config = useConfig();
   const identity = useIdentity();
 
   const { handleAdd, handleGet, handleDelete } = useAuthStore();
