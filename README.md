@@ -47,21 +47,32 @@ Most of the code lives in the `src` folder and looks something like this:
 ```sh
 src
 ├── app
-│   └── index.(css)
 │   └── layout.(tsx)
 │   └── page.(tsx)
 │   └── login
 │       └── page.(tsx)
 ├── components
-│   └── layouts
-│   └── ui
+│   └── layouts         # Folder for different layouts
+│   └── ui              # Atomic components
 ├── config
-│   └── constants
+│   └── config.(tsx)
+│   └── constants.(tsx)
 ├── features
 │   └── home
 │   └── login
 ├── hooks
 │   └── use-user.(tsx)
-└── lib
-    └── utils.(tsx)
+├── lib
+│   └── utils.(tsx)
+└── index.(css)
+```
+
+If you want to create a `feature`, we recommend following the same general structure:
+
+```sh
+features
+└── example
+    └── components
+    └── config
+    └── hooks
 ```
