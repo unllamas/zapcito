@@ -5,7 +5,10 @@ import * as React from 'react';
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
 import { LaWalletProvider } from '@lawallet/react';
-import { useActiveUser, useAutoLogin, useLogin, useNostrHooks } from 'nostr-hooks';
+import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
+
+// Libs and hooks
+import { useAuth } from '@/hooks/use-auth';
 
 // Components
 import { Button } from '@/components/ui/button';
@@ -31,12 +34,11 @@ function UserAuth() {
   useAutoLogin();
 
   // const router = useRouter();
-  const { logout } = useLogin();
-  const { activeUser } = useActiveUser({ fetchProfile: true });
+  const { user, profile, logout } = useAuth();
 
   return (
     <>
-      {!activeUser ? (
+      {!user ? (
         <Button variant='link' asChild>
           <Link href='/login' className='menu_link' id='login'>
             Login
@@ -46,10 +48,10 @@ function UserAuth() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='secondary' className='relative h-8 w-8 rounded-full'>
-              {activeUser?.profile?.image ? (
+              {profile?.image ? (
                 <Avatar className='h-9 w-9'>
-                  <AvatarImage loading='lazy' src={activeUser?.profile?.image || '/profile.png'} />
-                  <AvatarFallback>{activeUser?.profile?.displayName?.slice(0, 2).toUpperCase()}</AvatarFallback>
+                  <AvatarImage loading='lazy' src={profile?.image || '/profile.png'} />
+                  <AvatarFallback>{profile?.displayName?.slice(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
               ) : (
                 <Skeleton className='w-9 h-9 bg-card' />
@@ -59,17 +61,15 @@ function UserAuth() {
           <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
               <div className='flex flex-col space-y-1'>
-                {!activeUser?.profile?.displayName && (!activeUser?.profile?.lud16 || !activeUser?.profile?.nip05) ? (
+                {!profile?.displayName && (!profile?.lud16 || !profile?.nip05) ? (
                   <>
                     <p className='text-sm font-medium leading-none'>Hola,</p>
                     <p className='text-xs leading-none text-muted-foreground'>Annonymous</p>
                   </>
                 ) : (
                   <>
-                    <p className='text-sm font-medium leading-none'>{activeUser?.profile?.displayName}</p>
-                    <p className='text-xs leading-none text-muted-foreground'>
-                      {activeUser?.profile?.lud16 || activeUser?.profile?.nip05}
-                    </p>
+                    <p className='text-sm font-medium leading-none'>{profile?.displayName}</p>
+                    <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || profile?.nip05}</p>
                   </>
                 )}
               </div>

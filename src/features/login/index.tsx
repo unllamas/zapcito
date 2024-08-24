@@ -1,25 +1,45 @@
 'use client';
 
 // Packages
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useActiveUser, useLogin } from 'nostr-hooks';
+// import { useLogin } from 'nostr-hooks';
+import { toast } from 'sonner';
+
+// Libs and hooks
+import { useAuth } from '@/hooks/use-auth';
 
 // Components
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 export function Login() {
+  // Flow
+  const [secret, setSecret] = useState<string>('');
+
+  // Libs and hooks
   const router = useRouter();
 
-  // Validate if have active session
-  const { activeUser } = useActiveUser();
-  const { loginWithExtention } = useLogin();
+  // const { loginWithExtention } = useLogin();
+  const { user, loading, loginWithSecretKey } = useAuth();
 
-  if (activeUser) {
+  if (user) {
     router.push('/');
     return null;
   }
+
+  const handlePasteInput = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      setSecret(text);
+    } catch (error) {
+      toast.info('Oops...');
+      return null;
+    }
+  };
 
   return (
     <>
@@ -29,16 +49,16 @@ export function Login() {
             <h2 className='text-semibold text-lg'>Login</h2>
             <p className='text-gray-500'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
-          <Tabs defaultValue='extension' className='w-full'>
+          <Tabs defaultValue='secret' className='w-full'>
             <TabsList className='w-full bg-card'>
-              <TabsTrigger className='flex-1' value='extension'>
+              <TabsTrigger className='flex-1' value='extension' disabled>
                 Extension
               </TabsTrigger>
-              <TabsTrigger className='flex-1' value='secret' disabled>
+              <TabsTrigger className='flex-1' value='secret'>
                 Secret key
               </TabsTrigger>
             </TabsList>
-            <TabsContent className='flex flex-col gap-4' value='extension'>
+            {/* <TabsContent className='flex flex-col gap-4' value='extension'>
               <div className='flex flex-col gap-2'>
                 <Button className='w-full' onClick={() => loginWithExtention()} disabled={false}>
                   Login with extension
@@ -59,45 +79,46 @@ export function Login() {
                   </Button>
                 </div>
               </div>
-            </TabsContent>
-            {/* <TabsContent className="flex flex-col gap-4" value="secret">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="secret">Tu clave secreta</Label>
-              <div className="relative w-full">
-                <Input
-                  className="pr-[70px]"
-                  id="secret"
-                  type="password"
-                  placeholder="Formato hex o nsec..."
-                  value={secret}
-                  onChange={(e) => setSecret(e.target.value)}
-                />
-                <div className="absolute top-0 right-[2px] flex items-center h-full">
-                  <Button variant="ghost" size="sm" onClick={handlePasteInput}>
-                    Pegar
-                  </Button>
+            </TabsContent> */}
+            <TabsContent className='flex flex-col gap-4' value='secret'>
+              <div className='flex flex-col gap-2'>
+                <Label htmlFor='secret'>Tu clave secreta</Label>
+                <div className='relative w-full'>
+                  <Input
+                    className='pr-[70px]'
+                    id='secret'
+                    type='password'
+                    placeholder='Formato hex o nsec...'
+                    value={secret}
+                    onChange={(e) => setSecret(e.target.value)}
+                  />
+                  <div className='absolute top-0 right-[2px] flex items-center h-full'>
+                    <Button variant='ghost' size='sm' onClick={handlePasteInput}>
+                      Pegar
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <Button
-                className="w-full"
-                disabled={!secret}
-                onClick={() => loginWithSecretKey({ secretKey: secret })}
-              >
-                Ingresar
-              </Button>
-              <Button className="w-full" onClick={() => navigate('/')} variant="ghost">
-                Volver al inicio
-              </Button>
-            </div>
-            <div className="text-sm text-center">
-              <p className="text-gray-500">¿Aún no tenés?</p>
-              <Button variant="link" size="sm" asChild>
-                <a href="">Generar una aleatoria</a>
-              </Button>
-            </div>
-          </TabsContent> */}
+              <div className='flex flex-col gap-2'>
+                <Button
+                  className='w-full'
+                  disabled={!secret || loading}
+                  onClick={() => loginWithSecretKey({ secretKey: secret })}
+                >
+                  {loading ? 'Loading' : 'Login'}
+                </Button>
+                <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
+                  <ArrowLeftIcon />
+                  <p className='ml-2'>Back to home</p>
+                </Button>
+              </div>
+              {/* <div className='text-sm text-center'>
+                <p className='text-gray-500'>¿Aún no tenés?</p>
+                <Button variant='link' size='sm' asChild>
+                  <a href=''>Generar una aleatoria</a>
+                </Button>
+              </div> */}
+            </TabsContent>
           </Tabs>
         </div>
       </div>

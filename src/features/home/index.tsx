@@ -3,7 +3,6 @@
 // Packages
 import Link from 'next/link';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { useProfile } from 'nostr-hooks';
 
 // Components
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { Zap } from '../zap';
-// import { useAuth } from '@/hooks/use-auth';
+import { useProfile } from '@/hooks/use-profile';
 
 export function Home() {
   const { profile } = useProfile({ pubkey: 'cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547' });
