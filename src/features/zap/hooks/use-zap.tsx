@@ -4,17 +4,17 @@ import { toast } from 'sonner';
 
 import { config } from '@/config/payment';
 
+// Internal
+import { DEFAULT_PUBKEY } from '../config/constants';
+
 export const useZap = () => {
   const [amount, setAmount] = useState(0);
   const [comment, setComment] = useState('');
   const [screen, setScreen] = useState<'information' | 'payment' | 'finished'>('information');
   const [processing, setProcessing] = useState(false);
 
-  // dios@lawallet.ar
-  const userPubkey: string = 'cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547';
-
   const { invoice, createZapInvoice } = useZapHandle({
-    receiverPubkey: userPubkey,
+    receiverPubkey: DEFAULT_PUBKEY,
     config,
   });
 
