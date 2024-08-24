@@ -41,15 +41,6 @@ export const useAuth = () => {
 
     try {
       const pubkey: string = getPublicKey(secretKey);
-      // const username: string = await getUsername(pubkey, config);
-
-      // console.log('username', username);
-
-      // if (!username.length) {
-      //   toast.warning('No user found.');
-      //   setLoading(false);
-      //   return;
-      // }
 
       identity.initializeFromPrivateKey(secretKey).then((res) => {
         if (res) {
