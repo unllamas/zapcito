@@ -72,14 +72,14 @@ export default function RootLayout(props: RootLayoutProps) {
         {/* Manifest */}
         <link rel='manifest' href='/manifest.json' />
       </head>
-      <GoogleTagManager gtmId={process.env.TM_KEY || ''} />
       <body className={cn('flex min-w-[100dvw] min-h-[100dvh] overflow-x-hidden antialiased', montserrat.variable)}>
         <div className='w-full min-h-full' id='root'>
           <MainLayout>{children}</MainLayout>
         </div>
         <Toaster />
+        {process.env.TM_KEY && <GoogleTagManager gtmId={process.env.TM_KEY || ''} />}
+        {process.env.GA_KEY && <GoogleAnalytics gaId={process.env.GA_KEY || ''} />}
       </body>
-      <GoogleAnalytics gaId={process.env.GA_KEY || ''} />
     </html>
   );
 }
