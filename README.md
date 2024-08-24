@@ -55,15 +55,17 @@ src
 │   └── layouts         # Folder for different layouts
 │   └── ui              # Atomic components
 ├── config
-│   └── config.(tsx)
 │   └── constants.(tsx)
+│   └── payment.(tsx)
 ├── features
 │   └── home
 │   └── login
+│   └── zap
 ├── hooks
-│   └── use-user.(tsx)
 ├── lib
 │   └── utils.(tsx)
+├── store
+├── types
 └── index.(css)
 ```
 
@@ -72,8 +74,8 @@ If you want to create a `feature`, we recommend following the same general struc
 ```sh
 features
 └── example
-    └── components
-    └── config
-    └── hooks
+    └── components      # Example folder
+    └── config          # Example folder
+    └── hooks           # Example folder
     └── index.(tsx)
 ```
