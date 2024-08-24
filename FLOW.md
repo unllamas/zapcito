@@ -35,7 +35,7 @@ The database is managed using `Dexie`, a library that simplifies interaction wit
 
 In this case, the database is named `example` and contains a single table called `auth`:
 
-``` javascript
+``` typescript
 import Dexie, { Table } from 'dexie';
 
 export interface Auth {
