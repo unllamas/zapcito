@@ -40,6 +40,25 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 See the section about [deployment](https://vitejs.dev/guide/static-deploy) for more information.
 
+## 🔐 Environment Variables
+
+The **Next-Nostr-Starter-Kit** uses environment variables to manage configuration settings. These variables are stored in a `.env` file in the root directory of the project.
+
+### Setting up the .env file
+
+1. Create a new file named `.env` in the root directory of the project.
+2. Copy the contents of `.env.example` into your new `.env` file.
+3. Update the values in the `.env` file with your specific configuration.
+
+```sh
+# Analytics
+NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY='G..'
+NEXT_PUBLIC_GOOGLE_TAG_MANAGER_KEY='GTM...'
+
+# Payment
+SIGNER_RANDOM_PRIV_KEY='Random private key in hex format'
+```
+
 ## 🗄️ Project Structure
 
 Most of the code lives in the `src` folder and looks something like this:
