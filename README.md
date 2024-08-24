@@ -79,3 +79,22 @@ features
     └── hooks           # Example folder
     └── index.(tsx)
 ```
+
+## 📋 Roadmap
+
+- [x] Generate invoice
+- [ ] Auth system
+    - [x] Login with private key
+    - [ ] Login with extension
+    - [x] Autologin
+- [ ] Profile
+    - [x] Get profile
+    - [ ] Get profiles
+    - [ ] Edit profile
+- [ ] Events
+    - [ ] Get events
+    - [ ] Get filtered events
+    - [ ] Publish event
+    - [ ] Edit event
+- [ ] Relays
+    - [ ] Add or remove relays
