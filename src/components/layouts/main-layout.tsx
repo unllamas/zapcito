@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 // Icons
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { ExitIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
 import { config } from '@/config/payment';
 import { LaWalletConfig } from '@lawallet/react';
 
@@ -91,7 +91,8 @@ function UserAuth() {
             </DropdownMenuGroup>
             {/* <DropdownMenuSeparator /> */}
             <DropdownMenuItem onClick={logout}>
-              Cerrar sesión
+              <ExitIcon />
+              <p className='ml-2'>Logout</p>
               {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
             </DropdownMenuItem>
           </DropdownMenuContent>
