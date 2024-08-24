@@ -23,7 +23,7 @@ export const useZap = () => {
 
     createZapInvoice(amount, comment).then((bolt11: string | undefined) => {
       if (!bolt11) {
-        console.log('upds, algo paso mal');
+        console.log('Oops, something went wrong');
         return;
       }
 
@@ -43,10 +43,10 @@ export const useZap = () => {
     navigator.clipboard
       .writeText(value)
       .then(() => {
-        toast.success('Copiado al portapapeles.');
+        toast.success('Copied to clipboard');
       })
       .catch((err) => {
-        console.error('Error al copiar al portapapeles:', err);
+        console.error('Oops, something went wrong:', err);
       });
   };
 

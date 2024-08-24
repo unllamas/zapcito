@@ -58,7 +58,7 @@ export function Zap() {
                   <Textarea
                     name='message'
                     id='message'
-                    placeholder='Mensaje (opcional)'
+                    placeholder='Message (optional)'
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     disabled={!amount}
