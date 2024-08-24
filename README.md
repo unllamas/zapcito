@@ -99,6 +99,9 @@ features
     - [ ] Edit event
 - [ ] Relays
     - [ ] Add or remove relays
+- [ ] Local databases
+    - [x] User
+    - [ ] Profiles
 
 ## 🩷 Donations
 
