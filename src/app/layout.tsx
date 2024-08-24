@@ -7,6 +7,7 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { cn } from '@/lib/utils';
 
 // Components
+import { Toaster } from '@/components/ui/sonner';
 const MainLayout = dynamic(() => import('../components/layouts/main-layout').then((mod) => mod.MainLayout), {
   loading: () => (
     <div className='flex justify-center items-center w-full h-full'>
@@ -76,6 +77,7 @@ export default function RootLayout(props: RootLayoutProps) {
         <div className='w-full min-h-full' id='root'>
           <MainLayout>{children}</MainLayout>
         </div>
+        <Toaster />
       </body>
       <GoogleAnalytics gaId={process.env.GA_KEY || ''} />
     </html>

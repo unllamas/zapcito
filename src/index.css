@@ -8,31 +8,41 @@
     --foreground: 0 0% 100%;
     --text: 0 0% 64%;
     --background: 0 7% 9%;
+
     /* Components */
     --border: 0 4% 15%;
+
     /* Brand */
     --primary: 141 78% 65%;
     --primary-foreground: 0 7% 9%;
+
     --secondary: 0 2% 23%;
     --secondary-foreground: 141 78% 95%;
+
     /* Validations */
     --warning: 40 59% 49%;
     --warning-foreground: 0 0% 100%;
+
     /* Card */
     --card: 0 5% 12%;
     --card-foreground: 0 0% 100%;
     /* Defaults */
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
+
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 141 7% 50%;
+    
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+
     /* Charts */
     --chart-1: 213 83% 59%;
     --chart-2: 141 78% 65%;
