@@ -4,16 +4,19 @@
 import Link from 'next/link';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 
+// Libs and hooks
+import { useProfile } from '@/hooks/use-profile';
+
 // Components
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
-
 import { Zap } from '../zap';
-import { useProfile } from '@/hooks/use-profile';
+
+import { DEFAULT_PUBKEY } from '@/config/constants';
 
 export function Home() {
-  const { profile } = useProfile({ pubkey: 'cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547' });
+  const { profile } = useProfile({ pubkey: DEFAULT_PUBKEY });
 
   return (
     <>
@@ -43,7 +46,7 @@ export function Home() {
               </Link>
             </Button>
 
-            <Zap />
+            <Zap pubkey={DEFAULT_PUBKEY} />
           </div>
         </div>
       </div>

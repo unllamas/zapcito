@@ -17,12 +17,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { ZAP_AMOUNTS } from './config';
 import { CopyIcon, LightningBoltIcon } from '@radix-ui/react-icons';
 
-export function Zap() {
+interface ZapProps {
+  pubkey: string;
+}
+
+export function Zap(props: ZapProps) {
+  const { pubkey } = props;
+
   // Flow
   const [open, setOpen] = useState(false);
 
   // Hooks
-  const { screen, amount, comment, invoice, processing, copy, reset, pay, generate, setAmount, setComment } = useZap();
+  const { screen, amount, comment, invoice, processing, copy, reset, pay, generate, setAmount, setComment } =
+    useZap(pubkey);
 
   return (
     <>
