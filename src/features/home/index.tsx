@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { Zap } from '../zap';
+// import { useAuth } from '@/hooks/use-auth';
 
 export function Home() {
   const { profile } = useProfile({ pubkey: 'cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547' });
