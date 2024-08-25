@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { Auth, database } from '@/lib/database';
 
 // Define store interfaces
-interface AuthProps {
+interface UseAuthStoreProps {
   auth: Auth | null;
   handleAdd: (auth: Auth) => Promise<void>;
   handleDelete: () => Promise<void>;
@@ -11,7 +11,7 @@ interface AuthProps {
 }
 
 // Create the Zustand stores
-export const useAuthStore = create<AuthProps>((set) => ({
+export const useAuthStore = create<UseAuthStoreProps>((set) => ({
   auth: null,
 
   handleAdd: async (user: Auth) => {
