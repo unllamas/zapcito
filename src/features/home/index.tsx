@@ -34,7 +34,7 @@ export function Home() {
               </Avatar>
               <div className='flex flex-col gap-0'>
                 <h3 className='font-bold text-md'>Send SATs to {profile?.name}</h3>
-                <p className='font-sm text-muted-foreground'>{profile?.lud16}</p>
+                <p className='font-sm text-muted-foreground'>{profile?.address}</p>
               </div>
             </div>
           ) : (

@@ -58,7 +58,7 @@ function UserAuth() {
           <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
               <div className='flex flex-col space-y-1'>
-                {!profile?.name && (!profile?.lud16 || !profile?.nip05) ? (
+                {!profile?.name && !profile?.address ? (
                   <>
                     <p className='text-sm font-medium leading-none'>Hello,</p>
                     <p className='text-xs leading-none text-muted-foreground'>Anonymous</p>
@@ -66,7 +66,7 @@ function UserAuth() {
                 ) : (
                   <>
                     <p className='text-sm font-medium leading-none'>{profile?.name}</p>
-                    <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || profile?.nip05}</p>
+                    <p className='text-xs leading-none text-muted-foreground'>{profile?.address}</p>
                   </>
                 )}
               </div>

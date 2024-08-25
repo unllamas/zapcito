@@ -41,6 +41,7 @@ export const useProfile = (profileParams?: ProfileParams) => {
             banner: nostrProfile?.banner || '',
             avatar: nostrProfile?.image || '',
             name: nostrProfile?.displayName || '',
+            address: nostrProfile?.lud16 || nostrProfile?.nip05 || '',
             lud16: nostrProfile?.lud16 || '',
             nip05: nostrProfile?.nip05 || '',
             about: nostrProfile?.about || '',

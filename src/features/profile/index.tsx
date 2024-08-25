@@ -54,7 +54,7 @@ export const Profile = (props: ProfileProps) => {
       <div className='flex flex-col gap-4 w-full px-4'>
         <aside className='w-full'>
           <Name value={profile?.name} />
-          <LightningAddress value={profile?.lud16 || profile?.nip05} />
+          <LightningAddress value={profile?.address} />
           <Description value={profile?.about} />
           <Website value={profile?.website} />
         </aside>

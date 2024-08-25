@@ -10,6 +10,7 @@ export interface Profile {
   banner: string;
   avatar: string;
   name: string;
+  address: string;
   lud16: string;
   nip05: string;
   about: string;
@@ -26,7 +27,7 @@ class ExampleDB extends Dexie {
     super('example');
     this.version(1).stores({
       auth: 'id, secret',
-      profiles: 'id, banner, avatar, name, lud16, nip05, about, website, created_at',
+      profiles: 'id, banner, avatar, name, address, lud16, nip05, about, website, created_at',
     });
   }
 }
