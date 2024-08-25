@@ -22,8 +22,18 @@ export function Home() {
   return (
     <>
       <div className='flex flex-col justify-center items-center gap-6 max-w-sm h-full mx-auto px-4'>
-        <Image src='/img/layer.png' alt='Layer icon by Yassine Design' width={200} height={200} />
-        <h1 className='text-2xl font-bold'>Next-Nostr-Starter-Kit</h1>
+        <Image src='/img/cloud.png' alt='Cloud icon by Yassine Design' width={200} height={200} />
+        <div className='flex flex-col gap-2 text-center'>
+          <h1 className='text-2xl font-bold'>Zapcito</h1>
+          <p>Zapcito is a small framework to create a Nostr client with payments on Lightning Network</p>
+        </div>
+
+        <Button className='w-full' asChild>
+          <Link href='https://github.com/unllamas/zapcito' target='_blank' rel='noreferrer'>
+            <GitHubLogoIcon />
+            <p className='ml-2'>GitHub</p>
+          </Link>
+        </Button>
 
         <div className='flex flex-col gap-2 w-full'>
           {profile ? (
@@ -40,16 +50,8 @@ export function Home() {
           ) : (
             <Skeleton className='w-full h-[80px] bg-card' />
           )}
-          <div className='flex gap-2'>
-            <Button className='flex-1' asChild variant='secondary'>
-              <Link href='https://github.com/unllamas/next-nostr-starter-kit' target='_blank' rel='noreferrer'>
-                <GitHubLogoIcon />
-                <p className='ml-2'>GitHub</p>
-              </Link>
-            </Button>
 
-            <Zap pubkey={DEFAULT_PUBKEY} />
-          </div>
+          <Zap pubkey={DEFAULT_PUBKEY} />
         </div>
       </div>
     </>

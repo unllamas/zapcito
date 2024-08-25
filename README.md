@@ -3,7 +3,7 @@
 [![MIT License](https://img.shields.io/github/license/unllamas/zapcito)](https://github.com/unllamas/zapcito/blob/main/LICENSE)
 ![Stars](https://badgen.net/github/stars/unllamas/zapcito/?color=yellow)
 
-**Zapcito** is a small framework to create a [Nostr](https://nostr.com/) client with payments on [Lightning Network](https://lawallet.io/)
+A small framework to create fast [Nostr](https://nostr.com/) clients and lightning payments with local session
 
 ## 🤓 Tech Stack
 
