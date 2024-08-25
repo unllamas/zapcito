@@ -25,7 +25,7 @@ export function Home() {
         <Image src='/img/cloud.png' alt='Cloud icon by Yassine Design' width={200} height={200} />
         <div className='flex flex-col gap-2 text-center'>
           <h1 className='text-2xl font-bold'>Zapcito</h1>
-          <p>A tiny framework to create fast Nostr clients andwith lightning payments.</p>
+          <p>A tiny framework to create fast Nostr clients and with lightning payments.</p>
         </div>
 
         <Button className='w-full' asChild>
