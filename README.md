@@ -117,7 +117,7 @@ features
     - [ ] Add or remove relays
 - [ ] Database Structure
     - [x] Auth
-    - [ ] Profiles
+    - [x] Profiles
     - [ ] Role
 
 ### Supports NIP's 

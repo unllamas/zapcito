@@ -8,6 +8,8 @@ This document is work in progress. Information is probably outdated. Dont't trus
 - [Auth](#auth)
   - [Login with private key](#login-with-private-key)
 - [Database Structure](#database-structure)
+  - [Auth](#auth)
+  - [Profile](#profile)
 
 ## Overview
 
@@ -33,26 +35,31 @@ This document is work in progress. Information is probably outdated. Dont't trus
 
 The database is managed using `Dexie`, a library that simplifies interaction with [IndexedDB](https://developer.mozilla.org/es/docs/Web/API/IndexedDB_API). 
 
-In this case, the database is named `example` and contains a single table called `auth`:
+### Auth
+
+For easy handling of the authentication system we have decided that the table has the following structure:
 
 ``` typescript
-import Dexie, { Table } from 'dexie';
-
-export interface Auth {
+interface Auth {
   id: string; // Public key on hex
   secret: string; // Private key on hex
 }
+```
 
-class ExampleDB extends Dexie {
-  auth!: Table<Auth, string>;
+### Profile
 
-  constructor() {
-    super('example');
-    this.version(1).stores({
-      auth: 'id, secret',
-    });
-  }
+Because [Kind: 0](https://github.com/nostr-protocol/nips/blob/master/01.md) events can be somewhat chaotic, we've decided to normalize it as follows:
+
+``` typescript
+interface Profile {
+  id: string; // Pubkey on hex
+  banner: string;
+  avatar: string; // Variant: image, picture
+  name: string; // Variant: displayName, display_name
+  lud16: string;
+  nip05: string;
+  about: string;
+  website: string;
+  created_at: number;
 }
-
-export const database = new ExampleDB();
 ```
