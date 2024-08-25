@@ -2,6 +2,8 @@
 
 [![MIT License](https://img.shields.io/github/license/alan2207/bulletproof-react)](https://github.com/unllamas/react-starter-kit/blob/main/LICENSE)
 
+A [Nostr](https://nostr.com/) and [Lightning Network](https://lightning.network/)-powered framework tailored for the fast creation of web clients and applications. It integrates session management, user roles, and a Lightning-driven payment system, equipping your **NaaS (Nostr as a Service)** startup with all the core features you need to focus on building your product.
+
 ## 🤓 Tech Stack
 
 - [NextJS](https://nextjs.org/) for web app
@@ -115,6 +117,7 @@ features
 - [ ] Database Structure
     - [x] Auth
     - [ ] Profiles
+    - [ ] Role
 
 ### Supports NIP's 
 
