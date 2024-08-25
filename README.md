@@ -3,7 +3,7 @@
 [![MIT License](https://img.shields.io/github/license/unllamas/next-nostr-starter-kit)](https://github.com/unllamas/next-nostr-starter-kit/blob/main/LICENSE)
 ![Stars](https://badgen.net/github/stars/unllamas/next-nostr-starter-kit/?color=yellow)
 
-A [Nostr](https://nostr.com/) and [Lightning Network](https://lightning.network/)-powered framework tailored for the fast creation of web clients and applications. It integrates session management, user roles, and a Lightning-driven payment system, equipping your **NaaS (Nostr as a Service)** startup with all the core features you need to focus on building your product.
+A [Nostr](https://nostr.com/) and [Lightning Network](https://lightning.network/)-powered framework tailored for the fast creation of web clients and applications.
 
 ## 🤓 Tech Stack
 
