@@ -2,6 +2,7 @@
 
 // Packages
 import Link from 'next/link';
+import Image from 'next/image';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 
 // Libs and hooks
@@ -20,8 +21,9 @@ export function Home() {
 
   return (
     <>
-      <div className='flex flex-col justify-center items-center gap-6 max-w-[400px] h-full mx-auto px-4'>
-        <h1 className='text-3xl font-extrabold'>Next-Nostr-Starter-Kit</h1>
+      <div className='flex flex-col justify-center items-center gap-6 max-w-sm h-full mx-auto px-4'>
+        <Image src='/img/heart.png' alt='Hearth icon by Yassine Design' width={200} height={200} />
+        <h1 className='text-2xl font-bold'>Next-Nostr-Starter-Kit</h1>
 
         <div className='flex flex-col gap-2 w-full'>
           {profile ? (

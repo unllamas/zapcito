@@ -3,6 +3,7 @@
 // Packages
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 // import { useLogin } from 'nostr-hooks';
 import { toast } from 'sonner';
 
@@ -43,11 +44,12 @@ export function Login() {
 
   return (
     <>
-      <div className='flex justify-center items-center h-screen w-full bg-background'>
+      <div className='flex justify-center h-screen w-full bg-background'>
         <div className='flex flex-col items-center gap-4 max-w-md px-4'>
+          <Image src='/img/lock.png' alt='Lock icon by Yassine Design' width={200} height={200} />
           <div className='flex flex-col gap-2 text-center'>
-            <h2 className='text-semibold text-lg'>Login</h2>
-            <p className='text-gray-500'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <h2 className='text-bold text-xl'>Login</h2>
+            <p className='text-muted-foreground'>Connect and access all the features we have to offer.</p>
           </div>
           <Tabs defaultValue='secret' className='w-full'>
             <TabsList className='w-full bg-card'>
