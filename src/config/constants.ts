@@ -1,5 +1,5 @@
 // App
-export const APP_TITLE = 'Next-Nostr-Starter-Kit';
+export const APP_TITLE = 'Zapcito';
 
 // Nostr
 export const RELAYS = [

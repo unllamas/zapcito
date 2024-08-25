@@ -1,7 +1,7 @@
-# next-nostr-starter-kit
+# zapcito
 
-[![MIT License](https://img.shields.io/github/license/unllamas/next-nostr-starter-kit)](https://github.com/unllamas/next-nostr-starter-kit/blob/main/LICENSE)
-![Stars](https://badgen.net/github/stars/unllamas/next-nostr-starter-kit/?color=yellow)
+[![MIT License](https://img.shields.io/github/license/unllamas/zapcito)](https://github.com/unllamas/zapcito/blob/main/LICENSE)
+![Stars](https://badgen.net/github/stars/unllamas/zapcito/?color=yellow)
 
 A [Nostr](https://nostr.com/) and [Lightning Network](https://lightning.network/)-powered framework tailored for the fast creation of web clients and applications.
 
@@ -21,7 +21,7 @@ Prerequisites:
 To set up the app execute the following commands.
 
 ```bash
-git clone https://github.com/unllamas/next-nostr-starter-kit.git
+git clone https://github.com/unllamas/zapcito.git
 cd ...
 ```
 
@@ -125,14 +125,14 @@ features
 
 ## License
 
-**Next-Nostr-Starter-Kit** is open-source software licensed under the MIT license.
+**Zapcito** is open-source software licensed under the MIT license.
 
 ## 🩷 Donations
 
-If you'd like to support the development of **Next-Nostr-Starter-Kit**, please consider donating to the developer.
+If you'd like to support the development of **Zapcito**, please consider donating to the developer.
 
 - ⚡ Zap sats to [dios@lawallet.ar](dios@lawallet.ar)
 
 ## 💌 Contact
 
-If you have any questions or concerns about **Next-Nostr-Starter-Kit**, please contact the developer at [npub1em3g0wcfjz5we0gaaelw07fcyqys3fwg42qykw774mvgala424rsl26ytm](https://njump.me/npub1em3g0wcfjz5we0gaaelw07fcyqys3fwg42qykw774mvgala424rsl26ytm).
+If you have any questions or concerns about **Zapcito**, please contact the developer at [npub1em3g0wcfjz5we0gaaelw07fcyqys3fwg42qykw774mvgala424rsl26ytm](https://njump.me/npub1em3g0wcfjz5we0gaaelw07fcyqys3fwg42qykw774mvgala424rsl26ytm).

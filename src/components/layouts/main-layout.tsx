@@ -113,7 +113,7 @@ export function MainLayout({ children }: MainLayoutProps) {
             <UserAuth />
 
             <Button variant='link' size='icon' asChild>
-              <Link href='https://github.com/unllamas/next-nostr-starter-kit' target='_blank' rel='noreferrer'>
+              <Link href='https://github.com/unllamas/zapcito' target='_blank' rel='noreferrer'>
                 <GitHubLogoIcon />
               </Link>
             </Button>
