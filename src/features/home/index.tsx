@@ -29,11 +29,11 @@ export function Home() {
           {profile ? (
             <div className='flex items-center gap-2 p-4 bg-card rounded-lg'>
               <Avatar>
-                <AvatarImage src={profile?.image} />
+                <AvatarImage src={profile?.avatar} />
                 <AvatarFallback>{profile?.name?.slice(0, 2)}</AvatarFallback>
               </Avatar>
               <div className='flex flex-col gap-0'>
-                <h3 className='font-bold text-md'>Send SATs to {profile?.displayName}</h3>
+                <h3 className='font-bold text-md'>Send SATs to {profile?.name}</h3>
                 <p className='font-sm text-muted-foreground'>{profile?.lud16}</p>
               </div>
             </div>

@@ -40,7 +40,7 @@ export const Profile = (props: ProfileProps) => {
         <div className='w-full'>
           <div className='flex justify-between items-end gap-4 w-full'>
             <Avatar className='overflow-hidden w-[100px] h-[100px] bg-card border-4 border-background rounded-full'>
-              <AvatarImage src={profile?.image || ''} loading='lazy' />
+              <AvatarImage src={profile?.avatar || ''} loading='lazy' />
               <AvatarFallback>
                 <Skeleton className='bg-card' />
               </AvatarFallback>
@@ -53,7 +53,7 @@ export const Profile = (props: ProfileProps) => {
 
       <div className='flex flex-col gap-4 w-full px-4'>
         <aside className='w-full'>
-          <Name value={profile?.displayName} />
+          <Name value={profile?.name} />
           <LightningAddress value={profile?.lud16 || profile?.nip05} />
           <Description value={profile?.about} />
           <Website value={profile?.website} />
