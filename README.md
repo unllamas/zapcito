@@ -5,11 +5,14 @@
 
 A [Nostr](https://nostr.com/) and [Lightning Network](https://lightning.network/)-powered framework tailored for the fast creation of web clients and applications.
 
+**Zapcito** is a small framework to create a [Nostr](https://nostr.com/) client with payments on [Lightning Network](https://lawallet.io/)
+
 ## 🤓 Tech Stack
 
 - [NextJS](https://nextjs.org/) for web app
 - [Tailwind](https://tailwindcss.com/) for style
 - [Shadcn](https://ui.shadcn.com/) for UI components
+- [LaWallet](https://lawallet.io/) for lightning payments
 
 ## 🚀 Get Started
 
