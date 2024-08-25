@@ -98,13 +98,16 @@ features
 
 ## 📋 Roadmap
 
-- [x] Generate invoice
-    - [x] Pay with extension
+- [x] Database Structure
+    - [x] Auth
+    - [x] Profiles
 - [ ] Auth system
     - [ ] Generate new private key
     - [x] Login with private key
     - [ ] Login with extension
     - [x] Autologin
+- [x] Generate invoices
+    - [x] Pay with extension
 - [ ] Profile
     - [x] Get profile
     - [ ] Edit profile
@@ -115,10 +118,6 @@ features
     - [ ] Edit event
 - [ ] Relays
     - [ ] Add or remove relays
-- [ ] Database Structure
-    - [x] Auth
-    - [x] Profiles
-    - [ ] Role
 
 ### Supports NIP's 
 

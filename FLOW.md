@@ -3,31 +3,15 @@ This document is work in progress. Information is probably outdated. Dont't trus
 ## Table of Contents
 
 - [Overview](#overview)
-- [Payment](#payment)
-  - [Generate invoice](#generate-invoice)
-- [Auth](#auth)
-  - [Login with private key](#login-with-private-key)
 - [Database Structure](#database-structure)
   - [Auth](#auth)
   - [Profile](#profile)
+- [Auth](#auth)
+  - [Login with private key](#login-with-private-key)
+- [Payment](#payment)
+  - [Generate invoice](#generate-invoice)
 
 ## Overview
-
-...
-
-## Payment
-
-...
-
-### Generate invoice
-
-...
-
-## Auth
-
-...
-
-### Login with private key
 
 ...
 
@@ -63,3 +47,19 @@ interface Profile {
   created_at: number;
 }
 ```
+
+...
+
+## Auth
+
+...
+
+### Login with private key
+
+...
+
+## Payment
+
+...
+
+### Generate invoice
