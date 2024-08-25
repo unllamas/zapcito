@@ -3,7 +3,6 @@
 // Packages
 import * as React from 'react';
 import Link from 'next/link';
-// import { useRouter } from 'next/navigation';
 import { LaWalletProvider } from '@lawallet/react';
 import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
 
@@ -28,12 +27,10 @@ import {
 import { paymentConfig } from '@/config/payment';
 
 // Icons
-import { ExitIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
+import { ExitIcon, GitHubLogoIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 
 function UserAuth() {
   useAutoLogin();
-
-  // const router = useRouter();
   const { user, profile, logout } = useAuth();
 
   return (
@@ -76,25 +73,23 @@ function UserAuth() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator className='bg-card' />
             <DropdownMenuGroup>
-              {/* <DropdownMenuItem onClick={() => router.push(`/p/${activeUser?.pubkey || activeUser?.npub}`)}>
-                Profile
-                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-              </DropdownMenuItem> */}
-              {/* <DropdownMenuItem>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem> */}
-              {/* <DropdownMenuItem>
-              Settings
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </DropdownMenuItem> */}
-              {/* <DropdownMenuItem>New Team</DropdownMenuItem> */}
+              <DropdownMenuItem asChild>
+                <Link href='/'>
+                  <HomeIcon />
+                  <p className='ml-2'>Home</p>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={`/p/${user?.id}`}>
+                  <PersonIcon />
+                  <p className='ml-2'>Profile</p>
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuGroup>
-            {/* <DropdownMenuSeparator /> */}
+            <DropdownMenuSeparator className='bg-card' />
             <DropdownMenuItem onClick={logout}>
               <ExitIcon />
               <p className='ml-2'>Logout</p>
-              {/* <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut> */}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -126,7 +121,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         </div>
       </nav>
 
-      {children}
+      <div className='mt-[60px]'>{children}</div>
     </LaWalletProvider>
   );
 }
