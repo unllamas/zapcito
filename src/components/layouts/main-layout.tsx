@@ -28,7 +28,7 @@ import {
 import { paymentConfig } from '@/config/payment';
 
 // Icons
-import { ExitIcon, GitHubLogoIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
+import { ExitIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 
 function UserAuth() {
   useAutoLogin();
