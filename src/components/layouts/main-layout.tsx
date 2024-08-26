@@ -117,11 +117,11 @@ export function MainLayout({ children }: MainLayoutProps) {
           <div className='flex items-center gap-2'>
             <UserAuth />
 
-            <Button variant='link' size='icon' asChild>
+            {/* <Button variant='link' size='icon' asChild>
               <Link href='https://github.com/unllamas/zapcito' target='_blank' rel='noreferrer'>
                 <GitHubLogoIcon />
               </Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </nav>
