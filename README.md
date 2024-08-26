@@ -63,27 +63,14 @@ Most of the code lives in the `src` folder and looks something like this:
 ```sh
 src
 ├── app
-│   └── login
-│   └── layout.(tsx)
-│   └── page.(tsx)
 ├── components
 │   └── layouts         # Folder for different layouts
 │   └── ui              # Atomic components
 ├── config
-│   └── constants.(tsx)
-│   └── payment.(tsx)
 ├── features
-│   └── home
-│   └── login
-│   └── zap
 ├── hooks
-│   └── use-auth.(tsx)
-│   └── use-profile.(tsx)
 ├── lib
-│   └── database.(tsx)
-│   └── utils.(tsx)
 ├── store
-│   └── use-auth-store.(tsx)
 ├── types
 └── index.(css)
 ```
