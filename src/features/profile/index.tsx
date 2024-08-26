@@ -5,11 +5,11 @@ import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 
 // Libs and hooks
 import { useProfile } from '@/hooks/use-profile';
-// import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/hooks/use-auth';
 
 // Components
 import { Skeleton } from '@/components/ui/skeleton';
-// import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 // Internal components
 import { Website } from './components/website';
@@ -29,7 +29,7 @@ export const Profile = (props: ProfileProps) => {
   const { value } = props;
 
   const { profile } = useProfile({ pubkey: value });
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   return (
     <div className='w-full max-w-xl mx-auto pt-4'>
@@ -48,9 +48,14 @@ export const Profile = (props: ProfileProps) => {
             </Avatar>
 
             <div>
-              <Zap pubkey={value} />
+              {value === user?.id ? (
+                <Button variant='secondary' disabled>
+                  Edit profile
+                </Button>
+              ) : (
+                <Zap pubkey={value} />
+              )}
             </div>
-            {/* {pubkey === user?.id && <Button variant='secondary'>Edit</Button>} */}
           </div>
         </div>
       </div>
