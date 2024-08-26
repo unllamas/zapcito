@@ -49,8 +49,8 @@ Create `.env` file:
 
 ```sh
 # Analytics
-NEXT_PUBLIC_GOOGLE_ANALYTICS_KEY='Optional'
-NEXT_PUBLIC_GOOGLE_TAG_MANAGER_KEY='Optional'
+GOOGLE_ANALYTICS_KEY='Optional'
+GOOGLE_TAG_MANAGER_KEY='Optional'
 
 # Payment
 SIGNER_RANDOM_PRIV_KEY='Random private key in hex format'

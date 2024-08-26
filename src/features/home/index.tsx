@@ -21,7 +21,7 @@ export function Home() {
         </div>
       </div>
 
-      <div className='w-full max-w-xl mx-auto my-4'>
+      <div className='w-full max-w-xl mx-auto my-4 px-4'>
         <Search />
       </div>
 

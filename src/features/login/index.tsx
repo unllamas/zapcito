@@ -44,7 +44,7 @@ export function Login() {
 
   return (
     <>
-      <div className='flex justify-center h-screen w-full bg-background'>
+      <div className='flex justify-center'>
         <div className='flex flex-col items-center gap-4 max-w-md px-4'>
           <Image src='/img/lock.png' alt='Lock icon by Yassine Design' width={200} height={200} />
           <div className='flex flex-col gap-2 text-center'>

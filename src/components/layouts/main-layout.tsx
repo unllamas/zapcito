@@ -109,7 +109,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   return (
     <LaWalletProvider config={paymentConfig}>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
-        <div className='flex justify-between items-center max-w-xl h-full mx-auto'>
+        <div className='flex justify-between items-center max-w-xl h-full mx-auto px-4'>
           <Link href='/'>
             <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
           </Link>
