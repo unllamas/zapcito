@@ -5,7 +5,7 @@
 [![MIT License](https://img.shields.io/github/license/unllamas/zapcito)](https://github.com/unllamas/zapcito/blob/main/LICENSE)
 ![Stars](https://badgen.net/github/stars/unllamas/zapcito/?color=yellow)
 
-A tiny framework to create fast [Nostr](https://nostr.com/) clients andwith lightning payments.
+A tiny framework to create fast [Nostr](https://nostr.com/) clients and with lightning payments.
 
 ## 🤓 Tech Stack
 
