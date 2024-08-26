@@ -34,7 +34,7 @@ export function Zap(props: ZapProps) {
   return (
     <>
       <Drawer onClose={reset} open={open && screen !== 'finished'} onOpenChange={setOpen}>
-        <DrawerTrigger asChild>
+        <DrawerTrigger asChild disabled>
           <Button className='flex-1'>
             <LightningBoltIcon />
             <p className='ml-2'>Zap me!</p>
