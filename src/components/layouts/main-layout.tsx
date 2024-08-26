@@ -3,6 +3,7 @@
 // Packages
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { LaWalletProvider } from '@lawallet/react';
 import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
 
@@ -108,7 +109,11 @@ export function MainLayout({ children }: MainLayoutProps) {
   return (
     <LaWalletProvider config={paymentConfig}>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
-        <div className='flex justify-end items-center max-w-[1024px] h-full mx-auto'>
+        <div className='flex justify-between items-center max-w-xl h-full mx-auto'>
+          <Link href='/'>
+            <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
+          </Link>
+
           <div className='flex items-center gap-2'>
             <UserAuth />
 
@@ -122,6 +127,26 @@ export function MainLayout({ children }: MainLayoutProps) {
       </nav>
 
       <div className='mt-[60px]'>{children}</div>
+
+      <footer className='py-8 border-t-[1px] border-card mt-8'>
+        <div className='w-full max-w-lg mx-auto'>
+          <div className='flex items-center justify-center gap-1'>
+            <p className='text-sm text-gray-500'>® Zapcito, 2024</p>
+            <span className='text-sm text-gray-500'>-</span>
+            <p className='text-sm'>With love by</p>
+            <Link
+              href={`/p/cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547`}
+              className='footer_link'
+              id='by'
+              tabIndex={-1}
+            >
+              <Button size='sm' variant='link' className='p-0'>
+                @unllamas
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </footer>
     </LaWalletProvider>
   );
 }
