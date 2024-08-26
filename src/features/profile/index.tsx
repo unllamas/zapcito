@@ -17,6 +17,7 @@ import { Description } from './components/description';
 import { LightningAddress } from './components/lightning-address';
 import { Name } from './components/name';
 import { Banner } from './components/banner';
+import { Zap } from '../zap';
 
 interface ProfileProps {
   value: string;
@@ -46,6 +47,9 @@ export const Profile = (props: ProfileProps) => {
               </AvatarFallback>
             </Avatar>
 
+            <div>
+              <Zap pubkey={value} />
+            </div>
             {/* {pubkey === user?.id && <Button variant='secondary'>Edit</Button>} */}
           </div>
         </div>
