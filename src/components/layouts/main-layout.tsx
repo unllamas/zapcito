@@ -131,8 +131,8 @@ export function MainLayout({ children }: MainLayoutProps) {
       <footer className='py-8 border-t-[1px] border-card mt-8'>
         <div className='w-full max-w-lg mx-auto'>
           <div className='flex items-center justify-center gap-1'>
-            <p className='text-sm text-gray-500'>® Zapcito, 2024</p>
-            <span className='text-sm text-gray-500'>-</span>
+            <p className='text-sm text-muted-foreground'>® Zapcito, 2024</p>
+            <span className='text-sm text-muted-foreground'>-</span>
             <p className='text-sm'>With love by</p>
             <Link
               href={`/p/cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547`}

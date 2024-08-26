@@ -51,7 +51,7 @@ export const Search = () => {
         </Button>
       </div>
       {/* {message && <>{message}</>} */}
-      <p className='text-center text-sm text-gray-500'>Support for: npub, hex or nip05</p>
+      <p className='text-center text-sm text-muted-foreground'>Support for: npub, hex or nip05</p>
     </div>
   );
 };
