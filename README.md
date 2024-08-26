@@ -109,8 +109,6 @@ features
     - [x] Login with private key
     - [ ] Login with extension
     - [x] Autologin
-- [x] Generate invoices
-    - [x] Pay with extension
 - [ ] Profile
     - [x] Get profile
     - [ ] Edit profile
@@ -124,7 +122,13 @@ features
 
 ### Supports NIP's 
 
-- [x] NIP-01: Basic protocol flow description
+- [ ] NIP-01: Basic protocol flow description
+- [ ] NIP-02: Follow List
+- [ ] NIP-17: Private Direct Messages
+- [ ] NIP-25: Reactions
+- [ ] NIP-57: Lightning Zaps
+- [ ] NIP-58: Badges
+- [ ] NIP-75: Zap Goals
 
 ## License
 
