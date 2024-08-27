@@ -50,70 +50,7 @@ pnpm build
 
 ### How to use
 
-#### Auth
-
-``` javascript
-import { useAuth } from '@/hooks/use-auth'
-
-const MyComponent = () => {
-  const {
-    loading,
-    loginWithExtention,
-    loginWithSecretKey,
-    logout,
-  } = useAuth();
-
-  return (
-    <>
-      <button disabled={loading} onClick={() => loginWithExtention()}>Login with extention</button>
-      <button disabled={loading} onClick={() => loginWithSecretKey(secret)}>Login with secret key</button>
-      <button onClick={() => logout()}>Logout</button>
-    </>
-  );
-};
-```
-
-``` javascript
-import { useAuth } from '@/hooks/use-auth'
-
-const MyComponent = () => {
-  const [secretKey, setSecretKey] = useState('');
-
-  const { generateKey } = useAuth();
-
-  const handleGenerateSecretKey = () => {
-    const value = generateKey()
-    setSecretKey(value)
-  }
-
-  return (
-    <>
-      <input type="text" value={secretKey} readonly />
-
-      <button onClick={() => handleGenerateSecretKey()}>Generate secret key</button>
-    </>
-  );
-};
-```
-
-#### Profile
-
-``` javascript
-import { useProfile } from '@/hooks/use-profile'
-
-const MyComponent = () => {
-  const { profile } = useProfile({ npub: 'npub...' });
-
-  return (
-    <>
-      <p>{profile.name}</p>
-      <p>{profile.npub}</p>
-      <p>{profile.about}</p>
-      <p>{profile.website}</p>
-    </>
-  );
-};
-```
+[FLOW](https://github.com/unllamas/zapcito/blob/main/FLOW.md)
 
 ## 🔐 Environment Variables
 
