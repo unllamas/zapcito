@@ -65,8 +65,8 @@ const MyComponent = () => {
 
   return (
     <>
-      <button disabled={loading} onClick={() => loginWithExtention()}>Login with Extention</button>
-      <button disabled={loading} onClick={() => loginWithSecretKey(secret)}>Login with Secret Key</button>
+      <button disabled={loading} onClick={() => loginWithExtention()}>Login with extention</button>
+      <button disabled={loading} onClick={() => loginWithSecretKey(secret)}>Login with secret key</button>
       <button onClick={() => logout()}>Logout</button>
     </>
   );
@@ -81,11 +81,16 @@ const MyComponent = () => {
 
   const { generateKey } = useAuth();
 
+  const handleGenerateSecretKey = () => {
+    const value = generateKey()
+    setSecretKey(value)
+  }
+
   return (
     <>
       <input type="text" value={secretKey} readonly />
 
-      <button onClick={() => generateKey()}>Generate secret key</button>
+      <button onClick={() => handleGenerateSecretKey()}>Generate secret key</button>
     </>
   );
 };
