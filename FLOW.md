@@ -26,7 +26,7 @@ For easy handling of the authentication system we have decided that the table ha
 ``` typescript
 interface Auth {
   id: string; // Public key on hex
-  secret: string; // Private key on hex
+  secret?: string; // Private key on hex
 }
 ```
 
@@ -45,6 +45,7 @@ interface Profile {
   about: string;
   website: string;
   created_at: number;
+  npub: string;
 }
 ```
 
