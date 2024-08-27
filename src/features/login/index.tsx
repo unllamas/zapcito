@@ -26,7 +26,7 @@ export function Login() {
   const router = useRouter();
 
   // const { loginWithExtention } = useLogin();
-  const { user, loading, loginWithSecretKey, loginWithExtension, generateKey } = useAuth();
+  const { user, loading, loginWithSecretKey, loginWithExtention, generateKey } = useAuth();
 
   if (user) {
     router.push('/');
@@ -72,7 +72,7 @@ export function Login() {
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='extension'>
               <div className='flex flex-col gap-2'>
-                <Button className='w-full' onClick={() => loginWithExtension()}>
+                <Button className='w-full' onClick={() => loginWithExtention()}>
                   Login with extension
                 </Button>
                 <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>

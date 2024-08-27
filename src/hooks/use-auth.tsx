@@ -27,12 +27,12 @@ export const useAuth = () => {
   const { profile } = useProfile(user ? { pubkey: user.id } : undefined);
 
   const handleLoginWithSecretKey = async (value: string) => {
+    setLoading(true);
+
     if (value.length < 32) {
       toast.warning('The private key must have a minimum of 32 digits.');
       return;
     }
-
-    setLoading(true);
 
     // TO-DO
     // Revisar que no ingresa con @hodl.ar
@@ -51,9 +51,8 @@ export const useAuth = () => {
       });
     } catch (err) {
       toast.warning('An error occurred while logging in.');
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleLogout = async () => {
@@ -68,7 +67,8 @@ export const useAuth = () => {
     return secret;
   };
 
-  const handleLoginWithExtension = async () => {
+  const handleLoginWithExtention = async () => {
+    setLoading(true);
     try {
       if (typeof window.nostr === 'undefined') {
         toast.warning('GetAlby is not installed or is not available');
@@ -88,7 +88,8 @@ export const useAuth = () => {
         router.push('/');
       });
     } catch (error) {
-      toast.warning('handleLoginWithExtension: An error occurred while logging in.');
+      toast.warning('handleLoginWithExtention: An error occurred while logging in.');
+      setLoading(false);
     }
   };
 
@@ -105,7 +106,7 @@ export const useAuth = () => {
     profile,
     loading,
     loginWithSecretKey: handleLoginWithSecretKey,
-    loginWithExtension: handleLoginWithExtension,
+    loginWithExtention: handleLoginWithExtention,
     logout: handleLogout,
     generateKey: handleGenerateSecretKey,
   };
