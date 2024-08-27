@@ -6,10 +6,9 @@ This document is work in progress. Information is probably outdated. Dont't trus
 - [Database Structure](#database-structure)
   - [Auth](#auth)
   - [Profile](#profile)
-- [Auth](#auth)
-  - [Login with private key](#login-with-private-key)
-- [Payment](#payment)
-  - [Generate invoice](#generate-invoice)
+- [Hooks](#hooks)
+  - [useAuth](#useAuth)
+  - [useProfile](#useProfile)
 
 ## Overview
 
@@ -51,7 +50,7 @@ interface Profile {
 
 ## Hooks
 
-### Auth
+### useAuth
 
 ``` javascript
 import { useAuth } from '@/hooks/use-auth'
@@ -97,7 +96,7 @@ const MyComponent = () => {
 };
 ```
 
-### Profile
+### useProfile
 
 ``` javascript
 import { useProfile } from '@/hooks/use-profile'
@@ -115,9 +114,3 @@ const MyComponent = () => {
   );
 };
 ```
-
-## Payment
-
-...
-
-### Generate invoice
