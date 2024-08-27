@@ -91,10 +91,10 @@ features
 - [x] Database Structure
     - [x] Auth
     - [x] Profiles
-- [ ] Auth system
-    - [ ] Generate new private key
+- [x] Auth system
+    - [x] Generate new private key
     - [x] Login with private key
-    - [ ] Login with extension
+    - [x] Login with extension
     - [x] Autologin
 - [ ] Profile
     - [x] Get profile
