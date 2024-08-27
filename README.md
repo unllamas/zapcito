@@ -34,13 +34,81 @@ cd ...
 pnpm install
 ```
 
-##### `pnpm dev`
+Install dependencies
+
+```bash
+pnpm dev
+```
 
 Runs the app in the development mode.
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##### `pnpm build`
+```bash
+pnpm build
+```
+
+### How to use
+
+#### Auth
+
+``` javascript
+import { useAuth } from '@/hooks/use-auth'
+
+const MyComponent = () => {
+  const {
+    loading,
+    loginWithExtention,
+    loginWithSecretKey,
+    logout,
+  } = useAuth();
+
+  return (
+    <>
+      <button disabled={loading} onClick={() => loginWithExtention()}>Login with Extention</button>
+      <button disabled={loading} onClick={() => loginWithSecretKey(secret)}>Login with Secret Key</button>
+      <button onClick={() => logout()}>Logout</button>
+    </>
+  );
+};
+```
+
+``` javascript
+import { useAuth } from '@/hooks/use-auth'
+
+const MyComponent = () => {
+  const [secretKey, setSecretKey] = useState('');
+
+  const { generateKey } = useAuth();
+
+  return (
+    <>
+      <input type="text" value={secretKey} readonly />
+
+      <button onClick={() => generateKey()}>Generate secret key</button>
+    </>
+  );
+};
+```
+
+#### Profile
+
+``` javascript
+import { useProfile } from '@/hooks/use-profile'
+
+const MyComponent = () => {
+  const { profile } = useProfile({ npub: 'npub...' });
+
+  return (
+    <>
+      <p>{profile.name}</p>
+      <p>{profile.npub}</p>
+      <p>{profile.about}</p>
+      <p>{profile.website}</p>
+    </>
+  );
+};
+```
 
 ## 🔐 Environment Variables
 
