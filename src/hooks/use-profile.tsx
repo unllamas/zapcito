@@ -13,6 +13,7 @@ import { paymentConfig } from '@/config/payment';
 
 // Types
 import { Profile } from '@/lib/database';
+import { NDKUserProfile } from '@/types';
 
 type ProfileParams = {
   nip05?: string;
@@ -114,7 +115,7 @@ export const useProfile = (profileParams?: ProfileParams) => {
 
         if (!localUser) {
           const nostrResponse = ndk.getUser(profileParams);
-          const nostrProfile = await nostrResponse.fetchProfile();
+          const nostrProfile: NDKUserProfile | null = await nostrResponse.fetchProfile();
 
           const profile: Profile = {
             id: profileParams?.pubkey || '',
@@ -127,6 +128,7 @@ export const useProfile = (profileParams?: ProfileParams) => {
             about: nostrProfile?.about || '',
             website: nostrProfile?.website || '',
             created_at: Number(nostrProfile?.created_at),
+            npub: String(nostrProfile?.npub),
           };
 
           await handleAdd(profile);

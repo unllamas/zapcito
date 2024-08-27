@@ -2,7 +2,7 @@ import Dexie, { Table } from 'dexie';
 
 export interface Auth {
   id: string; // Public key on hex
-  secret: string; // Private key on hex
+  secret?: string; // Private key on hex
 }
 
 export interface Profile {
@@ -16,6 +16,7 @@ export interface Profile {
   about: string;
   website: string;
   created_at: number;
+  npub: string;
 }
 
 // Create db
@@ -27,7 +28,7 @@ class ExampleDB extends Dexie {
     super('example');
     this.version(1).stores({
       auth: 'id, secret',
-      profiles: 'id, banner, avatar, name, address, lud16, nip05, about, website, created_at',
+      profiles: 'id, banner, avatar, name, address, lud16, nip05, about, website, created_at, npub',
     });
   }
 }

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 // import { useLogin } from 'nostr-hooks';
 import { toast } from 'sonner';
+import { ArrowLeftIcon, EyeOpenIcon, EyeClosedIcon, ClipboardIcon } from '@radix-ui/react-icons';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
@@ -13,19 +14,19 @@ import { useAuth } from '@/hooks/use-auth';
 // Components
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
 export function Login() {
   // Flow
-  const [secret, setSecret] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   // Libs and hooks
   const router = useRouter();
 
   // const { loginWithExtention } = useLogin();
-  const { user, loading, loginWithSecretKey } = useAuth();
+  const { user, loading, loginWithSecretKey, loginWithExtension, generateKey } = useAuth();
 
   if (user) {
     router.push('/');
@@ -35,11 +36,20 @@ export function Login() {
   const handlePasteInput = async () => {
     try {
       const text = await navigator.clipboard.readText();
-      setSecret(text);
+      setInputValue(text);
     } catch (error) {
       toast.info('Oops...');
       return null;
     }
+  };
+
+  const handleToggleVisibility = () => {
+    setIsPasswordVisible((prev) => !prev);
+  };
+
+  const handleGenerate = () => {
+    const key = generateKey();
+    setInputValue(key);
   };
 
   return (
@@ -51,18 +61,18 @@ export function Login() {
             <h2 className='text-bold text-xl'>Login</h2>
             <p className='text-muted-foreground'>Connect and access all the features we have to offer.</p>
           </div>
-          <Tabs defaultValue='secret' className='w-full'>
+          <Tabs defaultValue='extension' className='w-full'>
             <TabsList className='w-full bg-card'>
-              <TabsTrigger className='flex-1' value='extension' disabled>
+              <TabsTrigger className='flex-1' value='extension'>
                 Extension
               </TabsTrigger>
               <TabsTrigger className='flex-1' value='secret'>
                 Secret key
               </TabsTrigger>
             </TabsList>
-            {/* <TabsContent className='flex flex-col gap-4' value='extension'>
+            <TabsContent className='flex flex-col gap-4' value='extension'>
               <div className='flex flex-col gap-2'>
-                <Button className='w-full' onClick={() => loginWithExtention()} disabled={false}>
+                <Button className='w-full' onClick={() => loginWithExtension()}>
                   Login with extension
                 </Button>
                 <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
@@ -81,32 +91,36 @@ export function Login() {
                   </Button>
                 </div>
               </div>
-            </TabsContent> */}
+            </TabsContent>
             <TabsContent className='flex flex-col gap-4' value='secret'>
               <div className='flex flex-col gap-2'>
                 <Label htmlFor='secret'>Your private key</Label>
                 <div className='relative w-full'>
                   <Input
-                    className='pr-[70px]'
+                    className='pr-[82px]'
                     id='secret'
-                    type='password'
+                    type={isPasswordVisible ? 'text' : 'password'}
                     placeholder='Format hex or nsec...'
-                    value={secret}
-                    onChange={(e) => setSecret(e.target.value)}
+                    value={inputValue}
+                    readOnly
                   />
                   <div className='absolute top-0 right-[2px] flex items-center h-full'>
-                    <Button variant='ghost' size='sm' onClick={handlePasteInput}>
-                      Paste
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      onClick={handleToggleVisibility}
+                      title={isPasswordVisible ? 'Hide' : 'Show'}
+                    >
+                      {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
+                    </Button>
+                    <Button variant='ghost' size='sm' onClick={handlePasteInput} title='Paste from clipboard'>
+                      <ClipboardIcon />
                     </Button>
                   </div>
                 </div>
               </div>
               <div className='flex flex-col gap-2'>
-                <Button
-                  className='w-full'
-                  disabled={!secret || loading}
-                  onClick={() => loginWithSecretKey({ secretKey: secret })}
-                >
+                <Button className='w-full' disabled={loading} onClick={() => loginWithSecretKey(inputValue)}>
                   {loading ? 'Loading' : 'Login'}
                 </Button>
                 <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
@@ -114,12 +128,12 @@ export function Login() {
                   <p className='ml-2'>Back to home</p>
                 </Button>
               </div>
-              {/* <div className='text-sm text-center'>
-                <p className='text-gray-500'>¿Aún no tenés?</p>
-                <Button variant='link' size='sm' asChild>
-                  <a href=''>Generar una aleatoria</a>
+              <div className='text-sm text-center'>
+                <p className='text-gray-500'>Don&apos;t you have one yet?</p>
+                <Button variant='link' onClick={() => handleGenerate()}>
+                  Generate a random
                 </Button>
-              </div> */}
+              </div>
             </TabsContent>
           </Tabs>
         </div>
