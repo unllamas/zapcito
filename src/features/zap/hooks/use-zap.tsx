@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useZap as useZapHandle } from '@lawallet/react';
+// import { useZap as useZapHandle } from '@lawallet/react';
 import { toast } from 'sonner';
 
 export const useZap = (value: string) => {
@@ -8,21 +8,19 @@ export const useZap = (value: string) => {
   const [screen, setScreen] = useState<'information' | 'payment' | 'finished'>('information');
   const [processing, setProcessing] = useState(false);
 
-  const { invoice, createZapInvoice } = useZapHandle({
-    receiverPubkey: value,
-  });
+  // const { invoice, createZapInvoice } = useZapHandle({
+  //   receiverPubkey: value,
+  // });
 
   const handleGenerate = async () => {
-    if (invoice.loading) return;
-
-    createZapInvoice(amount, comment).then((bolt11: string | undefined) => {
-      if (!bolt11) {
-        console.log('Oops, something went wrong');
-        return;
-      }
-
-      setScreen('payment');
-    });
+    // if (invoice.loading) return;
+    // createZapInvoice(amount, comment).then((bolt11: string | undefined) => {
+    //   if (!bolt11) {
+    //     console.log('Oops, something went wrong');
+    //     return;
+    //   }
+    //   setScreen('payment');
+    // });
   };
 
   const handleReset = () => {
@@ -60,17 +58,17 @@ export const useZap = (value: string) => {
     }
   };
 
-  useEffect(() => {
-    if (invoice.payed) {
-      setScreen('finished');
-    }
-  }, [invoice.payed]);
+  // useEffect(() => {
+  //   if (invoice.payed) {
+  //     setScreen('finished');
+  //   }
+  // }, [invoice.payed]);
 
   return {
     // Variables
     amount,
     comment,
-    invoice,
+    // invoice,
     screen,
     processing,
     // Handles

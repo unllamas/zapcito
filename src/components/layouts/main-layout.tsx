@@ -1,11 +1,10 @@
 'use client';
 
 // Packages
-import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LaWalletProvider } from '@lawallet/react';
-import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
+// import { LaWalletProvider } from '@lawallet/react';
+import { useNostrHooks, useProfile } from 'nostr-hooks';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
@@ -25,14 +24,16 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 // Config
-import { paymentConfig } from '@/config/payment';
+// import { paymentConfig } from '@/config/payment';
 
 // Icons
 import { ExitIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 
 function UserAuth() {
-  useAutoLogin();
-  const { user, profile, logout } = useAuth();
+  // useAutoLogin();
+  const { user, logout } = useAuth();
+
+  const { profile } = useProfile({ pubkey: user?.id });
 
   return (
     <>
@@ -46,9 +47,9 @@ function UserAuth() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='secondary' className='relative h-8 w-8 rounded-full'>
-              {profile?.avatar ? (
+              {profile?.image ? (
                 <Avatar className='h-9 w-9'>
-                  <AvatarImage loading='lazy' src={profile?.avatar || '/profile.png'} />
+                  <AvatarImage loading='lazy' src={profile?.image || '/profile.png'} />
                   <AvatarFallback>{profile?.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
               ) : (
@@ -59,15 +60,15 @@ function UserAuth() {
           <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
               <div className='flex flex-col space-y-1'>
-                {!profile?.name && !profile?.address ? (
+                {!profile?.displayName && !profile?.lud16 ? (
                   <>
                     <p className='text-sm font-medium leading-none'>Hello,</p>
                     <p className='text-xs leading-none text-muted-foreground'>Anonymous</p>
                   </>
                 ) : (
                   <>
-                    <p className='text-sm font-medium leading-none'>{profile?.name}</p>
-                    <p className='text-xs leading-none text-muted-foreground'>{profile?.address}</p>
+                    <p className='text-sm font-medium leading-none'>{profile?.displayName}</p>
+                    <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16}</p>
                   </>
                 )}
               </div>
@@ -107,7 +108,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   useNostrHooks();
 
   return (
-    <LaWalletProvider config={paymentConfig}>
+    <>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
         <div className='flex justify-between items-center max-w-xl h-full mx-auto px-4'>
           <Link href='/'>
@@ -147,6 +148,6 @@ export function MainLayout({ children }: MainLayoutProps) {
           </div>
         </div>
       </footer>
-    </LaWalletProvider>
+    </>
   );
 }

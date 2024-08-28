@@ -2,12 +2,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 // import { useIdentity, useNostr } from '@lawallet/react';
-import { getPublicKey, generatePrivateKey } from '@lawallet/nostr-tools';
+import { getPublicKey, generateSecretKey } from 'nostr-tools';
+import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 import { toast } from 'sonner';
 
 // Libs and hooks
 import { useAuthStore } from '@/stores/use-auth-store';
-import { useProfile } from './use-profile';
 
 // Types
 import { Auth } from '@/lib/database';
@@ -24,7 +24,7 @@ export const useAuth = () => {
   // const identity = useIdentity();
   const { handleAdd, handleGet, handleDelete } = useAuthStore();
 
-  const { profile } = useProfile(user ? { pubkey: user.id } : undefined);
+  // const { profile } = useProfile(user ? { pubkey: user.id } : undefined);
 
   const handleLoginWithSecretKey = async (value: string) => {
     setLoading(true);
@@ -37,7 +37,8 @@ export const useAuth = () => {
     // TO-DO
     // Revisar que no ingresa con @hodl.ar
     try {
-      const pubkey: string = getPublicKey(value);
+      const secretToBytes = hexToBytes(value);
+      const pubkey: string = getPublicKey(secretToBytes);
 
       const AuthSave: Auth = {
         id: pubkey,
@@ -63,8 +64,8 @@ export const useAuth = () => {
   };
 
   const handleGenerateSecretKey = () => {
-    const secret = generatePrivateKey();
-    return secret;
+    const secret = generateSecretKey();
+    return bytesToHex(secret);
   };
 
   const handleLoginWithExtention = async () => {
@@ -99,15 +100,15 @@ export const useAuth = () => {
     };
 
     !user && getUser();
-  }, [user, handleLoginWithSecretKey, handleLogout, profile]);
+  }, [user, handleLoginWithSecretKey, handleLogout]);
 
   return {
     user,
-    profile,
+    // profile,
     loading,
     loginWithSecretKey: handleLoginWithSecretKey,
     loginWithExtention: handleLoginWithExtention,
     logout: handleLogout,
-    generateKey: handleGenerateSecretKey,
+    generateSecret: handleGenerateSecretKey,
   };
 };

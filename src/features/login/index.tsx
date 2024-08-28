@@ -26,7 +26,7 @@ export function Login() {
   const router = useRouter();
 
   // const { loginWithExtention } = useLogin();
-  const { user, loading, loginWithSecretKey, loginWithExtention, generateKey } = useAuth();
+  const { user, loading, loginWithSecretKey, loginWithExtention, generateSecret } = useAuth();
 
   if (user) {
     router.push('/');
@@ -48,7 +48,7 @@ export function Login() {
   };
 
   const handleGenerate = () => {
-    const key = generateKey();
+    const key = generateSecret();
     setInputValue(key);
   };
 
