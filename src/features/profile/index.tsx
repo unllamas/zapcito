@@ -69,7 +69,7 @@ export const Profile = (props: ProfileProps) => {
         <div className='relative mt-[-50px] mb-2 px-4'>
           <div className='w-full'>
             <div className='flex justify-between items-end gap-4 w-full'>
-              <Avatar src={profile?.image || ''} alt={profile?.displayName} variant='profile' />
+              <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} variant='profile' />
               <div>
                 {value === user?.id ? (
                   <Button variant='secondary' disabled>
@@ -85,7 +85,7 @@ export const Profile = (props: ProfileProps) => {
 
         <div className='flex flex-col gap-4 w-full px-4'>
           <aside className='flex flex-col gap-2 w-full'>
-            <Name value={profile?.displayName} />
+            <Name value={profile?.displayName || profile?.name} />
             <LightningAddress value={profile?.lud16} />
             <Description value={profile?.about} />
             <Website value={profile?.website} />
