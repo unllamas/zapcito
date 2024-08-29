@@ -91,19 +91,19 @@ export function Notes(props: ComponentProps) {
                 const isImage = url.match(/\.(jpe?g|png|gif|webp)$/);
 
                 if (isAudio) {
-                  return <Audio src={url} />;
+                  return <Audio key={i} src={url} />;
                 }
                 if (isSpotify) {
-                  return <Spotify src={url} />;
+                  return <Spotify key={i} src={url} />;
                 }
                 if (isVideo) {
-                  return <Video src={url} />;
+                  return <Video key={i} src={url} />;
                 }
                 if (isImage) {
                   return <img key={i} loading='lazy' src={url} alt='img' className='w-full h-auto rounded-md mt-1' />;
                 }
               } else {
-                return <Iframe src={url} />;
+                return <Iframe key={i} src={url} />;
               }
             } else if (isProfile(parsed)) {
               return <UserMention key={i} value={parsed.value.pubkey} />;
