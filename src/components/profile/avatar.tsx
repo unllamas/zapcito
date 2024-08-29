@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 interface AvatarProps {
-  src: string;
+  src: string | undefined;
   alt?: string;
   variant?: 'default' | 'profile';
 }

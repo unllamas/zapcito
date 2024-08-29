@@ -13,6 +13,7 @@ import {
   isAddress,
   isNewline,
 } from '@welshman/content';
+import MotionNumber from 'motion-number';
 
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/profile/avatar';
@@ -24,6 +25,10 @@ import { Spotify } from './spotify';
 import { Audio } from './audio';
 import { Iframe } from './iframe';
 
+import { useMemo } from 'react';
+import { useSubscribe } from 'nostr-hooks';
+import { HeartFilledIcon } from '@radix-ui/react-icons';
+
 interface ComponentProps {
   post: any;
   profile: any;
@@ -33,6 +38,11 @@ export function Notes(props: ComponentProps) {
   const { post, profile } = props;
 
   if (!post) null;
+
+  const filters = useMemo(() => [{ '#e': [post.id], '#p': [post.pubkey], kinds: [7], limit: 10 }], [post]);
+  const opts = useMemo(() => ({ closeOnEose: true }), []);
+
+  const { events: likes } = useSubscribe({ filters, opts });
 
   const fullContent = parse(post);
 
@@ -117,11 +127,20 @@ export function Notes(props: ComponentProps) {
             }
           })}
       </div>
-      {/* <div className='flex justify-between p-4 pt-0'>
-<Button variant='ghost' size='icon' onClick={() => setLiked(!liked)}>
-  <HeartIcon className={`h-5 w-5 ${liked ? 'text-red-500 fill-red-500' : ''}`} />
-</Button>
-</div> */}
+      <div className='flex justify-between p-2'>
+        <div className='flex items-center gap-1 text-text'>
+          <span className='text-sm'>≈</span>
+          {likes.length > 0 ? <HeartFilledIcon className='text-red-500 fill-red-500' /> : <HeartFilledIcon />}
+          <p>
+            <MotionNumber
+              value={likes.length}
+              format={{ notation: 'standard' }} // Intl.NumberFormat() options
+              locales='en-US'
+            />{' '}
+            likes
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

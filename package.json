@@ -31,6 +31,7 @@
     "dexie": "^4.0.8",
     "dexie-react-hooks": "^1.1.7",
     "lucide-react": "^0.419.0",
+    "motion-number": "^0.1.6",
     "next": "14.2.5",
     "next-themes": "^0.3.0",
     "nostr-hooks": "^2.9.4",
