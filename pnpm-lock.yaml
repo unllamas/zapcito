@@ -59,6 +59,9 @@ dependencies:
   lucide-react:
     specifier: ^0.419.0
     version: 0.419.0(react@18.0.0)
+  motion-number:
+    specifier: ^0.1.6
+    version: 0.1.6(framer-motion@11.3.30)(react-dom@18.0.0)(react@18.0.0)
   next:
     specifier: 14.2.5
     version: 14.2.5(react-dom@18.0.0)(react@18.0.0)
@@ -2544,6 +2547,25 @@ packages:
       fetch-blob: 3.2.0
     dev: false
 
+  /framer-motion@11.3.30(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-9VmqGe9OIjfMoCcs+ZsKXlv6JaG5QagKX2F1uSbkG3Z33wgjnz60Kw+CngC1M49rDYau+Y9aL+8jGagAwrbVyw==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
+      tslib: 2.6.3
+    dev: false
+
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
@@ -3156,6 +3178,18 @@ packages:
   /minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
+
+  /motion-number@0.1.6(framer-motion@11.3.30)(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-KR/BxaMMHaHciAxXAtp5EI+M0/KrXFWKdkUkKz0UE7WotLltpedF5YPnjsAP7bgdExR72TRUZCTtCzG9paER9w==}
+    peerDependencies:
+      framer-motion: ^11.3.19
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      framer-motion: 11.3.30(react-dom@18.0.0)(react@18.0.0)
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
+    dev: false
 
   /ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
