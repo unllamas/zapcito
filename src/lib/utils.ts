@@ -58,3 +58,12 @@ export const normalizeUrl = (input: string): string => {
     return input;
   }
 };
+
+export function shuffleArray(array: any[], limit?: number) {
+  const shuffledArray = array
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+
+  return limit ? shuffledArray.slice(0, limit) : shuffledArray;
+}

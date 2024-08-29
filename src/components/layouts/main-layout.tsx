@@ -42,7 +42,8 @@ import { database } from '@/lib/database';
 import { LightningAddress } from '@/components/profile/lightning-address';
 import { Avatar } from '@/components/profile/avatar';
 
-export function CommandMenu() {
+export function CommandMenu(props: any) {
+  const { profiles } = props;
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -56,27 +57,13 @@ export function CommandMenu() {
     return () => document.removeEventListener('keydown', down);
   }, []);
 
-  const [firstFetch, setFirstFetch] = useState<boolean>(false);
-  const [profiles, setProfiles] = useState<NDKUserProfile[]>([]);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const users = await database.profiles.toArray();
-      setProfiles(users);
-      setFirstFetch(true);
-      return;
-    };
-
-    !firstFetch && getUsers();
-  }, [firstFetch, profiles]);
-
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder='Search...' />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading={`Suggestions (${profiles.length})`}>
-          {profiles.map((profile, key) => {
+          {profiles.map((profile: any, key: any) => {
             return (
               <CommandItem key={key} className='flex gap-2 items-center hover:bg-card' onClick={() => setOpen(false)}>
                 <div className='flex flex-1 gap-2 items-center'>
@@ -171,6 +158,20 @@ type MainLayoutProps = {
 export function MainLayout({ children }: MainLayoutProps) {
   useNostrHooks();
 
+  const [firstFetch, setFirstFetch] = useState<boolean>(false);
+  const [profiles, setProfiles] = useState<NDKUserProfile[]>([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const users = await database.profiles.toArray();
+      setProfiles(users);
+      setFirstFetch(true);
+      return;
+    };
+
+    !firstFetch && getUsers();
+  }, [firstFetch, profiles]);
+
   return (
     <>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
@@ -180,9 +181,9 @@ export function MainLayout({ children }: MainLayoutProps) {
           </Link>
 
           <div className='flex items-center gap-2'>
-            <Button variant='link' asChild>
+            {/* <Button variant='link' asChild>
               <Link href='/explore'>Explore</Link>
-            </Button>
+            </Button> */}
             <UserAuth />
 
             {/* <Button variant='link' size='icon' asChild>
@@ -216,7 +217,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         </div>
       </footer>
 
-      <CommandMenu />
+      <CommandMenu profiles={profiles} />
     </>
   );
 }

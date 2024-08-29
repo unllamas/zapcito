@@ -4,7 +4,7 @@ import { useProfileHook } from '@/hooks/use-profile';
 
 import { Button } from '@/components/ui/button';
 
-export function UserMention(props: any) {
+export function Mention(props: any) {
   const { value } = props;
 
   const { profile } = useProfileHook(value);

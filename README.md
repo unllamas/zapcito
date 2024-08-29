@@ -61,9 +61,6 @@ Create `.env` file:
 # Analytics
 GOOGLE_ANALYTICS_KEY='Optional'
 GOOGLE_TAG_MANAGER_KEY='Optional'
-
-# Payment
-SIGNER_RANDOM_PRIV_KEY='Random private key in hex format'
 ```
 
 ## 🗄️ Project Structure
@@ -109,17 +106,13 @@ features
 - [ ] Profile
     - [x] Get profile
     - [ ] Edit profile
-- [ ] Events
-    - [ ] Get events
-    - [ ] Get filtered events
-    - [ ] Publish event
-    - [ ] Edit event
+    - [ ] Zap profile
 - [ ] Relays
     - [ ] Add or remove relays
 
 ### Supports NIP's 
 
-- [ ] NIP-01: Basic protocol flow description
+- [x] NIP-01: Basic protocol flow description
 - [ ] NIP-02: Follow List
 - [ ] NIP-17: Private Direct Messages
 - [ ] NIP-25: Reactions

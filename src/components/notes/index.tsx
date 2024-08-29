@@ -14,11 +14,10 @@ import {
   isNewline,
 } from '@welshman/content';
 
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/profile/avatar';
 
-import { UserMention } from '@/components/notes/user-mention';
+import { Mention } from './mention';
 import { Quote } from './quote';
 import { Video } from './video';
 import { Spotify } from './spotify';
@@ -38,15 +37,15 @@ export function Notes(props: ComponentProps) {
   const fullContent = parse(post);
 
   return (
-    <Card className='gap-0 overflow-hidden'>
-      <div className='flex flex-row items-center gap-2 p-4 pb-0'>
+    <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
+      <div className='flex flex-row items-center gap-2 p-2 pb-0'>
         <Avatar src={profile?.image || ''} alt={profile?.displayName} />
         <div className='flex flex-col'>
           <p className='text-md font-semibold'>{profile?.displayName}</p>
           <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
         </div>
       </div>
-      <div className='p-4'>
+      <div className='p-2'>
         {fullContent.length > 0 &&
           fullContent?.map((parsed, i) => {
             if (isNewline(parsed)) {
@@ -103,7 +102,7 @@ export function Notes(props: ComponentProps) {
                 return <Iframe key={i} src={url} />;
               }
             } else if (isProfile(parsed)) {
-              return <UserMention key={i} value={parsed.value.pubkey} />;
+              return <Mention key={i} value={parsed.value.pubkey} />;
             } else if (isEvent(parsed) || isAddress(parsed)) {
               return <Quote key={i} raw={parsed.raw} />;
             } else {
@@ -123,6 +122,6 @@ export function Notes(props: ComponentProps) {
   <HeartIcon className={`h-5 w-5 ${liked ? 'text-red-500 fill-red-500' : ''}`} />
 </Button>
 </div> */}
-    </Card>
+    </div>
   );
 }
