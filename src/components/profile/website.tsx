@@ -13,7 +13,7 @@ interface ComponentProps {
 export const Website = (props: ComponentProps) => {
   const { value } = props;
 
-  if (!value) return <Skeleton className='w-full h-[20px] bg-card rounded-full mt-2' />;
+  if (!value) return <Skeleton className='w-full h-[20px] bg-card rounded-full' />;
 
   return (
     <Link href={normalizeUrl(value)} title={value} target='_blank' tabIndex={-1} rel='nofollow'>

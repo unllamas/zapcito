@@ -7,7 +7,7 @@ interface ComponentProps {
 export const Description = (props: ComponentProps) => {
   const { value } = props;
 
-  if (!value) return <Skeleton className='w-full h-[20px] bg-card rounded-full mt-2' />;
+  if (!value) return <Skeleton className='w-full h-[20px] bg-card rounded-full' />;
 
   return <p className='break-words w-full text-sm'>{value}</p>;
 };

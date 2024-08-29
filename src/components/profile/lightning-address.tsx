@@ -7,7 +7,7 @@ interface ComponentProps {
 export const LightningAddress = (props: ComponentProps) => {
   const { value } = props;
 
-  if (!value) return <Skeleton className='w-[120px] h-[16px] bg-card rounded-full mt-2' />;
+  if (!value) return <Skeleton className='w-[120px] h-[16px] bg-card rounded-full' />;
 
-  return <p className='text-muted-foreground whitespace-nowrap'>{value}</p>;
+  return <p className='truncate w-full max-w-40 lg:max-w-80 text-muted-foreground whitespace-nowrap'>{value}</p>;
 };

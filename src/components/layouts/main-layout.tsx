@@ -1,19 +1,17 @@
 'use client';
 
 // Packages
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LaWalletProvider } from '@lawallet/react';
-import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
+// import { LaWalletProvider } from '@lawallet/react';
+import { useNostrHooks } from 'nostr-hooks';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
 
 // Components
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,16 +21,90 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 
 // Config
-import { paymentConfig } from '@/config/payment';
+// import { paymentConfig } from '@/config/payment';
 
 // Icons
-import { ExitIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, ExitIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
+import { useProfileHook } from '@/hooks/use-profile';
+import { NDKUserProfile } from '@nostr-dev-kit/ndk';
+import { database } from '@/lib/database';
+
+import { LightningAddress } from '@/components/profile/lightning-address';
+import { Avatar } from '@/components/profile/avatar';
+
+export function CommandMenu() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, []);
+
+  const [firstFetch, setFirstFetch] = useState<boolean>(false);
+  const [profiles, setProfiles] = useState<NDKUserProfile[]>([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const users = await database.profiles.toArray();
+      setProfiles(users);
+      setFirstFetch(true);
+      return;
+    };
+
+    !firstFetch && getUsers();
+  }, [firstFetch, profiles]);
+
+  return (
+    <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandInput placeholder='Search...' />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading={`Suggestions (${profiles.length})`}>
+          {profiles.map((profile, key) => {
+            return (
+              <CommandItem key={key} className='flex gap-2 items-center hover:bg-card' onClick={() => setOpen(false)}>
+                <div className='flex flex-1 gap-2 items-center'>
+                  <Avatar src={profile.image || ''} />
+                  <div className='flex flex-col'>
+                    {profile?.displayName || profile?.name}
+                    <LightningAddress value={profile?.lud16 || profile?.nip05} />
+                  </div>
+                </div>
+                <Button size='icon' variant='ghost' asChild>
+                  <Link href={`/p/${profile?.npub || profile.id}`}>
+                    <ArrowTopRightIcon />
+                  </Link>
+                </Button>
+              </CommandItem>
+            );
+          })}
+        </CommandGroup>
+      </CommandList>
+    </CommandDialog>
+  );
+}
 
 function UserAuth() {
-  useAutoLogin();
-  const { user, profile, logout } = useAuth();
+  // useAutoLogin();
+  const { user, logout } = useAuth();
+
+  const { profile } = useProfileHook(user?.id || '');
 
   return (
     <>
@@ -45,29 +117,22 @@ function UserAuth() {
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='secondary' className='relative h-8 w-8 rounded-full'>
-              {profile?.avatar ? (
-                <Avatar className='h-9 w-9'>
-                  <AvatarImage loading='lazy' src={profile?.avatar || '/profile.png'} />
-                  <AvatarFallback>{profile?.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
-                </Avatar>
-              ) : (
-                <Skeleton className='w-9 h-9 bg-card' />
-              )}
+            <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
+              <Avatar src={profile?.image || ''} alt={profile?.displayName} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
               <div className='flex flex-col space-y-1'>
-                {!profile?.name && !profile?.address ? (
+                {!profile?.displayName && !profile?.lud16 ? (
                   <>
                     <p className='text-sm font-medium leading-none'>Hello,</p>
                     <p className='text-xs leading-none text-muted-foreground'>Anonymous</p>
                   </>
                 ) : (
                   <>
-                    <p className='text-sm font-medium leading-none'>{profile?.name}</p>
-                    <p className='text-xs leading-none text-muted-foreground'>{profile?.address}</p>
+                    <p className='text-sm font-medium leading-none'>{profile?.displayName}</p>
+                    <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16}</p>
                   </>
                 )}
               </div>
@@ -81,7 +146,7 @@ function UserAuth() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href={`/p/${user?.id}`}>
+                <Link href={`/p/${profile?.npub || user?.id}`}>
                   <PersonIcon />
                   <p className='ml-2'>Profile</p>
                 </Link>
@@ -107,14 +172,17 @@ export function MainLayout({ children }: MainLayoutProps) {
   useNostrHooks();
 
   return (
-    <LaWalletProvider config={paymentConfig}>
+    <>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
-        <div className='flex justify-between items-center max-w-xl h-full mx-auto px-4'>
+        <div className='flex justify-between items-center w-full max-w-[1024px] h-full mx-auto px-4'>
           <Link href='/'>
             <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
           </Link>
 
           <div className='flex items-center gap-2'>
+            <Button variant='link' asChild>
+              <Link href='/explore'>Explore</Link>
+            </Button>
             <UserAuth />
 
             {/* <Button variant='link' size='icon' asChild>
@@ -147,6 +215,8 @@ export function MainLayout({ children }: MainLayoutProps) {
           </div>
         </div>
       </footer>
-    </LaWalletProvider>
+
+      <CommandMenu />
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { useProfile } from '@/hooks/use-profile';
+// import { useProfile } from '@/hooks/use-profile';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +10,7 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 export const Search = () => {
   const [searchText, setSearchText] = useState<string>('');
 
-  const { search } = useProfile();
+  // const { search } = useProfile();
 
   const handlePasteInput = async () => {
     try {
@@ -43,7 +43,7 @@ export const Search = () => {
         </div>
         <Button
           className='flex gap-1 w-full lg:w-auto min-w-[60px] h-[50px] lg:h-[60px]'
-          onClick={() => search(searchText)}
+          onClick={() => null}
           disabled={!searchText}
         >
           <MagnifyingGlassIcon className='w-4 h-4 lg:w-6 lg:h-6' />

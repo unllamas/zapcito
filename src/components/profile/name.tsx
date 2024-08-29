@@ -9,5 +9,5 @@ export const Name = (props: ComponentProps) => {
 
   if (!value) return <Skeleton className='w-[80px] h-[24px] bg-card rounded-full' />;
 
-  return <h1 className='font-bold text-xl whitespace-nowrap'>{value}</h1>;
+  return <h1 className='truncate w-full max-w-40 lg:max-w-80 font-bold text-md whitespace-nowrap'>{value}</h1>;
 };

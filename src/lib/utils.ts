@@ -1,23 +1,20 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { nip19 } from '@lawallet/nostr-tools';
+import { nip19 } from 'nostr-tools';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const convertToHex = (value: string): string | null => {
-  try {
-    if (value.startsWith('npub')) {
-      const { data } = nip19.decode(value);
-      return data as string;
-    }
+export const convertToHex = (value: string) => {
+  if (!value) return null;
 
-    return value;
-  } catch (error) {
-    console.error('Error al convertir la clave pública:', error);
-    return null;
+  if (value.startsWith('npub')) {
+    const { data } = nip19.decode(value);
+    return data as string;
   }
+
+  return value;
 };
 
 export const extractDomain = (url: string): string => {
