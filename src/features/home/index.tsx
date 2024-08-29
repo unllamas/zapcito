@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 
 export function Home() {
   return (
-    <>
+    <div>
       <div className='flex flex-col justify-center items-center gap-6 max-w-sm h-full mx-auto px-4'>
         <Image src='/img/cloud.png' alt='Cloud icon by Yassine Design' width={200} height={200} />
         <div className='flex flex-col gap-2 text-center'>
@@ -33,6 +33,6 @@ export function Home() {
           </Link>
         </Button>
       </div>
-    </>
+    </div>
   );
 }

@@ -9,5 +9,5 @@ export const LightningAddress = (props: ComponentProps) => {
 
   if (!value) return <Skeleton className='w-[120px] h-[16px] bg-card rounded-full' />;
 
-  return <p className='truncate w-full max-w-40 lg:max-w-80 text-muted-foreground whitespace-nowrap'>{value}</p>;
+  return <p className='truncate w-full max-w-40 lg:max-w-50 text-muted-foreground whitespace-nowrap'>{value}</p>;
 };
