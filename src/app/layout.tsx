@@ -31,7 +31,7 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   return (
-    <html className='h-full scroll-smooth' lang='es' suppressHydrationWarning>
+    <html className='dark h-full scroll-smooth' lang='es' suppressHydrationWarning>
       <head>
         {/* Links */}
         <link rel='icon' type='image/png' href='/favicon.svg' />

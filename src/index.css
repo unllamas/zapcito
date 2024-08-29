@@ -49,6 +49,48 @@
   }
 
   .dark {
+    /* General */
+    --foreground: 0 0% 100%;
+    --text: 0 0% 64%;
+    --background: 326 5% 4%;
+
+    /* Components */
+    --border: 0 4% 15%;
+
+    /* Brand */
+    --primary: 326 84% 70%;
+    --primary-foreground: 326 84% 5%;
+
+    --secondary: 306 2% 24%;
+    --secondary-foreground: 326 84% 95%;
+
+    /* Validations */
+    --warning: 40 59% 49%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Card */
+    --card: 0 5% 12%;
+    --card-foreground: 0 0% 100%;
+    /* Defaults */
+    --popover: 326 5% 4%;
+    --popover-foreground: 0 0% 100%;
+
+    --muted: 326 40% 96.1%;
+    --muted-foreground: 326 7% 50%;
+    
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* Charts */
+    --chart-1: 213 83% 59%;
+    --chart-2: 141 78% 65%;
   }
 }
 
