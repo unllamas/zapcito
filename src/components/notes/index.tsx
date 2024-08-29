@@ -27,7 +27,7 @@ import { Iframe } from './iframe';
 
 import { useMemo } from 'react';
 import { useSubscribe } from 'nostr-hooks';
-import { HeartFilledIcon, HeartIcon } from '@radix-ui/react-icons';
+import { HeartFilledIcon } from '@radix-ui/react-icons';
 
 interface ComponentProps {
   post: any;
