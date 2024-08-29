@@ -13,7 +13,7 @@ class ExampleDB extends Dexie {
 
   constructor() {
     super('example');
-    this.version(1).stores({
+    this.version(2).stores({
       auth: 'id, secret',
       profiles: 'id, banner, image, displayName, lud06, lud16, nip05, about, bio, website, created_at, npub',
     });
