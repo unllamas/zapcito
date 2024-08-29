@@ -109,8 +109,8 @@ export const Profile = (props: ProfileProps) => {
               <TabsTrigger className='flex-1' value='feed'>
                 Feed
               </TabsTrigger>
-              <TabsTrigger className='flex-1' value='groups' disabled>
-                Groups
+              <TabsTrigger className='flex-1' value='zapcitos' disabled>
+                Zapcitos
               </TabsTrigger>
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='feed'>
