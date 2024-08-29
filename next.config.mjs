@@ -6,6 +6,7 @@ const nextConfig = {
     TM_KEY: process.env.GOOGLE_TAG_MANAGER_KEY,
   },
   images: {
+    domains: ['nostr.build'],
     remotePatterns: [
       {
         protocol: 'https',

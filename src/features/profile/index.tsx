@@ -25,6 +25,7 @@ import { Banner } from '@/components/profile/banner';
 import { Notes } from '@/components/notes';
 
 import { Zap } from '../zap';
+import { DEFAULT_PUBKEY } from '@/config/constants';
 
 interface ProfileProps {
   value: string;
@@ -54,11 +55,12 @@ export const Profile = (props: ProfileProps) => {
     };
 
     !firstFetch && getUsers();
-  }, [firstFetch, profiles]);
+  }, [pubkeyToHex]);
 
   const shuffledProfiles = useMemo(() => shuffleArray(profiles, 4), [profiles]);
+
   return (
-    <div className='flex w-full justify-center'>
+    <div className='flex w-full justify-center items-start'>
       <div className='w-full max-w-lg pt-4'>
         <div className='h-[200px]'>
           <Banner value={profile?.banner} />
@@ -97,7 +99,7 @@ export const Profile = (props: ProfileProps) => {
                 Feed
               </TabsTrigger>
               <TabsTrigger className='flex-1' value='events' disabled>
-                Events
+                Zapcitos
               </TabsTrigger>
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='feed'>
@@ -111,29 +113,47 @@ export const Profile = (props: ProfileProps) => {
         </div>
       </div>
 
-      <div className='hidden md:block w-full max-w-sm px-8'>
+      <div className='sticky top-20 hidden md:block w-full max-w-sm px-8'>
         <h2 className='font-bold font-lg'>You might like</h2>
 
         <div className='flex flex-col gap-1 w-full mt-2'>
-          {shuffledProfiles.map((profile: any, key: any) => {
-            if (key > 5) return null;
-            return (
-              <div key={key} className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
-                <div className='flex gap-2 items-center w-full'>
-                  <Avatar src={profile.image || ''} />
-                  <div className='flex flex-col'>
-                    {profile?.displayName || profile?.name}
-                    <LightningAddress value={profile?.lud16 || profile?.nip05} />
+          {shuffledProfiles?.length > 0 ? (
+            shuffledProfiles.map((profile: any, key: any) => {
+              if (key > 5) return null;
+              return (
+                <div key={key} className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
+                  <div className='flex gap-2 items-center w-full'>
+                    <Avatar src={profile.image || ''} />
+                    <div className='flex flex-col'>
+                      {profile?.displayName || profile?.name}
+                      <LightningAddress value={profile?.lud16 || profile?.nip05} />
+                    </div>
                   </div>
+                  <Button className='flex-0' size='icon' variant='ghost' asChild>
+                    <Link href={`/p/${profile?.npub || profile.id}`}>
+                      <ArrowTopRightIcon />
+                    </Link>
+                  </Button>
                 </div>
-                <Button className='flex-0' size='icon' variant='ghost' asChild>
-                  <Link href={`/p/${profile?.npub || profile.id}`}>
-                    <ArrowTopRightIcon />
-                  </Link>
-                </Button>
+              );
+            })
+          ) : (
+            // Fake mock
+            <div className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
+              <div className='flex gap-2 items-center w-full'>
+                <Avatar src={'https://primal.b-cdn.net/media-cache?s=o&a=1&u=https%3A%2F%2Fm.primal.net%2FHWWM.png'} />
+                <div className='flex flex-col'>
+                  {'Jona |🇦🇷'}
+                  <LightningAddress value={'dios@lawallet.ar'} />
+                </div>
               </div>
-            );
-          })}
+              <Button className='flex-0' size='icon' variant='ghost' asChild>
+                <Link href={`/p/${DEFAULT_PUBKEY}`}>
+                  <ArrowTopRightIcon />
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

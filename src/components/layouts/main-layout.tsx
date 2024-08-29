@@ -181,9 +181,9 @@ export function MainLayout({ children }: MainLayoutProps) {
           </Link>
 
           <div className='flex items-center gap-2'>
-            <Button variant='link' asChild>
+            {/* <Button variant='link' asChild>
               <Link href='/explore'>Explore</Link>
-            </Button>
+            </Button> */}
             <UserAuth />
 
             {/* <Button variant='link' size='icon' asChild>
