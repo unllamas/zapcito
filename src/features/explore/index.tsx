@@ -2,15 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 
 import { database } from '@/lib/database';
 
-import { CardUser } from './components/card';
-
 import { Button } from '@/components/ui/button';
-import { Card as AtomicCard } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LightningAddress } from '@/components/profile/lightning-address';
 import { Name } from '@/components/profile/name';

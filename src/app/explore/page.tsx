@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 
 // Libs and hooks
-import { Explore } from '@/pages/explore';
+import { Explore } from '@/features/explore';
 
 // Config
 import { APP_TITLE } from '@/config/constants';

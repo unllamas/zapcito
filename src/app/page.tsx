@@ -2,7 +2,7 @@
 import { Metadata } from 'next';
 
 // Components
-import { Home } from '@/pages/home';
+import { Home } from '@/features/home';
 
 // Config
 import { APP_TITLE } from '@/config/constants';

@@ -21,9 +21,9 @@ export function Home() {
         </div>
       </div>
 
-      <div className='w-full max-w-xl mx-auto my-4 px-4'>
+      {/* <div className='w-full max-w-xl mx-auto my-4 px-4'>
         <Search />
-      </div>
+      </div> */}
 
       <div className='flex justify-center max-w-sm h-full mx-auto px-4'>
         <Button variant='ghost' asChild>
