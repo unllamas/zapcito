@@ -129,11 +129,13 @@ export const Profile = (props: ProfileProps) => {
                       <LightningAddress value={profile?.lud16 || profile?.nip05} />
                     </div>
                   </div>
-                  <Button className='flex-0' size='icon' variant='ghost' asChild>
-                    <Link href={`/p/${profile?.npub || profile.id}`}>
-                      <ArrowTopRightIcon />
-                    </Link>
-                  </Button>
+                  <div>
+                    <Button className='flex-0' size='icon' variant='ghost' asChild>
+                      <Link href={`/p/${profile?.npub || profile.id}`}>
+                        <ArrowTopRightIcon />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               );
             })
@@ -147,11 +149,13 @@ export const Profile = (props: ProfileProps) => {
                   <LightningAddress value={'dios@lawallet.ar'} />
                 </div>
               </div>
-              <Button className='flex-0' size='icon' variant='ghost' asChild>
-                <Link href={`/p/${DEFAULT_PUBKEY}`}>
-                  <ArrowTopRightIcon />
-                </Link>
-              </Button>
+              <div>
+                <Button className='flex-0' size='icon' variant='ghost' asChild>
+                  <Link href={`/p/${DEFAULT_PUBKEY}`}>
+                    <ArrowTopRightIcon />
+                  </Link>
+                </Button>
+              </div>
             </div>
           )}
         </div>
