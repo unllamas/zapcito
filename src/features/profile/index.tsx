@@ -141,7 +141,7 @@ export const Profile = (props: ProfileProps) => {
                     </div>
                   </div>
                   <div>
-                    <Button className='flex-0' size='icon' variant='ghost' asChild>
+                    <Button className='flex-0' size='icon' variant='outline' asChild>
                       <Link href={`/p/${profile?.npub || profile.id}`}>
                         <ArrowTopRightIcon />
                       </Link>
@@ -161,7 +161,7 @@ export const Profile = (props: ProfileProps) => {
                 </div>
               </div>
               <div>
-                <Button className='flex-0' size='icon' variant='ghost' asChild>
+                <Button className='flex-0' size='icon' variant='outline' asChild>
                   <Link href={`/p/${DEFAULT_PUBKEY}`}>
                     <ArrowTopRightIcon />
                   </Link>
