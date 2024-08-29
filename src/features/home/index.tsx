@@ -8,7 +8,7 @@ import { GitHubLogoIcon } from '@radix-ui/react-icons';
 // Components
 import { Button } from '@/components/ui/button';
 
-import { Search } from './components/seach';
+// import { Search } from './components/seach';
 
 export function Home() {
   return (

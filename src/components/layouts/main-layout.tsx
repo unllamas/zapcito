@@ -5,14 +5,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 // import { LaWalletProvider } from '@lawallet/react';
-import { useNostrHooks, useProfile } from 'nostr-hooks';
+import { useNostrHooks } from 'nostr-hooks';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
 
 // Components
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,22 +22,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from '@/components/ui/command';
 
 // Config
 // import { paymentConfig } from '@/config/payment';
 
 // Icons
-import { ArrowTopRightIcon, ExitIcon, HomeIcon, Link1Icon, PersonIcon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, ExitIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useProfileHook } from '@/hooks/use-profile';
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 import { database } from '@/lib/database';

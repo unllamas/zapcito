@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { type NDKEvent } from '@nostr-dev-kit/ndk';
 // import { useSubscription } from '@lawallet/react';
 import {
   parse,

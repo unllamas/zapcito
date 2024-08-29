@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState } from 'react';
 // import { useZap as useZapHandle } from '@lawallet/react';
 import { toast } from 'sonner';

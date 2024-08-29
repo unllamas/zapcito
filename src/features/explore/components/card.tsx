@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
