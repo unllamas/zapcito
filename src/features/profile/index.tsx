@@ -6,7 +6,7 @@ import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 
 // Libs and hooks
-import { useAuth } from '@/hooks/use-auth';
+// import { useAuth } from '@/hooks/use-auth';
 import { useProfileHook } from '@/hooks/use-profile';
 import { useSuscriptionHook } from '@/hooks/use-suscription';
 
