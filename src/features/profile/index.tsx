@@ -24,7 +24,7 @@ import { Name } from '@/components/profile/name';
 import { Banner } from '@/components/profile/banner';
 import { Notes } from '@/components/notes';
 
-import { Zap } from '../zap';
+// import { Zap } from '../zap';
 import { DEFAULT_PUBKEY } from '@/config/constants';
 
 interface ProfileProps {
@@ -37,7 +37,7 @@ export const Profile = (props: ProfileProps) => {
   const { value } = props;
 
   const { profile } = useProfileHook(value);
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   const pubkeyToHex = useMemo(() => convertToHex(value) || '', [value]);
 
@@ -70,14 +70,25 @@ export const Profile = (props: ProfileProps) => {
           <div className='w-full'>
             <div className='flex justify-between items-end gap-4 w-full'>
               <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} variant='profile' />
-              <div>
-                {value === user?.id ? (
+              <div className='flex gap-1 items-center'>
+                {/* {value === user?.id ? (
                   <Button variant='secondary' disabled>
                     Edit profile
                   </Button>
                 ) : (
-                  <Zap pubkey={value} />
-                )}
+                  <>
+                    <Button size='icon' variant='outline' disabled>
+                      <DotsHorizontalIcon />
+                    </Button>
+                    <Button size='icon' variant='outline' disabled>
+                      <EnvelopeClosedIcon />
+                    </Button>
+                    <Button variant='outline' disabled>
+                      Follow
+                    </Button>
+                    <Zap pubkey={value} />
+                  </>
+                )} */}
               </div>
             </div>
           </div>
@@ -98,8 +109,8 @@ export const Profile = (props: ProfileProps) => {
               <TabsTrigger className='flex-1' value='feed'>
                 Feed
               </TabsTrigger>
-              <TabsTrigger className='flex-1' value='events' disabled>
-                Zapcitos
+              <TabsTrigger className='flex-1' value='groups' disabled>
+                Groups
               </TabsTrigger>
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='feed'>
