@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 
 // Libs and hooks
-import { Profile } from '@/features/profile';
+import { Profile } from '@/pages/profile';
 
 // Config
 import { APP_TITLE } from '@/config/constants';

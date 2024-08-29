@@ -1,27 +1,26 @@
 'use client';
 
-// Packages
 import { useMemo } from 'react';
-import { useProfile, useSubscribe } from 'nostr-hooks';
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
+import { useProfileHook } from '@/hooks/use-profile';
+import { useSuscriptionHook } from '@/hooks/use-suscription';
+
+import { convertToHex } from '@/lib/utils';
 
 // Components
-import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Avatar } from '@/components/profile/avatar';
+import { Website } from '@/components/profile/website';
+import { Description } from '@/components/profile/description';
+import { LightningAddress } from '@/components/profile/lightning-address';
+import { Name } from '@/components/profile/name';
+import { Banner } from '@/components/profile/banner';
+import { Notes } from '@/components/notes';
 
 import { Zap } from '../zap';
-import { Notes } from '../notes';
-
-// Internal components
-import { Website } from './components/website';
-import { Description } from './components/description';
-import { LightningAddress } from './components/lightning-address';
-import { Name } from './components/name';
-import { Banner } from './components/banner';
 
 interface ProfileProps {
   value: string;
@@ -32,11 +31,12 @@ export const Profile = (props: ProfileProps) => {
   // Value can be: npub, pubkey hex or lightning address
   const { value } = props;
 
-  const { profile } = useProfile({ pubkey: value });
+  const { profile } = useProfileHook(value);
   const { user } = useAuth();
 
-  const filters = useMemo(() => [{ authors: [value], kinds: [1], limit: 12 }], [value]);
-  const { events: publications } = useSubscribe({ filters });
+  const pubkeyToHex = useMemo(() => convertToHex(value) || '', [value]);
+
+  const { events } = useSuscriptionHook(pubkeyToHex);
 
   return (
     <div className='w-full max-w-xl mx-auto pt-4'>
@@ -47,13 +47,7 @@ export const Profile = (props: ProfileProps) => {
       <div className='relative mt-[-50px] mb-2 px-4'>
         <div className='w-full'>
           <div className='flex justify-between items-end gap-4 w-full'>
-            <Avatar className='overflow-hidden w-[100px] h-[100px] bg-card border-4 border-background rounded-full'>
-              <AvatarImage src={profile?.image || ''} loading='lazy' />
-              <AvatarFallback>
-                <Skeleton className='bg-card' />
-              </AvatarFallback>
-            </Avatar>
-
+            <Avatar src={profile?.image || ''} alt={profile?.displayName} variant='profile' />
             <div>
               {value === user?.id ? (
                 <Button variant='secondary' disabled>
@@ -68,7 +62,7 @@ export const Profile = (props: ProfileProps) => {
       </div>
 
       <div className='flex flex-col gap-4 w-full px-4'>
-        <aside className='w-full'>
+        <aside className='flex flex-col gap-2 w-full'>
           <Name value={profile?.displayName} />
           <LightningAddress value={profile?.lud16} />
           <Description value={profile?.about} />
@@ -88,9 +82,9 @@ export const Profile = (props: ProfileProps) => {
           </TabsList>
           <TabsContent className='flex flex-col gap-4' value='feed'>
             <div className='flex flex-col gap-2'>
-              {publications &&
-                publications.length > 0 &&
-                publications?.map((post, key) => <Notes key={key} post={post} profile={profile} />)}
+              {events &&
+                events.length > 0 &&
+                events?.map((post, key) => <Notes key={key} post={post} profile={profile} />)}
             </div>
           </TabsContent>
         </Tabs>
