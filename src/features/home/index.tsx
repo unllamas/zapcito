@@ -25,7 +25,7 @@ export function Home() {
         <Search />
       </div> */}
 
-      <div className='flex justify-center max-w-sm h-full mx-auto px-4'>
+      <div className='flex justify-center max-w-sm h-full mx-auto mt-4 px-4'>
         <Button variant='ghost' asChild>
           <Link href='https://github.com/unllamas/zapcito' target='_blank' rel='noreferrer'>
             <GitHubLogoIcon />
