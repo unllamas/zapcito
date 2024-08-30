@@ -105,23 +105,14 @@ function UserAuth() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
-              <Avatar src={profile?.image || ''} alt={profile?.displayName} />
+              <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
               <div className='flex flex-col space-y-1'>
-                {!profile?.displayName && !profile?.lud16 ? (
-                  <>
-                    <p className='text-sm font-medium leading-none'>Hello,</p>
-                    <p className='text-xs leading-none text-muted-foreground'>Anonymous</p>
-                  </>
-                ) : (
-                  <>
-                    <p className='text-sm font-medium leading-none'>{profile?.displayName}</p>
-                    <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16}</p>
-                  </>
-                )}
+                <p className='text-sm font-medium leading-none'>{profile?.displayName || profile?.name || 'Hello,'}</p>
+                <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator className='bg-card' />
