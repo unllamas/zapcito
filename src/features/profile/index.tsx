@@ -3,10 +3,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, EnvelopeClosedIcon, LightningBoltIcon } from '@radix-ui/react-icons';
 
 // Libs and hooks
-// import { useAuth } from '@/hooks/use-auth';
+import { useAuth } from '@/hooks/use-auth';
 import { useProfileHook } from '@/hooks/use-profile';
 import { useSuscriptionHook } from '@/hooks/use-suscription';
 
@@ -23,9 +23,10 @@ import { LightningAddress } from '@/components/profile/lightning-address';
 import { Name } from '@/components/profile/name';
 import { Banner } from '@/components/profile/banner';
 import { Notes } from '@/components/notes';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 // import { Zap } from '../zap';
-import { DEFAULT_PUBKEY } from '@/config/constants';
+import { MOCK_BASE_PROFILES } from '@/config/constants';
 
 interface ProfileProps {
   value: string;
@@ -37,7 +38,7 @@ export const Profile = (props: ProfileProps) => {
   const { value } = props;
 
   const { profile } = useProfileHook(value);
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   const pubkeyToHex = useMemo(() => convertToHex(value) || '', [value]);
 
@@ -57,7 +58,7 @@ export const Profile = (props: ProfileProps) => {
     !firstFetch && getUsers();
   }, [pubkeyToHex]);
 
-  const shuffledProfiles = useMemo(() => shuffleArray(profiles, 4), [profiles]);
+  const shuffledProfiles = useMemo(() => shuffleArray(profiles, 5), [profiles]);
 
   return (
     <div className='flex w-full justify-center items-start'>
@@ -71,22 +72,53 @@ export const Profile = (props: ProfileProps) => {
             <div className='flex justify-between items-end gap-4 w-full'>
               <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} variant='profile' />
               <div className='flex gap-1 items-center'>
-                {/* {value === user?.id ? (
-                  <Button variant='secondary' disabled>
-                    Edit profile
-                  </Button>
-                ) : (
-                  <>
-                    <Button size='icon' variant='outline'>
-                      <DotsHorizontalIcon />
-                    </Button>
-                    <Button size='icon' variant='outline'>
-                      <EnvelopeClosedIcon />
-                    </Button>
-                    <Button variant='outline'>Follow</Button>
-                    <Zap pubkey={value} />
-                  </>
-                )} */}
+                <TooltipProvider>
+                  {pubkeyToHex === user?.id ? (
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Button variant='outline' disabled>
+                          Edit profile
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Soon</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ) : (
+                    <>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Button size='icon' variant='outline' disabled>
+                            <EnvelopeClosedIcon />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Soon</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Button variant='outline' disabled>
+                            Follow
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Soon</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Button size='icon' disabled>
+                            <LightningBoltIcon />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Soon</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </>
+                  )}
+                </TooltipProvider>
               </div>
             </div>
           </div>
@@ -128,7 +160,6 @@ export const Profile = (props: ProfileProps) => {
         <div className='flex flex-col gap-1 w-full mt-2'>
           {shuffledProfiles?.length > 0 ? (
             shuffledProfiles.map((profile: any, key: any) => {
-              if (key > 5) return null;
               return (
                 <div key={key} className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
                   <div className='flex gap-2 items-center w-full'>
@@ -149,23 +180,29 @@ export const Profile = (props: ProfileProps) => {
               );
             })
           ) : (
-            // Fake mock
-            <div className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
-              <div className='flex gap-2 items-center w-full'>
-                <Avatar src={'https://primal.b-cdn.net/media-cache?s=o&a=1&u=https%3A%2F%2Fm.primal.net%2FHWWM.png'} />
-                <div className='flex flex-col'>
-                  {'Jona |🇦🇷'}
-                  <LightningAddress value={'dios@lawallet.ar'} />
-                </div>
-              </div>
-              <div>
-                <Button className='flex-0' size='icon' variant='outline' asChild>
-                  <Link href={`/p/${DEFAULT_PUBKEY}`}>
-                    <ArrowTopRightIcon />
-                  </Link>
-                </Button>
-              </div>
-            </div>
+            <>
+              {/* // Fake mock */}
+              {MOCK_BASE_PROFILES.map((profile) => {
+                return (
+                  <div key={profile.pubkey} className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
+                    <div className='flex gap-2 items-center w-full'>
+                      <Avatar src={profile.image} />
+                      <div className='flex flex-col'>
+                        {profile.name}
+                        <LightningAddress value={profile.lud16} />
+                      </div>
+                    </div>
+                    <div>
+                      <Button className='flex-0' size='icon' variant='outline' asChild>
+                        <Link href={`/p/${profile.pubkey}`}>
+                          <ArrowTopRightIcon />
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
           )}
         </div>
       </div>
