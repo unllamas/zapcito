@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 // import { useLogin } from 'nostr-hooks';
+import { nip19 } from 'nostr-tools';
 import { toast } from 'sonner';
 import { ArrowLeftIcon, EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
 
@@ -29,7 +30,8 @@ export function Login() {
   const { user, loading, loginWithSecretKey, loginWithExtention, generateSecret } = useAuth();
 
   if (user) {
-    router.push('/');
+    const npub = nip19.npubEncode(user.id);
+    router.push(`/p/${npub}`);
     return null;
   }
 
