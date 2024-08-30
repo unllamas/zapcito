@@ -77,15 +77,13 @@ export const Profile = (props: ProfileProps) => {
                   </Button>
                 ) : (
                   <>
-                    <Button size='icon' variant='outline' disabled>
+                    <Button size='icon' variant='outline'>
                       <DotsHorizontalIcon />
                     </Button>
-                    <Button size='icon' variant='outline' disabled>
+                    <Button size='icon' variant='outline'>
                       <EnvelopeClosedIcon />
                     </Button>
-                    <Button variant='outline' disabled>
-                      Follow
-                    </Button>
+                    <Button variant='outline'>Follow</Button>
                     <Zap pubkey={value} />
                   </>
                 )} */}
