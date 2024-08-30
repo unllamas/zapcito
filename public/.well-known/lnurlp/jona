@@ -2,8 +2,8 @@
   "status": "OK",
   "tag": "payRequest",
   "commentAllowed": 255,
-  "callback": "https://getalby.com/lnurlp/unllamas/callback",
-  "metadata": "[[\"text/identifier\",\"unllamas@getalby.com\"],[\"text/plain\",\"Sats for unllamas\"]]",
+  "callback": "https://api.lawallet.ar/lnurlp/dios/callback",
+  "metadata": "[[\"text/identifier\",\"dios@lawallet.ar\"],[\"text/plain\",\"Sats for Jona\"]]",
   "minSendable": 1000,
   "maxSendable": 11000000000,
   "payerData": {
