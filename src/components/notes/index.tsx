@@ -49,9 +49,9 @@ export function Notes(props: ComponentProps) {
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
       <div className='flex flex-row items-center gap-2 p-2 pb-0'>
-        <Avatar src={profile?.image || ''} alt={profile?.displayName} />
+        <Avatar src={profile?.image} alt={profile?.displayName} />
         <div className='flex flex-col'>
-          <p className='text-md font-semibold'>{profile?.displayName}</p>
+          <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
           <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
         </div>
       </div>

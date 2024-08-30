@@ -67,3 +67,19 @@ export function shuffleArray(array: any[], limit?: number) {
 
   return limit ? shuffledArray.slice(0, limit) : shuffledArray;
 }
+
+export const normalizeLNDomain = (domain: string) => {
+  try {
+    const iURL = new URL(domain);
+    return iURL.hostname;
+  } catch {
+    return '';
+  }
+};
+
+export const splitHandle = (handle: string): string[] => {
+  if (!handle.length) return [];
+
+  const [username, domain] = handle.split('@');
+  return [username!, domain!];
+};

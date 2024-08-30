@@ -8,7 +8,7 @@ import { GitHubLogoIcon } from '@radix-ui/react-icons';
 // Components
 import { Button } from '@/components/ui/button';
 
-// import { Search } from './components/seach';
+import { Search } from '@/components/search';
 
 export function Home() {
   return (
@@ -21,9 +21,9 @@ export function Home() {
         </div>
       </div>
 
-      {/* <div className='w-full max-w-xl mx-auto my-4 px-4'>
+      <div className='w-full max-w-xl mx-auto my-12 px-4'>
         <Search />
-      </div> */}
+      </div>
 
       <div className='flex justify-center max-w-sm h-full mx-auto mt-4 px-4'>
         <Button variant='outline' asChild>
