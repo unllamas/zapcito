@@ -1,0 +1,22 @@
+{
+  "status": "OK",
+  "tag": "payRequest",
+  "commentAllowed": 255,
+  "callback": "https://getalby.com/lnurlp/unllamas/callback",
+  "metadata": "[[\"text/identifier\",\"unllamas@getalby.com\"],[\"text/plain\",\"Sats for unllamas\"]]",
+  "minSendable": 1000,
+  "maxSendable": 11000000000,
+  "payerData": {
+    "name": {
+      "mandatory": false
+    },
+    "email": {
+      "mandatory": false
+    },
+    "pubkey": {
+      "mandatory": false
+    }
+  },
+  "nostrPubkey": "cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547",
+  "allowsNostr": true
+}
