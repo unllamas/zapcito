@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 // import { useLogin } from 'nostr-hooks';
 import { toast } from 'sonner';
-import { ArrowLeftIcon, EyeOpenIcon, EyeClosedIcon, ClipboardIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon, EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
@@ -97,14 +97,14 @@ export function Login() {
                 <Label htmlFor='secret'>Your private key</Label>
                 <div className='relative w-full'>
                   <Input
-                    className='pr-[82px]'
+                    className='pr-[90px]'
                     id='secret'
                     type={isPasswordVisible ? 'text' : 'password'}
                     placeholder='Format hex or nsec...'
                     value={inputValue}
                     readOnly
                   />
-                  <div className='absolute top-0 right-[2px] flex items-center h-full'>
+                  <div className='absolute top-0 right-[10px] flex items-center h-full'>
                     <Button
                       variant='ghost'
                       size='sm'
@@ -113,9 +113,15 @@ export function Login() {
                     >
                       {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
                     </Button>
-                    <Button variant='ghost' size='sm' onClick={handlePasteInput} title='Paste from clipboard'>
-                      <ClipboardIcon />
-                    </Button>
+                    {inputValue ? (
+                      <Button variant='ghost' size='sm' onClick={() => setInputValue('')} title='Delete value'>
+                        <TrashIcon />
+                      </Button>
+                    ) : (
+                      <Button variant='ghost' size='sm' onClick={handlePasteInput} title='Paste from clipboard'>
+                        <ClipboardIcon />
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>

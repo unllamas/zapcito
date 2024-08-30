@@ -35,7 +35,7 @@ export function Zap(props: ZapProps) {
   return (
     <>
       <Drawer onClose={reset} open={open && screen !== 'finished'} onOpenChange={setOpen}>
-        <DrawerTrigger asChild disabled>
+        <DrawerTrigger asChild>
           <Button size={'icon'} className='flex-1'>
             <LightningBoltIcon />
           </Button>

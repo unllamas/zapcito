@@ -77,15 +77,13 @@ export const Profile = (props: ProfileProps) => {
                   </Button>
                 ) : (
                   <>
-                    <Button size='icon' variant='outline' disabled>
+                    <Button size='icon' variant='outline'>
                       <DotsHorizontalIcon />
                     </Button>
-                    <Button size='icon' variant='outline' disabled>
+                    <Button size='icon' variant='outline'>
                       <EnvelopeClosedIcon />
                     </Button>
-                    <Button variant='outline' disabled>
-                      Follow
-                    </Button>
+                    <Button variant='outline'>Follow</Button>
                     <Zap pubkey={value} />
                   </>
                 )} */}
@@ -109,8 +107,8 @@ export const Profile = (props: ProfileProps) => {
               <TabsTrigger className='flex-1' value='feed'>
                 Feed
               </TabsTrigger>
-              <TabsTrigger className='flex-1' value='groups' disabled>
-                Groups
+              <TabsTrigger className='flex-1' value='zapcitos' disabled>
+                Zapcitos
               </TabsTrigger>
             </TabsList>
             <TabsContent className='flex flex-col gap-4' value='feed'>
@@ -141,7 +139,7 @@ export const Profile = (props: ProfileProps) => {
                     </div>
                   </div>
                   <div>
-                    <Button className='flex-0' size='icon' variant='ghost' asChild>
+                    <Button className='flex-0' size='icon' variant='outline' asChild>
                       <Link href={`/p/${profile?.npub || profile.id}`}>
                         <ArrowTopRightIcon />
                       </Link>
@@ -161,7 +159,7 @@ export const Profile = (props: ProfileProps) => {
                 </div>
               </div>
               <div>
-                <Button className='flex-0' size='icon' variant='ghost' asChild>
+                <Button className='flex-0' size='icon' variant='outline' asChild>
                   <Link href={`/p/${DEFAULT_PUBKEY}`}>
                     <ArrowTopRightIcon />
                   </Link>

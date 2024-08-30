@@ -2,15 +2,16 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 // import { useIdentity, useNostr } from '@lawallet/react';
-import { getPublicKey, generateSecretKey } from 'nostr-tools';
+import { generateSecretKey, getPublicKey } from 'nostr-tools';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 import { toast } from 'sonner';
+import * as nip19 from 'nostr-tools/nip19';
 
 // Libs and hooks
 import { useAuthStore } from '@/stores/use-auth-store';
 
 // Types
-import { Auth } from '@/lib/database';
+import { Auth, database } from '@/lib/database';
 
 export const useAuth = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ export const useAuth = () => {
   // Internal
   // const { initializeSigner } = useNostr();
   // const identity = useIdentity();
-  const { handleAdd, handleGet, handleDelete } = useAuthStore();
+  const { handleGet, handleDelete } = useAuthStore();
 
   // const { profile } = useProfile(user ? { pubkey: user.id } : undefined);
 
@@ -30,28 +31,38 @@ export const useAuth = () => {
     setLoading(true);
 
     if (value.length < 32) {
+      setLoading(false);
       toast.warning('The private key must have a minimum of 32 digits.');
       return;
     }
 
-    // TO-DO
-    // Revisar que no ingresa con @hodl.ar
+    let secretToBytes: Uint8Array;
+
+    if (value.startsWith('nsec')) {
+      const { data } = nip19.decode(value);
+      // @ts-ignore
+      secretToBytes = data;
+    } else {
+      secretToBytes = hexToBytes(value);
+    }
+
+    if (!secretToBytes) {
+      toast.warning('Ups...');
+      return;
+    }
+
+    const AuthSave: Auth = {
+      id: getPublicKey(secretToBytes),
+      secret: value,
+    };
+
     try {
-      const secretToBytes = hexToBytes(value);
-      const pubkey: string = getPublicKey(secretToBytes);
+      await database.auth.put(AuthSave);
 
-      const AuthSave: Auth = {
-        id: pubkey,
-        secret: value,
-      };
-
-      handleAdd(AuthSave).then(() => {
-        setUser(AuthSave);
-        // initializeSigner(identity.signer);
-        router.push('/');
-      });
-    } catch (err) {
-      toast.warning('An error occurred while logging in.');
+      setUser(AuthSave);
+      router.push('/');
+    } catch (error) {
+      console.log('error', error);
       setLoading(false);
     }
   };
@@ -70,25 +81,26 @@ export const useAuth = () => {
 
   const handleLoginWithExtention = async () => {
     setLoading(true);
+    if (typeof window.nostr === 'undefined') {
+      toast.warning('GetAlby is not installed or is not available');
+      throw new Error('GetAlby is not installed or is not available');
+    }
+
+    // @ts-ignore
+    const pubkey = await window.nostr.getPublicKey();
+
+    const AuthSave: Auth = {
+      id: pubkey,
+      secret: '',
+    };
+
     try {
-      if (typeof window.nostr === 'undefined') {
-        toast.warning('GetAlby is not installed or is not available');
-        throw new Error('GetAlby is not installed or is not available');
-      }
+      await database.auth.put(AuthSave);
 
-      // @ts-ignore
-      const pubkey = await window.nostr.getPublicKey();
-
-      const AuthSave: Auth = {
-        id: pubkey,
-        secret: '',
-      };
-
-      handleAdd(AuthSave).then(() => {
-        setUser(AuthSave);
-        router.push('/');
-      });
+      setUser(AuthSave);
+      router.push('/');
     } catch (error) {
+      console.log('error', error);
       toast.warning('handleLoginWithExtention: An error occurred while logging in.');
       setLoading(false);
     }
