@@ -2,7 +2,7 @@
   "status": "OK",
   "tag": "payRequest",
   "commentAllowed": 255,
-  "callback": "https://api.lawallet.ar/lnurlp/dios/callback",
+  "callback": "https://api.lawallet.ar/lnurlp/cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547/callback",
   "metadata": "[[\"text/identifier\",\"dios@lawallet.ar\"],[\"text/plain\",\"Sats for Jona\"]]",
   "minSendable": 1000,
   "maxSendable": 11000000000,
