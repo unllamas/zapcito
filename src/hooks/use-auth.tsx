@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { generateSecretKey, getPublicKey } from 'nostr-tools';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 import { toast } from 'sonner';
-import * as nip19 from 'nostr-tools/nip19';
+import { nip19 } from 'nostr-tools';
 
 // Libs and hooks
 import { useAuthStore } from '@/stores/use-auth-store';
@@ -51,16 +51,19 @@ export const useAuth = () => {
       return;
     }
 
+    const pubkey = getPublicKey(secretToBytes);
+
     const AuthSave: Auth = {
-      id: getPublicKey(secretToBytes),
+      id: pubkey,
       secret: value,
     };
 
     try {
       await database.auth.put(AuthSave);
-
       setUser(AuthSave);
-      router.push('/');
+
+      const npub = nip19.npubEncode(pubkey);
+      router.push(`/p/${npub}`);
     } catch (error) {
       console.log('error', error);
       setLoading(false);
@@ -96,9 +99,10 @@ export const useAuth = () => {
 
     try {
       await database.auth.put(AuthSave);
-
       setUser(AuthSave);
-      router.push('/');
+
+      const npub = nip19.npubEncode(pubkey);
+      router.push(`/p/${npub}`);
     } catch (error) {
       console.log('error', error);
       toast.warning('handleLoginWithExtention: An error occurred while logging in.');
