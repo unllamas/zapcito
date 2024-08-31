@@ -34,13 +34,14 @@ import {
 // import { paymentConfig } from '@/config/payment';
 
 // Icons
-import { ArrowTopRightIcon, ExitIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, ExitIcon, GearIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useProfileHook } from '@/hooks/use-profile';
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 import { database } from '@/lib/database';
 
 import { LightningAddress } from '@/components/profile/lightning-address';
 import { Avatar } from '@/components/profile/avatar';
+import { Badge } from '../ui/badge';
 
 export function CommandMenu(props: any) {
   const { profiles } = props;
@@ -128,6 +129,11 @@ function UserAuth() {
                   <PersonIcon />
                   <p className='ml-2'>Profile</p>
                 </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem disabled>
+                <GearIcon />
+                <p className='mx-2'>Settings</p>
+                <Badge variant='secondary'>Soon</Badge>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator className='bg-card' />
