@@ -112,9 +112,11 @@ features
 
 ### Supports NIP's 
 
-- [x] NIP-01: Basic protocol flow description
+- [x] NIP-01: (Basic protocol)[https://github.com/nostr-protocol/nips/blob/master/01.md]
 - [ ] NIP-02: Follow List
-- [ ] NIP-17: Private Direct Messages
+- [x] NIP-05: (Nostr keys to DNS)[https://github.com/nostr-protocol/nips/blob/master/05.md]
+- [ ] NIP-17: Private Messages
+- [ ] NIP-18: Reposts
 - [ ] NIP-25: Reactions
 - [ ] NIP-57: Lightning Zaps
 - [ ] NIP-58: Badges
