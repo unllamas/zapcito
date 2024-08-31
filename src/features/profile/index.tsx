@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 import { ArrowTopRightIcon, EnvelopeClosedIcon, LightningBoltIcon } from '@radix-ui/react-icons';
+import { useLocalStorage } from 'usehooks-ts';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
@@ -24,6 +25,7 @@ import { Name } from '@/components/profile/name';
 import { Banner } from '@/components/profile/banner';
 import { Notes } from '@/components/notes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { OnboardingModal } from '@/components/profile/onboarding-modal';
 
 // import { Zap } from '../zap';
 import { MOCK_BASE_PROFILES } from '@/config/constants';
@@ -39,6 +41,7 @@ export const Profile = (props: ProfileProps) => {
 
   const { profile } = useProfileHook(value);
   const { user } = useAuth();
+  const [onboarding, _] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
   const pubkeyToHex = useMemo(() => convertToHex(value) || '', [value]);
 
@@ -206,6 +209,8 @@ export const Profile = (props: ProfileProps) => {
           )}
         </div>
       </div>
+
+      {onboarding && <OnboardingModal />}
     </div>
   );
 };

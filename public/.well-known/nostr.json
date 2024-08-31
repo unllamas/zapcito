@@ -1,22 +1,32 @@
 {
   "names": {
-    "_": "cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547"
+    "_": "dbb11c21585cc94fe1dba6516f65298324512e57926cbdf408f4fb0e32706d4c",
+    "jona": "cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547"
   },
   "relays": {
-    "2ad91f1dca2dcd5fc89e7208d1e5059f0bac0870d63fc3bac21c7a9388fa18fd": [
+    "cee287bb0990a8ecbd1dee7ee7f938200908a5c8aa804b3bdeaed88effb55547": [
       "wss://hodl.ar",
-      "wss://brb.io",
-      "wss://nos.lol",
+      "wss://relay.damus.io",
+      "wss://relay.hodl.ar",
+      "wss://relay.lawallet.ar",
       "wss://nostr-pub.wellorder.net",
+      "wss://nos.lol",
+      "wss://soloco.nl",
+      "wss://relay.primal.net",
       "wss://relay.snort.social",
-      "wss://relay.damus.io"
+      "wss://nostr.wine"
     ],
-    "10fe7e324ad92e91a2c915934b9a349fc21d15d19d638ab61ed15bf65cd9b9df": [
-      "wss://brb.io",
-      "wss://nos.lol",
+    "dbb11c21585cc94fe1dba6516f65298324512e57926cbdf408f4fb0e32706d4c": [
+      "wss://hodl.ar",
+      "wss://relay.damus.io",
+      "wss://relay.hodl.ar",
+      "wss://relay.lawallet.ar",
       "wss://nostr-pub.wellorder.net",
+      "wss://nos.lol",
+      "wss://soloco.nl",
+      "wss://relay.primal.net",
       "wss://relay.snort.social",
-      "wss://relay.damus.io"
+      "wss://nostr.wine"
     ]
   }
 }

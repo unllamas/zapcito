@@ -7,27 +7,30 @@ import Image from 'next/image';
 // import { useLogin } from 'nostr-hooks';
 import { nip19 } from 'nostr-tools';
 import { toast } from 'sonner';
-import { ArrowLeftIcon, EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
+import { EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
+import { useLocalStorage } from 'usehooks-ts';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
 
 // Components
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
 export function Login() {
   // Flow
   const [inputValue, setInputValue] = useState<string>('');
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [showInputSecret, setShowInputSecret] = useState<boolean>(false);
 
   // Libs and hooks
   const router = useRouter();
 
   // const { loginWithExtention } = useLogin();
   const { user, loading, loginWithSecretKey, loginWithExtention, generateSecret } = useAuth();
+  const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
   if (user) {
     const npub = nip19.npubEncode(user.id);
@@ -50,8 +53,13 @@ export function Login() {
   };
 
   const handleGenerate = () => {
+    setOnboarding(true);
     const key = generateSecret();
-    setInputValue(key);
+    loginWithSecretKey(key);
+  };
+
+  const handleShowInputSecret = () => {
+    setShowInputSecret(!showInputSecret);
   };
 
   return (
@@ -63,87 +71,80 @@ export function Login() {
             <h2 className='text-bold text-xl'>Login</h2>
             <p className='text-muted-foreground'>Connect and access all the features we have to offer.</p>
           </div>
-          <Tabs defaultValue='extension' className='w-full'>
-            <TabsList className='w-full bg-card'>
-              <TabsTrigger className='flex-1' value='extension'>
-                Extension
-              </TabsTrigger>
-              <TabsTrigger className='flex-1' value='secret'>
-                Secret key
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent className='flex flex-col gap-4' value='extension'>
-              <div className='flex flex-col gap-2'>
-                <Button className='w-full' onClick={() => loginWithExtention()}>
-                  Login with extension
+
+          <div className='flex flex-col gap-4 w-full'>
+            <Button className='w-full' onClick={() => loginWithExtention()}>
+              Login with extension
+            </Button>
+
+            <div className='flex gap-4 items-center my-2'>
+              <Separator className='flex-1' />
+              <p className='text-sm text-muted-foreground'>OR</p>
+              <Separator className='flex-1' />
+            </div>
+
+            {!showInputSecret ? (
+              <>
+                <Button className='w-full' onClick={handleGenerate} variant='outline'>
+                  Create account
                 </Button>
-                <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
-                  <ArrowLeftIcon />
-                  <p className='ml-2'>Back to home</p>
-                </Button>
-              </div>
-              <div className='flex flex-col text-sm text-center'>
-                <p className='text-gray-500'>Not have one installed yet?</p>
-                <div className='flex justify-center items-center gap-1 text-sm'>
-                  <span>We recommend installing </span>
-                  <Button variant='link' size='sm' className='p-0 text-md' asChild>
-                    <a href='https://getalby.com/' target='_blank'>
-                      Alby
-                    </a>
+                <div className='text-sm text-center'>
+                  <p className='text-muted-foreground'>Do you already have one?</p>
+                  <Button variant='link' onClick={handleShowInputSecret}>
+                    Login with private key
                   </Button>
                 </div>
-              </div>
-            </TabsContent>
-            <TabsContent className='flex flex-col gap-4' value='secret'>
-              <div className='flex flex-col gap-2'>
-                <Label htmlFor='secret'>Your private key</Label>
-                <div className='relative w-full'>
-                  <Input
-                    className='pr-[90px]'
-                    id='secret'
-                    type={isPasswordVisible ? 'text' : 'password'}
-                    placeholder='Format hex or nsec...'
-                    value={inputValue}
-                    readOnly
-                  />
-                  <div className='absolute top-0 right-[10px] flex items-center h-full'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      onClick={handleToggleVisibility}
-                      title={isPasswordVisible ? 'Hide' : 'Show'}
-                    >
-                      {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
-                    </Button>
-                    {inputValue ? (
-                      <Button variant='ghost' size='sm' onClick={() => setInputValue('')} title='Delete value'>
-                        <TrashIcon />
+              </>
+            ) : (
+              <>
+                <div className='flex flex-col gap-2'>
+                  <Label htmlFor='secret'>Your private key</Label>
+                  <div className='relative w-full'>
+                    <Input
+                      className='pr-[90px]'
+                      id='secret'
+                      type={isPasswordVisible ? 'text' : 'password'}
+                      placeholder='Format hex or nsec...'
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                    />
+                    <div className='absolute top-0 right-[10px] flex items-center h-full'>
+                      <Button
+                        variant='ghost'
+                        size='sm'
+                        onClick={handleToggleVisibility}
+                        title={isPasswordVisible ? 'Hide' : 'Show'}
+                      >
+                        {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
                       </Button>
-                    ) : (
-                      <Button variant='ghost' size='sm' onClick={handlePasteInput} title='Paste from clipboard'>
-                        <ClipboardIcon />
-                      </Button>
-                    )}
+                      {inputValue ? (
+                        <Button variant='ghost' size='sm' onClick={() => setInputValue('')} title='Delete value'>
+                          <TrashIcon />
+                        </Button>
+                      ) : (
+                        <Button variant='ghost' size='sm' onClick={handlePasteInput} title='Paste from clipboard'>
+                          <ClipboardIcon />
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className='flex flex-col gap-2'>
-                <Button className='w-full' disabled={loading} onClick={() => loginWithSecretKey(inputValue)}>
-                  {loading ? 'Loading' : 'Login'}
-                </Button>
-                <Button className='w-full' onClick={() => router.push('/')} variant='ghost'>
-                  <ArrowLeftIcon />
-                  <p className='ml-2'>Back to home</p>
-                </Button>
-              </div>
-              <div className='text-sm text-center'>
-                <p className='text-gray-500'>Don&apos;t you have one yet?</p>
-                <Button variant='link' onClick={() => handleGenerate()}>
-                  Generate a random
-                </Button>
-              </div>
-            </TabsContent>
-          </Tabs>
+                <div className='flex flex-col gap-2'>
+                  <Button
+                    className='w-full'
+                    variant='secondary'
+                    disabled={loading}
+                    onClick={() => loginWithSecretKey(inputValue)}
+                  >
+                    {loading ? 'Loading' : 'Login'}
+                  </Button>
+                  <Button className='w-full' onClick={handleShowInputSecret} variant='ghost'>
+                    Cancel
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
