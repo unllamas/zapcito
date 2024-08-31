@@ -112,9 +112,9 @@ features
 
 ### Supports NIP's 
 
-- [x] NIP-01: (Basic protocol)[https://github.com/nostr-protocol/nips/blob/master/01.md]
+- [x] NIP-01: [Basic protocol](https://github.com/nostr-protocol/nips/blob/master/01.md)
 - [ ] NIP-02: Follow List
-- [x] NIP-05: (Nostr keys to DNS)[https://github.com/nostr-protocol/nips/blob/master/05.md]
+- [x] NIP-05: [Nostr keys to DNS](https://github.com/nostr-protocol/nips/blob/master/05.md)
 - [ ] NIP-17: Private Messages
 - [ ] NIP-18: Reposts
 - [ ] NIP-25: Reactions
