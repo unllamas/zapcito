@@ -13,6 +13,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lawallet/react": "^0.2.45",
+    "@lawallet/utils": "^0.2.45",
     "@next/third-parties": "^14.2.6",
     "@noble/hashes": "^1.4.0",
     "@nostr-dev-kit/ndk": "^2.10.0",
@@ -23,6 +25,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@welshman/content": "^0.0.8",
@@ -39,6 +42,7 @@
     "nostr-tools": "^2.7.2",
     "qrcode.react": "^3.1.0",
     "react": "^18",
+    "react-animated-heart": "^0.0.8",
     "react-confetti-boom": "^1.0.0",
     "react-dom": "^18",
     "sonner": "^1.5.0",
