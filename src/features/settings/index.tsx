@@ -44,7 +44,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
           );
         } else {
           return (
-            <Button variant='ghost' disabled>
+            <Button key={item.href} variant='ghost' disabled>
               {item.title}
             </Button>
           );
