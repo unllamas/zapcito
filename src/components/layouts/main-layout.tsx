@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-// import { LaWalletProvider } from '@lawallet/react';
+import { LaWalletProvider } from '@lawallet/react';
 import { useNostrHooks } from 'nostr-hooks';
 
 // Libs and hooks
@@ -41,7 +41,7 @@ import { database } from '@/lib/database';
 
 import { LightningAddress } from '@/components/profile/lightning-address';
 import { Avatar } from '@/components/profile/avatar';
-import { Badge } from '../ui/badge';
+import { paymentConfig } from '@/config/payment';
 
 export function CommandMenu(props: any) {
   const { profiles } = props;
@@ -130,10 +130,11 @@ function UserAuth() {
                   <p className='ml-2'>Profile</p>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem disabled>
-                <GearIcon />
-                <p className='mx-2'>Settings</p>
-                <Badge variant='secondary'>Soon</Badge>
+              <DropdownMenuItem asChild>
+                <Link href={`/settings`}>
+                  <GearIcon />
+                  <p className='ml-2'>Settings</p>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator className='bg-card' />
@@ -170,7 +171,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   }, [firstFetch, profiles]);
 
   return (
-    <>
+    <LaWalletProvider config={paymentConfig}>
       <nav className='fixed top-0 w-full h-16 bg-black/10 backdrop-blur-lg z-10'>
         <div className='flex justify-between items-center w-full max-w-[1024px] h-full mx-auto px-4'>
           <Link href='/'>
@@ -215,6 +216,6 @@ export function MainLayout({ children }: MainLayoutProps) {
       </footer>
 
       <CommandMenu profiles={profiles} />
-    </>
+    </LaWalletProvider>
   );
 }
