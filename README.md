@@ -1,6 +1,6 @@
 # Zapcito
 
-![Zapcito](./assets/banner.jpg)
+![Zapcito](./assets/banner.png)
 
 [![MIT License](https://img.shields.io/github/license/unllamas/zapcito)](https://github.com/unllamas/zapcito/blob/main/LICENSE)
 ![Stars](https://badgen.net/github/stars/unllamas/zapcito/?color=yellow)
