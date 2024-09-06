@@ -55,12 +55,15 @@ pnpm build
 ## 🔐 Environment Variables
 
 
-Create `.env` file:
+Create a `.env` file, or use `.env.example` as an example:
 
 ```sh
 # Analytics
-GOOGLE_ANALYTICS_KEY='Optional'
-GOOGLE_TAG_MANAGER_KEY='Optional'
+GOOGLE_ANALYTICS_KEY='G-...'
+GOOGLE_TAG_MANAGER_KEY='GTM-...'
+
+# Generic
+SIGNER_RANDOM_PRIV_KEY='Secret key on kex'
 ```
 
 ## 🗄️ Project Structure
@@ -82,10 +85,10 @@ src
 └── index.(css)
 ```
 
-If you want to create a `feature`, we recommend following the same general structure:
+For Next > v13.x we recommend using the `features` folder which simulates a `page` or `screen` folder. This in turn can contain the following structure:
 
 ```sh
-features
+features                # Or: page, screen
 └── example
     └── components      # Example folder
     └── config          # Example folder
