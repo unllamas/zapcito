@@ -1,16 +1,19 @@
 // Packages
 import { useMemo } from 'react';
+import { NDKFilter } from '@nostr-dev-kit/ndk';
 
 // Libs and hooks
-import { convertToHex } from '@/lib/utils';
 import { useSubscribe } from 'nostr-hooks';
 
-export const useSuscriptionHook = (id: string) => {
-  const valueToHex = useMemo(() => convertToHex(id) || '', [id]);
+interface HookProps {
+  pubkey: string;
+  filters?: NDKFilter[];
+}
 
-  const filters = useMemo(() => [{ authors: [valueToHex], kinds: [1], limit: 12 }], [valueToHex]);
-  const opts = useMemo(() => ({ closeOnEose: true }), []);
+export const useSuscriptionHook = ({ pubkey, filters }: HookProps) => {
+  const opts = useMemo(() => ({ closeOnEose: true }), [pubkey, filters]);
 
+  // @ts-ignore
   const { events } = useSubscribe({ filters, opts });
 
   return { events };

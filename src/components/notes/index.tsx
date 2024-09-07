@@ -13,7 +13,7 @@ import {
   isAddress,
   isNewline,
 } from '@welshman/content';
-import MotionNumber from 'motion-number';
+// import MotionNumber from 'motion-number';
 
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/profile/avatar';

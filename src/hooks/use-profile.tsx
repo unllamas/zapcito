@@ -15,6 +15,7 @@ export const useProfileHook = (id: string) => {
   const { ndk } = useNostr();
 
   const fetchProfile = async () => {
+    // @ts-ignore
     const storedProfile = await database.profiles.get(valueToHex);
     if (storedProfile) {
       setProfile(storedProfile);

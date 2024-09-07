@@ -1,7 +1,7 @@
 'use client';
 
 // Packages
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LaWalletProvider } from '@lawallet/react';
