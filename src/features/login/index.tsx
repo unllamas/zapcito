@@ -29,7 +29,7 @@ export function Login() {
   const router = useRouter();
 
   // const { loginWithExtention } = useLogin();
-  const { user, loading, loginWithSecretKey, loginWithExtention, generateSecret } = useAuth();
+  const { user, isLoading, loginWithSecretKey, loginWithExtention, generateSecret } = useAuth();
   const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
   if (user) {
@@ -52,10 +52,12 @@ export function Login() {
     setIsPasswordVisible((prev) => !prev);
   };
 
-  const handleGenerate = () => {
-    setOnboarding(true);
+  const handleCreateAccount = () => {
     const key = generateSecret();
-    loginWithSecretKey(key);
+    if (key) {
+      setOnboarding(true);
+      loginWithSecretKey(key);
+    }
   };
 
   const handleShowInputSecret = () => {
@@ -85,7 +87,7 @@ export function Login() {
 
             {!showInputSecret ? (
               <>
-                <Button className='w-full' onClick={handleGenerate} variant='outline'>
+                <Button className='w-full' onClick={handleCreateAccount} variant='outline'>
                   Create account
                 </Button>
                 <div className='text-sm text-center'>
@@ -133,10 +135,10 @@ export function Login() {
                   <Button
                     className='w-full'
                     variant='secondary'
-                    disabled={loading}
+                    disabled={isLoading}
                     onClick={() => loginWithSecretKey(inputValue)}
                   >
-                    {loading ? 'Loading' : 'Login'}
+                    {isLoading ? 'Loading' : 'Login'}
                   </Button>
                   <Button className='w-full' onClick={handleShowInputSecret} variant='ghost'>
                     Cancel
