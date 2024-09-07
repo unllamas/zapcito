@@ -1,7 +1,7 @@
 'use client';
 
 // Packages
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LaWalletProvider } from '@lawallet/react';
@@ -42,6 +42,7 @@ import { database } from '@/lib/database';
 import { LightningAddress } from '@/components/profile/lightning-address';
 import { Avatar } from '@/components/profile/avatar';
 import { paymentConfig } from '@/config/payment';
+import { nip19 } from 'nostr-tools';
 
 export function CommandMenu(props: any) {
   const { profiles } = props;
@@ -103,47 +104,55 @@ function UserAuth() {
           </Link>
         </Button>
       ) : (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
-              <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
-            <DropdownMenuLabel className='font-normal'>
-              <div className='flex flex-col space-y-1'>
-                <p className='text-sm font-medium leading-none'>{profile?.displayName || profile?.name || 'Hello,'}</p>
-                <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator className='bg-card' />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <Link href='/'>
-                  <HomeIcon />
-                  <p className='ml-2'>Home</p>
-                </Link>
+        <>
+          {/* <Button className='gap-1' size='sm'>
+            <PlusIcon />
+            Publish
+          </Button> */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
+                <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
+              <DropdownMenuLabel className='font-normal'>
+                <div className='flex flex-col space-y-1'>
+                  <p className='text-sm font-medium leading-none'>
+                    {profile?.displayName || profile?.name || 'Hello,'}
+                  </p>
+                  <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className='bg-card' />
+              <DropdownMenuGroup>
+                <DropdownMenuItem asChild>
+                  <Link href='/'>
+                    <HomeIcon />
+                    <p className='ml-2'>Home</p>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/p/${nip19.npubEncode(user?.id!)}`}>
+                    <PersonIcon />
+                    <p className='ml-2'>Profile</p>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/settings`}>
+                    <GearIcon />
+                    <p className='ml-2'>Settings</p>
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator className='bg-card' />
+              <DropdownMenuItem onClick={logout}>
+                <ExitIcon />
+                <p className='ml-2'>Logout</p>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href={`/p/${profile?.npub || user?.id}`}>
-                  <PersonIcon />
-                  <p className='ml-2'>Profile</p>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href={`/settings`}>
-                  <GearIcon />
-                  <p className='ml-2'>Settings</p>
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator className='bg-card' />
-            <DropdownMenuItem onClick={logout}>
-              <ExitIcon />
-              <p className='ml-2'>Logout</p>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
       )}
     </>
   );
