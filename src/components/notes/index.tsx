@@ -25,9 +25,9 @@ import { Spotify } from './spotify';
 import { Audio } from './audio';
 import { Iframe } from './iframe';
 
-import { useMemo } from 'react';
-import { useSubscribe } from 'nostr-hooks';
-import { HeartFilledIcon } from '@radix-ui/react-icons';
+// import { useMemo } from 'react';
+// import { useSubscribe } from 'nostr-hooks';
+// import { HeartFilledIcon } from '@radix-ui/react-icons';
 
 interface ComponentProps {
   post: any;
@@ -39,10 +39,10 @@ export function Notes(props: ComponentProps) {
 
   if (!post) null;
 
-  const filters = useMemo(() => [{ '#e': [post.id], '#p': [post.pubkey], kinds: [7], limit: 10 }], [post]);
-  const opts = useMemo(() => ({ closeOnEose: true }), []);
+  // const filters = useMemo(() => [{ '#e': [post.id], '#p': [post.pubkey], kinds: [7], limit: 10 }], [post]);
+  // const opts = useMemo(() => ({ closeOnEose: true }), []);
 
-  const { events: likes } = useSubscribe({ filters, opts });
+  // const { events: likes } = useSubscribe({ filters, opts });
 
   const fullContent = parse(post);
 
@@ -127,7 +127,7 @@ export function Notes(props: ComponentProps) {
             }
           })}
       </div>
-      <div className='flex justify-between p-2'>
+      {/* <div className='flex justify-between p-2'>
         <div className='flex items-center gap-1 text-text'>
           <span className='text-sm'>≈</span>
           {likes.length > 0 ? <HeartFilledIcon className='text-red-500 fill-red-500' /> : <HeartFilledIcon />}
@@ -140,7 +140,7 @@ export function Notes(props: ComponentProps) {
             likes
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
