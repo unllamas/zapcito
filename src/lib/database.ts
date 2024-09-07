@@ -1,15 +1,15 @@
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 import Dexie, { Table } from 'dexie';
 
-export interface Auth {
+export type Auth = {
   id: string; // Public key on hex
-  secret?: string; // Private key on hex
-}
+  secret?: string | null; // Private key on hex
+};
 
 // Create db
 class ExampleDB extends Dexie {
-  auth!: Table<Auth, string>;
-  profiles!: Table<NDKUserProfile, string>;
+  auth!: Table<Auth, null>;
+  profiles!: Table<NDKUserProfile, null>;
 
   constructor() {
     super('example');
