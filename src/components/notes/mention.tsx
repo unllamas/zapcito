@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { nip19 } from 'nostr-tools';
+// import { nip19 } from 'nostr-tools';
 
-import { useProfileHook } from '@/hooks/use-profile';
+// import { useProfileHook } from '@/hooks/use-profile';
 
 import { Button } from '@/components/ui/button';
 
