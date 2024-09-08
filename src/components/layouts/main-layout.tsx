@@ -35,7 +35,6 @@ import {
 
 // Icons
 import { ArrowTopRightIcon, ExitIcon, GearIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
-import { useProfileHook } from '@/hooks/use-profile';
 import { NDKUserProfile } from '@nostr-dev-kit/ndk';
 import { database } from '@/lib/database';
 
@@ -93,7 +92,7 @@ function UserAuth() {
   // useAutoLogin();
   const { user, logout } = useAuth();
 
-  const { profile } = useProfileHook(user?.id || '');
+  // const { profile } = useProfileHook(user?.id || '');
 
   return (
     <>
@@ -112,16 +111,16 @@ function UserAuth() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
-                <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} />
+                {/* <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} /> */}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
               <DropdownMenuLabel className='font-normal'>
                 <div className='flex flex-col space-y-1'>
-                  <p className='text-sm font-medium leading-none'>
+                  {/* <p className='text-sm font-medium leading-none'>
                     {profile?.displayName || profile?.name || 'Hello,'}
                   </p>
-                  <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
+                  <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p> */}
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator className='bg-card' />
@@ -132,6 +131,12 @@ function UserAuth() {
                     <p className='ml-2'>Home</p>
                   </Link>
                 </DropdownMenuItem>
+                {/* <DropdownMenuItem asChild>
+                  <Link href='/feed'>
+                    <HomeIcon />
+                    <p className='ml-2'>Feed</p>
+                  </Link>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem asChild>
                   <Link href={`/p/${nip19.npubEncode(user?.id!)}`}>
                     <PersonIcon />

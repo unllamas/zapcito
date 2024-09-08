@@ -14,11 +14,10 @@ import {
   isNewline,
 } from '@welshman/content';
 
-import { useProfileHook } from '@/hooks/use-profile';
 import { timeAgo } from '@/lib/utils';
 
 import { Button } from '@/components/ui/button';
-import { Avatar } from '@/components/profile/avatar';
+// import { Avatar } from '@/components/profile/avatar';
 
 import { Mention } from './mention';
 import { Quote } from './quote';
@@ -37,21 +36,21 @@ export function Notes(props: ComponentProps) {
 
   if (!post) null;
 
+  // @ts-ignore
   const key = useMemo(() => pubkey, [pubkey]);
-  const { profile } = useProfileHook(key);
 
   const fullContent = parse(post);
 
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
       <div className='flex flex-row items-center justify-between gap-2 p-2 pb-0'>
-        <div className='flex flex-row items-center gap-2'>
+        {/* <div className='flex flex-row items-center gap-2'>
           <Avatar src={profile?.image} alt={profile?.displayName} />
           <div className='flex flex-col'>
             <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
             <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
           </div>
-        </div>
+        </div> */}
         <span className='text-sm text-muted-foreground'>{timeAgo(post.created_at)}</span>
       </div>
       <div className='p-2'>
