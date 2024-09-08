@@ -12,15 +12,20 @@ import { AppError } from '@/lib/errors';
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const pubkey = req.nextUrl.searchParams.get('pubkey');
 
-  if (!pubkey) {
-    throw new AppError('Invalid pubkey', 400);
+  try {
+    if (!pubkey) {
+      throw new AppError('Invalid pubkey', 400);
+    }
+
+    const events = await nostrFetch(pubkey);
+
+    const count = countFollowing(events);
+
+    return NextResponse.json(count);
+  } catch (error) {
+    console.error('Error fetching user following:', error);
+    throw new AppError('Ups:', 400);
   }
-
-  const events = await nostrFetch(pubkey);
-
-  const count = countFollowing(events);
-
-  return NextResponse.json(count);
 }
 
 /**
