@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const convertToHex = (value: string) => {
+export const convertToHex = (value: string | undefined) => {
   if (!value) return null;
 
   if (value.startsWith('npub')) {
