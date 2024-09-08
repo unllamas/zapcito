@@ -4,10 +4,9 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import { useLocalStorage } from 'usehooks-ts';
+import useSWR from 'swr';
 
 import { useAuth } from '@/hooks/use-auth';
-import { useProfileHook } from '@/hooks/use-profile';
-import { useSuscriptionHook } from '@/hooks/use-suscription';
 
 import { convertToHex } from '@/lib/utils';
 
@@ -23,11 +22,13 @@ import { Notes } from '@/components/notes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { OnboardingModal } from '@/components/profile/onboarding-modal';
 import { Following } from '@/components/profile/following';
+import { Skeleton } from '@/components/ui/skeleton';
 // import { EditProfile } from '@/components/profile/edit-profile';
 
 import { AdsLightningAddress } from '@/components/ads/ads-lightning-address';
 
 import { MOCK_BASE_PROFILES } from '@/config/constants';
+import fetcher from '@/config/fetcher';
 
 interface ProfileProps {
   value: string;
@@ -52,10 +53,11 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
   const { user } = useAuth();
 
   const pubkeyToHex = useMemo(() => convertToHex(value) || '', [value]);
-  const { profile } = useProfileHook(value);
 
-  const filtersNotes = useMemo(() => [{ authors: [pubkeyToHex], kinds: [1], limit: 12 }], [pubkeyToHex]);
-  const { events: notes } = useSuscriptionHook({ pubkey: pubkeyToHex, filters: filtersNotes });
+  const { data: profile, error } = useSWR(`/api/user?pubkey=${pubkeyToHex}`, fetcher);
+  const { data: notes, isLoading: isLoadingNotes } = useSWR(`/api/notes?pubkey=${pubkeyToHex}`, fetcher);
+
+  if (error) return <div className='w-full py-4 text-center text-sm text-red-500'>Failed profile.</div>;
 
   return (
     <div className='flex w-full justify-center items-start'>
@@ -63,7 +65,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         <Banner value={profile?.banner} />
         <div className='relative mt-[-50px] mb-2 px-4'>
           <div className='flex justify-between items-end gap-4 w-full'>
-            <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} variant='profile' />
+            <Avatar src={profile?.picture} alt={profile?.displayName || profile?.name} variant='profile' />
             <div className='flex gap-1 items-center'>
               {pubkeyToHex === user?.id ? (
                 <>{/* <EditProfile profile={profile as ProfileData} /> */}</>
@@ -108,11 +110,15 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         <div className='mt-4 px-4'>
           <Tabs defaultValue='feed' className='w-full'>
             <TabsContent className='flex flex-col gap-4' value='feed'>
-              <div className='flex flex-col gap-2'>
-                {notes &&
-                  notes.length > 0 &&
-                  notes.map((post, key) => <Notes key={key} post={post} pubkey={pubkeyToHex} />)}
-              </div>
+              {isLoadingNotes ? (
+                <Skeleton className='w-full h-[100px] bg-card' />
+              ) : (
+                <div className='flex flex-col gap-2'>
+                  {notes &&
+                    notes.length > 0 &&
+                    notes.map((post: any, key: any) => <Notes key={key} post={post} pubkey={pubkeyToHex} />)}
+                </div>
+              )}
             </TabsContent>
           </Tabs>
         </div>
