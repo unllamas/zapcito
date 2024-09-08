@@ -23,7 +23,7 @@ interface ProfileData {
 async function fetchNostrProfile(pubkey: string): Promise<ProfileData> {
   await ndk.connect();
 
-  const filter: NDKFilter = { authors: [pubkey], kinds: [0] };
+  const filter: NDKFilter = { authors: [pubkey], kinds: [0], limit: 1 };
   const event = await ndk.fetchEvent(filter);
 
   if (!event) {

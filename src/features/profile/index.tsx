@@ -54,10 +54,8 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
 
   const pubkeyToHex = useMemo(() => convertToHex(value) || '', [value]);
 
-  const { data: profile, error } = useSWR(`/api/user?pubkey=${pubkeyToHex}`, fetcher);
+  const { data: profile } = useSWR(`/api/user?pubkey=${pubkeyToHex}`, fetcher);
   const { data: notes, isLoading: isLoadingNotes } = useSWR(`/api/notes?pubkey=${pubkeyToHex}`, fetcher);
-
-  if (error) return <div className='w-full py-4 text-center text-sm text-red-500'>Failed profile.</div>;
 
   return (
     <div className='flex w-full justify-center items-start'>
