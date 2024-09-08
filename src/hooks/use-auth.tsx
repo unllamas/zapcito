@@ -2,7 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { finalizeEvent, generateSecretKey, getPublicKey, nip19, Event } from 'nostr-tools';
 import { bytesToHex, hexToBytes } from '@noble/hashes/utils';
 import { toast } from 'sonner';
+
 import { Auth, database } from '@/lib/database';
+
 import { NostrWindow } from '@/types/extension';
 
 interface UseAuthReturn {
