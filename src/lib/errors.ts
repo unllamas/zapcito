@@ -1,9 +1,8 @@
-import { NextResponse } from 'next/server';
+export class AppError extends Error {
+  statusCode: number;
 
-export function handleError(error: any) {
-  console.error('Error fetching Nostr events:', error);
-  return new NextResponse(JSON.stringify({ error: 'An error occurred while fetching events' }), {
-    status: 500,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.statusCode = statusCode;
+  }
 }

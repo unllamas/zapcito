@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { NDKFilter, NDKEvent } from '@nostr-dev-kit/ndk';
 
 import { ndk } from '@/lib/nostr-utils';
-import { handleError } from '@/lib/errors';
+import { AppError } from '@/lib/errors';
 
 /**
  * Handles GET requests to fetch user following
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
   try {
     if (!pubkey) {
-      return NextResponse.json({ error: 'Invalid pubkey' }, { status: 400 });
+      throw new AppError('Invalid pubkey', 400);
     }
 
     const events = await nostrFetch(pubkey);
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json(count);
   } catch (error) {
     console.error('Error fetching user following:', error);
-    return handleError(error);
+    throw new AppError('Ups: following', 400);
   }
 }
 
