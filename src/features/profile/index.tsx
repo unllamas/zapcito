@@ -25,7 +25,7 @@ import { OnboardingModal } from '@/components/profile/onboarding-modal';
 import { Following } from '@/components/profile/following';
 // import { EditProfile } from '@/components/profile/edit-profile';
 
-// import { Ads } from './components/ads';
+import { AdsLightningAddress } from '@/components/ads/ads-lightning-address';
 
 import { MOCK_BASE_PROFILES } from '@/config/constants';
 
@@ -140,7 +140,8 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
             </div>
           ))}
         </div>
-        {/* <Ads /> */}
+
+        <AdsLightningAddress />
       </div>
 
       {onboarding && <OnboardingModal />}
