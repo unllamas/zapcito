@@ -4,8 +4,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { LaWalletProvider } from '@lawallet/react';
 import { useNostrHooks } from 'nostr-hooks';
+import { LaWalletProvider } from '@lawallet/react';
+import useSWR from 'swr';
+import { ArrowTopRightIcon, ExitIcon, GearIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
 
 // Libs and hooks
 import { useAuth } from '@/hooks/use-auth';
@@ -33,15 +35,11 @@ import {
 // Config
 // import { paymentConfig } from '@/config/payment';
 
-// Icons
-import { ArrowTopRightIcon, ExitIcon, GearIcon, HomeIcon, PersonIcon } from '@radix-ui/react-icons';
-import { useProfileHook } from '@/hooks/use-profile';
-import { NDKUserProfile } from '@nostr-dev-kit/ndk';
-import { database } from '@/lib/database';
-
 import { LightningAddress } from '@/components/profile/lightning-address';
 import { Avatar } from '@/components/profile/avatar';
+
 import { paymentConfig } from '@/config/payment';
+import fetcher from '@/config/fetcher';
 
 export function CommandMenu(props: any) {
   const { profiles } = props;
@@ -89,10 +87,9 @@ export function CommandMenu(props: any) {
 }
 
 function UserAuth() {
-  // useAutoLogin();
   const { user, logout } = useAuth();
 
-  const { profile } = useProfileHook(user?.id || '');
+  const { data: profile } = useSWR(`/api/user?pubkey=${user?.id}`, fetcher);
 
   return (
     <>
@@ -103,47 +100,61 @@ function UserAuth() {
           </Link>
         </Button>
       ) : (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
-              <Avatar src={profile?.image} alt={profile?.displayName || profile?.name} />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
-            <DropdownMenuLabel className='font-normal'>
-              <div className='flex flex-col space-y-1'>
-                <p className='text-sm font-medium leading-none'>{profile?.displayName || profile?.name || 'Hello,'}</p>
-                <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator className='bg-card' />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <Link href='/'>
-                  <HomeIcon />
-                  <p className='ml-2'>Home</p>
-                </Link>
+        <>
+          {/* <Button className='gap-1' size='sm'>
+            <PlusIcon />
+            Publish
+          </Button> */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='secondary' className='relative h-8 w-8 p-0 rounded-full'>
+                <Avatar src={profile?.picture} alt={profile?.displayName || profile?.name} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className='w-56 bg-card text-text' align='end' forceMount>
+              <DropdownMenuLabel className='font-normal'>
+                <div className='flex flex-col space-y-1'>
+                  <p className='text-sm font-medium leading-none'>
+                    {profile?.displayName || profile?.name || 'Hello,'}
+                  </p>
+                  <p className='text-xs leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className='bg-card' />
+              <DropdownMenuGroup>
+                <DropdownMenuItem asChild>
+                  <Link href='/'>
+                    <HomeIcon />
+                    <p className='ml-2'>Home</p>
+                  </Link>
+                </DropdownMenuItem>
+                {/* <DropdownMenuItem asChild>
+                  <Link href='/feed'>
+                    <HomeIcon />
+                    <p className='ml-2'>Feed</p>
+                  </Link>
+                </DropdownMenuItem> */}
+                <DropdownMenuItem asChild>
+                  <Link href={`/p/${user?.id}`}>
+                    <PersonIcon />
+                    <p className='ml-2'>Profile</p>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href={`/settings`}>
+                    <GearIcon />
+                    <p className='ml-2'>Settings</p>
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator className='bg-card' />
+              <DropdownMenuItem onClick={logout}>
+                <ExitIcon />
+                <p className='ml-2'>Logout</p>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href={`/p/${profile?.npub || user?.id}`}>
-                  <PersonIcon />
-                  <p className='ml-2'>Profile</p>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href={`/settings`}>
-                  <GearIcon />
-                  <p className='ml-2'>Settings</p>
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator className='bg-card' />
-            <DropdownMenuItem onClick={logout}>
-              <ExitIcon />
-              <p className='ml-2'>Logout</p>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
       )}
     </>
   );
@@ -155,20 +166,6 @@ type MainLayoutProps = {
 
 export function MainLayout({ children }: MainLayoutProps) {
   useNostrHooks();
-
-  const [firstFetch, setFirstFetch] = useState<boolean>(false);
-  const [profiles, setProfiles] = useState<NDKUserProfile[]>([]);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const users = await database.profiles.toArray();
-      setProfiles(users);
-      setFirstFetch(true);
-      return;
-    };
-
-    !firstFetch && getUsers();
-  }, [firstFetch, profiles]);
 
   return (
     <LaWalletProvider config={paymentConfig}>
@@ -214,8 +211,6 @@ export function MainLayout({ children }: MainLayoutProps) {
           </div>
         </div>
       </footer>
-
-      <CommandMenu profiles={profiles} />
     </LaWalletProvider>
   );
 }

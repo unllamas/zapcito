@@ -12,6 +12,7 @@ import { Button, buttonVariants } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { hexToBytes } from '@noble/hashes/utils';
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -86,6 +87,7 @@ export const Settings = () => {
   if (!user) return null;
 
   const npub = nip19.npubEncode(user?.id!);
+  const nsec = nip19.nsecEncode(hexToBytes(user?.secret || ''));
 
   return (
     <>
@@ -122,7 +124,7 @@ export const Settings = () => {
                 <CardContent>
                   <Textarea
                     placeholder='npub'
-                    value={!showSecret ? '********************************' : user?.secret}
+                    value={!showSecret ? '********************************' : nsec}
                     readOnly
                   />
                 </CardContent>

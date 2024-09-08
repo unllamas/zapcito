@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const convertToHex = (value: string) => {
+export const convertToHex = (value: string | undefined) => {
   if (!value) return null;
 
   if (value.startsWith('npub')) {
@@ -83,3 +83,31 @@ export const splitHandle = (handle: string): string[] => {
   const [username, domain] = handle.split('@');
   return [username!, domain!];
 };
+
+export function timeAgo(timestamp: any) {
+  const now = Math.floor(Date.now() / 1000); // Obtener el tiempo actual en segundos
+  const secondsAgo = now - timestamp;
+
+  const minutes = Math.floor(secondsAgo / 60);
+  const hours = Math.floor(secondsAgo / 3600);
+  const days = Math.floor(secondsAgo / 86400);
+  const weeks = Math.floor(secondsAgo / 604800);
+  const months = Math.floor(secondsAgo / 2592000);
+  const years = Math.floor(secondsAgo / 31536000);
+
+  if (secondsAgo < 60) {
+    return `${secondsAgo} ${secondsAgo === 1 ? 'second' : 'seconds'}`;
+  } else if (minutes < 60) {
+    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+  } else if (hours < 24) {
+    return `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+  } else if (days < 7) {
+    return `${days} ${days === 1 ? 'day' : 'days'}`;
+  } else if (weeks < 4) {
+    return `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
+  } else if (months < 12) {
+    return `${months} ${months === 1 ? 'month' : 'months'}`;
+  } else {
+    return `${years} ${years === 1 ? 'year' : 'years'}`;
+  }
+}

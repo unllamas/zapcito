@@ -1,5 +1,5 @@
+import { useMemo } from 'react';
 import Link from 'next/link';
-// import { useSubscription } from '@lawallet/react';
 import {
   parse,
   render as renderParsed,
@@ -13,9 +13,12 @@ import {
   isAddress,
   isNewline,
 } from '@welshman/content';
-import MotionNumber from 'motion-number';
+import useSWR from 'swr';
+
+import { timeAgo } from '@/lib/utils';
 
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar } from '@/components/profile/avatar';
 
 import { Mention } from './mention';
@@ -25,35 +28,49 @@ import { Spotify } from './spotify';
 import { Audio } from './audio';
 import { Iframe } from './iframe';
 
-import { useMemo } from 'react';
-import { useSubscribe } from 'nostr-hooks';
-import { HeartFilledIcon } from '@radix-ui/react-icons';
+import fetcher from '@/config/fetcher';
 
 interface ComponentProps {
   post: any;
-  profile: any;
+  pubkey: any;
 }
 
 export function Notes(props: ComponentProps) {
-  const { post, profile } = props;
+  const { post, pubkey } = props;
 
   if (!post) null;
 
-  const filters = useMemo(() => [{ '#e': [post.id], '#p': [post.pubkey], kinds: [7], limit: 10 }], [post]);
-  const opts = useMemo(() => ({ closeOnEose: true }), []);
+  const { data: profile, isLoading } = useSWR(`/api/user?pubkey=${pubkey}`, fetcher);
 
-  const { events: likes } = useSubscribe({ filters, opts });
+  // @ts-ignore
+  const key = useMemo(() => pubkey, [pubkey]);
 
   const fullContent = parse(post);
 
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
-      <div className='flex flex-row items-center gap-2 p-2 pb-0'>
-        <Avatar src={profile?.image} alt={profile?.displayName} />
-        <div className='flex flex-col'>
-          <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
-          <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
+      <div className='flex flex-row items-center justify-between gap-2 p-2 pb-0'>
+        <div className='flex flex-row items-center gap-2'>
+          {isLoading ? (
+            <Skeleton className='w-8 h-8 bg-card rounded-full' />
+          ) : (
+            <Avatar src={profile?.picture} alt={profile?.displayName} />
+          )}
+          <div className='flex flex-col'>
+            {isLoading ? (
+              <>
+                <Skeleton className='w-full h-6 bg-card rounded-full' />
+                <Skeleton className='w-fukk h-4 bg-card rounded-full' />
+              </>
+            ) : (
+              <>
+                <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
+                <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
+              </>
+            )}
+          </div>
         </div>
+        <span className='text-sm text-muted-foreground'>{timeAgo(post.created_at)}</span>
       </div>
       <div className='p-2'>
         {fullContent.length > 0 &&
@@ -126,20 +143,6 @@ export function Notes(props: ComponentProps) {
               );
             }
           })}
-      </div>
-      <div className='flex justify-between p-2'>
-        <div className='flex items-center gap-1 text-text'>
-          <span className='text-sm'>≈</span>
-          {likes.length > 0 ? <HeartFilledIcon className='text-red-500 fill-red-500' /> : <HeartFilledIcon />}
-          <p>
-            <MotionNumber
-              value={likes.length}
-              format={{ notation: 'standard' }} // Intl.NumberFormat() options
-              locales='en-US'
-            />{' '}
-            likes
-          </p>
-        </div>
       </div>
     </div>
   );
