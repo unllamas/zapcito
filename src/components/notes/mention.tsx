@@ -1,23 +1,22 @@
 import Link from 'next/link';
-// import { nip19 } from 'nostr-tools';
-
-// import { useProfileHook } from '@/hooks/use-profile';
+import useSWR from 'swr';
 
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+
+import fetcher from '@/config/fetcher';
 
 export function Mention(props: any) {
   const { value } = props;
 
-  // const { profile } = useProfileHook(value);
+  const { data: profile, isLoading } = useSWR(`/api/user?pubkey=${value}`, fetcher);
 
-  // if (!profile) return null;
-
-  // const npub = nip19.npubEncode(String(profile?.id));
+  if (isLoading) return <Skeleton className='w-12 h-4 bg-card rounded-full' />;
 
   return (
-    <Link href={`/p/${value}`} tabIndex={-1}>
+    <Link href={`/p/${profile?.pubkey}`} tabIndex={-1}>
       <Button variant='link' className='p-0 h-auto'>
-        @{value}
+        @{profile?.name}
       </Button>
     </Link>
   );

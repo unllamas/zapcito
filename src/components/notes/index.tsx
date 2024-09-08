@@ -13,11 +13,13 @@ import {
   isAddress,
   isNewline,
 } from '@welshman/content';
+import useSWR from 'swr';
 
 import { timeAgo } from '@/lib/utils';
 
 import { Button } from '@/components/ui/button';
-// import { Avatar } from '@/components/profile/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar } from '@/components/profile/avatar';
 
 import { Mention } from './mention';
 import { Quote } from './quote';
@@ -25,6 +27,8 @@ import { Video } from './video';
 import { Spotify } from './spotify';
 import { Audio } from './audio';
 import { Iframe } from './iframe';
+
+import fetcher from '@/config/fetcher';
 
 interface ComponentProps {
   post: any;
@@ -36,6 +40,8 @@ export function Notes(props: ComponentProps) {
 
   if (!post) null;
 
+  const { data: profile, isLoading } = useSWR(`/api/user?pubkey=${pubkey}`, fetcher);
+
   // @ts-ignore
   const key = useMemo(() => pubkey, [pubkey]);
 
@@ -44,13 +50,26 @@ export function Notes(props: ComponentProps) {
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
       <div className='flex flex-row items-center justify-between gap-2 p-2 pb-0'>
-        {/* <div className='flex flex-row items-center gap-2'>
-          <Avatar src={profile?.image} alt={profile?.displayName} />
+        <div className='flex flex-row items-center gap-2'>
+          {isLoading ? (
+            <Skeleton className='w-8 h-8 bg-card rounded-full' />
+          ) : (
+            <Avatar src={profile?.picture} alt={profile?.displayName} />
+          )}
           <div className='flex flex-col'>
-            <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
-            <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
+            {isLoading ? (
+              <>
+                <Skeleton className='w-full h-6 bg-card rounded-full' />
+                <Skeleton className='w-fukk h-4 bg-card rounded-full' />
+              </>
+            ) : (
+              <>
+                <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
+                <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
+              </>
+            )}
           </div>
-        </div> */}
+        </div>
         <span className='text-sm text-muted-foreground'>{timeAgo(post.created_at)}</span>
       </div>
       <div className='p-2'>
