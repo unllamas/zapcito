@@ -63,7 +63,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         <Banner value={profile?.banner} />
         <div className='relative mt-[-50px] mb-2 px-4'>
           <div className='flex justify-between items-end gap-4 w-full'>
-            <Avatar src={profile?.picture} alt={profile?.displayName || profile?.name} variant='profile' />
+            <Avatar src={profile?.picture} alt={profile?.name} variant='profile' />
             <div className='flex gap-1 items-center'>
               {pubkeyToHex === user?.id ? (
                 <>{/* <EditProfile profile={profile as ProfileData} /> */}</>
@@ -94,7 +94,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
 
         <div className='flex flex-col gap-4 w-full px-4'>
           <aside className='flex flex-col gap-1 w-full'>
-            <Name value={profile?.displayName || profile?.name} />
+            <Name value={profile?.name} />
             <LightningAddress value={profile?.nip05} />
             <Description value={profile?.about} />
             <Website value={profile?.website} />
@@ -109,7 +109,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
           <Tabs defaultValue='feed' className='w-full'>
             <TabsContent className='flex flex-col gap-4' value='feed'>
               {isLoadingNotes ? (
-                <Skeleton className='w-full h-[100px] bg-card' />
+                <Skeleton className='w-full h-[100px] bg-card rounded-xl' />
               ) : (
                 <div className='flex flex-col gap-2'>
                   {notes &&

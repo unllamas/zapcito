@@ -54,7 +54,7 @@ export function Notes(props: ComponentProps) {
           {isLoading ? (
             <Skeleton className='w-8 h-8 bg-card rounded-full' />
           ) : (
-            <Avatar src={profile?.picture} alt={profile?.displayName} />
+            <Avatar src={profile?.picture} alt={profile?.name} />
           )}
           <div className='flex flex-col'>
             {isLoading ? (
@@ -64,8 +64,8 @@ export function Notes(props: ComponentProps) {
               </>
             ) : (
               <>
-                <p className='text-md font-semibold'>{profile?.displayName || profile?.name}</p>
-                <p className='text-sm text-gray-500'>{profile?.lud16 || profile?.nip05}</p>
+                <p className='text-md font-semibold'>{profile?.name}</p>
+                <p className='text-sm text-gray-500'>{profile?.nip05}</p>
               </>
             )}
           </div>
