@@ -29,7 +29,7 @@ export function Login() {
   const router = useRouter();
 
   // const { loginWithExtention } = useLogin();
-  const { user, isLoading, loginWithSecretKey, loginWithExtention, generateSecret } = useAuth();
+  const { user, isLoading, loginWithSecretKey, loginWithExtension, generateSecret } = useAuth();
   const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
   if (user) {
@@ -75,7 +75,7 @@ export function Login() {
           </div>
 
           <div className='flex flex-col gap-4 w-full'>
-            <Button className='w-full' onClick={() => loginWithExtention()}>
+            <Button className='w-full' onClick={() => loginWithExtension()}>
               Login with extension
             </Button>
 
