@@ -105,9 +105,9 @@ export function MainLayout({ children }: MainLayoutProps) {
   return (
     <LaWalletProvider config={paymentConfig}>
       <div className='flex justify-center w-full'>
-        <nav className='z-10 fixed md:sticky bottom-0 md:top-0 w-full md:w-auto lg:w-full lg:max-w-sm h-16 md:h-full bg-black/65 md:bg-transparent backdrop-blur-lg'>
+        <nav className='z-10 fixed md:sticky bottom-0 md:top-0 w-full md:w-auto lg:w-full lg:max-w-[240px] h-16 md:h-full bg-black/65 md:bg-transparent backdrop-blur-lg'>
           <div className='flex justify-end items-center md:items-start w-full h-full mx-auto px-4 md:p-4 lg:pt-0'>
-            <div className='flex md:flex-col justify-center items-center gap-2 w-full lg:max-w-[240px]'>
+            <div className='flex md:flex-col justify-center items-center gap-2 w-full'>
               <div className='hidden lg:flex items-center w-full h-14 px-4'>
                 <Link href='/'>
                   <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
