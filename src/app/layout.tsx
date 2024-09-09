@@ -1,5 +1,5 @@
 // Packages
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
@@ -8,14 +8,6 @@ import { cn } from '@/lib/utils';
 
 // Components
 import { Toaster } from '@/components/ui/sonner';
-const MainLayout = dynamic(() => import('../components/layouts/main-layout').then((mod) => mod.MainLayout), {
-  loading: () => (
-    <div className='flex justify-center items-center w-full h-full'>
-      <p className='font-bold'>Loading...</p>
-    </div>
-  ),
-  ssr: false,
-});
 
 // Style
 import '@/index.css';
