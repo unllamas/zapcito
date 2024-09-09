@@ -1,9 +1,24 @@
-import NDK, { NDKEvent, NDKFilter } from '@nostr-dev-kit/ndk';
+import NDK, { NDKEvent, NDKEventSerialized, NDKFilter, NDKSigner, NDKUserProfile } from '@nostr-dev-kit/ndk';
 import { nip05, nip19 } from 'nostr-tools';
 
 import { RELAYS } from '@/config/constants';
 
 export const ndk = new NDK({ explicitRelayUrls: RELAYS });
+
+// export function setNDK(signer?: NDKSigner) {
+//   const ndk = new NDK({ explicitRelayUrls: RELAYS, signer });
+//   return ndk;
+// }
+
+/**
+ * Connects to NDK
+ * @returns Connected NDK instance
+ */
+export async function connectToNDK(): Promise<NDK> {
+  await ndk.connect();
+
+  return ndk;
+}
 
 export async function validateAndNormalizePubkey(pubkey: string): Promise<string> {
   if (pubkey.startsWith('npub1')) {
@@ -29,7 +44,7 @@ export async function validateAndNormalizePubkey(pubkey: string): Promise<string
 }
 
 export async function fetchNostrEvents(filter: NDKFilter): Promise<NDKEvent[]> {
-  await ndk.connect();
+  const ndk = await connectToNDK();
   const events = await ndk.fetchEvents(filter);
 
   return Array.from(events);
