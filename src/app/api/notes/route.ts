@@ -9,16 +9,16 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Missing pubkey parameter' }, { status: 400 });
   }
 
+  const filter: NDKFilter = {
+    authors: [pubkey],
+    kinds: [1],
+    limit: 50,
+  };
+
   try {
-    const filter: NDKFilter = {
-      authors: [pubkey],
-      kinds: [1],
-      limit: 50,
-    };
+    const nostrEvents = await fetchNostrEvents(filter);
 
-    const events = await fetchNostrEvents(filter);
-
-    const posts = events.map((event) => ({
+    const notes = nostrEvents.map((event) => ({
       id: event.id,
       pubkey: event.pubkey,
       content: event.content,
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       tags: event.tags,
     }));
 
-    return NextResponse.json(posts);
+    return NextResponse.json(notes);
   } catch (error) {
     console.error('Error fetching user posts:', error);
 
