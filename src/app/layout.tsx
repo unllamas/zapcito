@@ -73,8 +73,8 @@ export default function RootLayout(props: RootLayoutProps) {
         <link rel='manifest' href='/manifest.json' />
       </head>
       <body className={cn('flex min-w-[100dvw] min-h-[100dvh] overflow-x-hidden antialiased', montserrat.variable)}>
-        <div className='w-full min-h-full' id='root'>
-          <MainLayout>{children}</MainLayout>
+        <div className='flex justify-center items-center w-full min-h-full' id='root'>
+          {children}
         </div>
         <Toaster />
         {process.env.TM_KEY && <GoogleTagManager gtmId={process.env.TM_KEY || ''} />}

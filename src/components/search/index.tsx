@@ -90,43 +90,43 @@ export const Search = () => {
     return null;
   };
 
-  const handlePasteInput = async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      setSearchText(text);
-    } catch (error) {
-      toast.info('Oops...', {
-        description: 'There was an error trying to paste.',
-      });
-      return null;
-    }
-  };
+  // const handlePasteInput = async () => {
+  //   try {
+  //     const text = await navigator.clipboard.readText();
+  //     setSearchText(text);
+  //   } catch (error) {
+  //     toast.info('Oops...', {
+  //       description: 'There was an error trying to paste.',
+  //     });
+  //     return null;
+  //   }
+  // };
 
   return (
-    <div className='relative flex flex-col items-center gap-2 w-full'>
+    <div className='relative flex flex-col items-center gap-4 w-full'>
       <div className='flex flex-col lg:flex-row gap-2 w-full'>
         <div className='relative flex-1 h-[60px]'>
           <Input
             type='text'
             placeholder='Search profile'
-            className='min-h-[60px] pl-4 pr-[100px]'
+            className='min-h-[60px] pl-4 pr-[70px] rounded-full'
             onChange={(e) => setSearchText(e.target.value)}
             value={searchText}
           />
-          <div className='absolute top-0 right-3 flex items-center h-full'>
-            <Button variant='ghost' onClick={handlePasteInput} disabled={loading}>
+          <div className='absolute top-0 right-2 flex items-center min-w-[50px] h-full'>
+            {/* <Button variant='ghost' onClick={handlePasteInput} disabled={loading}>
               Paste
+            </Button> */}
+            <Button
+              className='flex gap-1 w-[50px] h-[50px]'
+              onClick={handleSearch}
+              variant={searchText ? 'default' : 'ghost'}
+              disabled={!searchText || loading}
+            >
+              <MagnifyingGlassIcon className='w-4 h-4 lg:w-6 lg:h-6' />
             </Button>
           </div>
         </div>
-        <Button
-          className='flex gap-1 w-full lg:w-auto min-w-[60px] h-[50px] lg:h-[60px]'
-          onClick={handleSearch}
-          disabled={!searchText || loading}
-        >
-          <MagnifyingGlassIcon className='w-4 h-4 lg:w-6 lg:h-6' />
-          <span className='lg:hidden'>Search</span>
-        </Button>
       </div>
       {/* {message && <>{message}</>} */}
       <p className='text-center text-sm text-muted-foreground'>Support for: npub, hex or nip05</p>

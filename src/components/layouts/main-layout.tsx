@@ -4,30 +4,13 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useActiveUser, useAutoLogin, useLogin, useNostrHooks } from 'nostr-hooks';
+import { useActiveUser, useAutoLogin, useNostrHooks } from 'nostr-hooks';
 import { LaWalletProvider } from '@lawallet/react';
 import useSWR from 'swr';
-import {
-  ArrowTopRightIcon,
-  EnvelopeClosedIcon,
-  ExitIcon,
-  GearIcon,
-  HomeIcon,
-  MagnifyingGlassIcon,
-  PersonIcon,
-} from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, EnvelopeClosedIcon, HomeIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 // Components
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 
 import { Avatar } from '@/components/profile/avatar';
 
@@ -114,14 +97,14 @@ export function MainLayout({ children }: MainLayoutProps) {
   useAutoLogin();
 
   const { activeUser } = useActiveUser();
-  const { logout } = useLogin();
+  // const { logout } = useLogin();
 
   const getKeyUrl = useMemo(() => `/api/user?pubkey=${activeUser?.pubkey}`, [activeUser?.pubkey]);
   const { data: profile } = useSWR(getKeyUrl, fetcher);
 
   return (
     <LaWalletProvider config={paymentConfig}>
-      <div className='flex justify-center'>
+      <div className='flex justify-center w-full'>
         <nav className='z-10 fixed md:sticky bottom-0 md:top-0 w-full md:w-auto lg:w-full lg:max-w-sm h-16 md:h-full bg-black/65 md:bg-transparent backdrop-blur-lg'>
           <div className='flex justify-end items-center md:items-start w-full h-full mx-auto px-4 md:p-4 lg:pt-0'>
             <div className='flex md:flex-col justify-center items-center gap-2 w-full lg:max-w-[240px]'>
@@ -172,7 +155,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           </div>
         </nav>
 
-        <div className='w-full md:min-w-lg lg:max-w-xl h-full min-h-screen md:border-l-[1px] lg:border-r-[1px] border-border'>
+        <div className='flex-1 w-full md:min-w-lg lg:max-w-xl h-full min-h-screen md:border-l-[1px] lg:border-r-[1px] border-border'>
           {/* Topbar */}
           <div className='flex items-center w-full h-14 px-4 bg-background border-b-[1px] border-border'>
             {/* <Button size='icon'>Back</Button> */}
