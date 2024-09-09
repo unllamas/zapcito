@@ -4,14 +4,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-// import { useLogin } from 'nostr-hooks';
-import { nip19 } from 'nostr-tools';
-import { toast } from 'sonner';
-import { EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
+import { useActiveUser, useLogin, useSigner } from 'nostr-hooks';
+import { generateSecretKey } from 'nostr-tools';
+import { bytesToHex } from '@noble/hashes/utils';
 import { useLocalStorage } from 'usehooks-ts';
-
-// Libs and hooks
-import { useAuth } from '@/hooks/use-auth';
+import { EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
 
 // Components
 import { Button } from '@/components/ui/button';
@@ -28,13 +26,13 @@ export function Login() {
   // Libs and hooks
   const router = useRouter();
 
-  // const { loginWithExtention } = useLogin();
-  const { user, isLoading, loginWithSecretKey, loginWithExtension, generateSecret } = useAuth();
+  const { activeUser } = useActiveUser();
+  const { loginWithExtention, loginWithSecretKey } = useLogin();
+  const { setSigner } = useSigner();
   const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
-  if (user) {
-    const npub = nip19.npubEncode(user.id);
-    router.push(`/p/${npub}`);
+  if (activeUser) {
+    router.push(`/p/${activeUser?.pubkey}`);
     return null;
   }
 
@@ -52,16 +50,56 @@ export function Login() {
     setIsPasswordVisible((prev) => !prev);
   };
 
+  /**
+   * Generates a new secret key
+   * @returns {string} The generated secret key
+   */
+  const handleGenerateSecretKey = (): string => {
+    const secret = generateSecretKey();
+    return bytesToHex(secret);
+  };
+
   const handleCreateAccount = () => {
-    const key = generateSecret();
-    if (key) {
-      setOnboarding(true);
-      loginWithSecretKey(key);
+    const secretKey = handleGenerateSecretKey();
+    if (secretKey) {
+      loginWithSecretKey({
+        secretKey,
+        onSuccess: (signer) => {
+          signer.user().then((user) => {
+            setSigner(signer);
+            setOnboarding(true);
+            router.push(`/p/${user?.pubkey}`);
+          });
+        },
+      });
     }
   };
 
   const handleShowInputSecret = () => {
     setShowInputSecret(!showInputSecret);
+  };
+
+  const handleLoginWithSecret = () => {
+    loginWithSecretKey({
+      secretKey: inputValue,
+      onSuccess: (signer) => {
+        signer.user().then((user) => {
+          setSigner(signer);
+          router.push(`/p/${user?.pubkey}`);
+        });
+      },
+    });
+  };
+
+  const handleLoginWithExtension = () => {
+    loginWithExtention({
+      onSuccess: (signer) => {
+        signer.user().then((user) => {
+          setSigner(signer);
+          router.push(`/p/${user?.pubkey}`);
+        });
+      },
+    });
   };
 
   return (
@@ -75,7 +113,7 @@ export function Login() {
           </div>
 
           <div className='flex flex-col gap-4 w-full'>
-            <Button className='w-full' onClick={() => loginWithExtension()}>
+            <Button className='w-full' onClick={handleLoginWithExtension}>
               Login with extension
             </Button>
 
@@ -132,13 +170,8 @@ export function Login() {
                   </div>
                 </div>
                 <div className='flex flex-col gap-2'>
-                  <Button
-                    className='w-full'
-                    variant='secondary'
-                    disabled={isLoading}
-                    onClick={() => loginWithSecretKey(inputValue)}
-                  >
-                    {isLoading ? 'Loading' : 'Login'}
+                  <Button className='w-full' variant='secondary' onClick={handleLoginWithSecret}>
+                    Login
                   </Button>
                   <Button className='w-full' onClick={handleShowInputSecret} variant='ghost'>
                     Cancel

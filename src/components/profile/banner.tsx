@@ -7,8 +7,7 @@ interface ComponentProps {
 export const Banner = (props: ComponentProps) => {
   const { value } = props;
 
-  if (!value)
-    return <Skeleton className='max-w-full w-[600px] h-[200px] mx-auto bg-card rounded-none md:rounded-3xl' />;
+  if (!value) return <Skeleton className='max-w-full w-[600px] h-[200px] mx-auto bg-card rounded-none' />;
 
-  return <img src={value} alt='Banner profile' className='w-full h-[200px] rounded-none md:rounded-3xl object-cover' />;
+  return <img src={value} alt='Banner profile' className='w-full h-[200px] rounded-none object-cover' />;
 };

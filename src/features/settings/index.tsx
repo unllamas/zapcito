@@ -1,18 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { nip19 } from 'nostr-tools';
+import { useActiveUser } from 'nostr-hooks';
 
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
 
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { hexToBytes } from '@noble/hashes/utils';
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -79,15 +77,15 @@ const sidebarNavItems = [
 ];
 
 export const Settings = () => {
-  const { user } = useAuth();
+  const { activeUser } = useActiveUser();
 
   // Flow
-  const [showSecret, setShowSecret] = useState<boolean>(false);
+  // const [showSecret, setShowSecret] = useState<boolean>(false);
 
-  if (!user) return null;
+  if (!activeUser) return null;
 
-  const npub = nip19.npubEncode(user?.id!);
-  const nsec = nip19.nsecEncode(hexToBytes(user?.secret || ''));
+  const npub = nip19.npubEncode(activeUser?.pubkey);
+  // const nsec = nip19.nsecEncode(hexToBytes(activeUser. || ''));
 
   return (
     <>
@@ -110,7 +108,7 @@ export const Settings = () => {
                 <Textarea placeholder='npub' value={npub} readOnly />
               </CardContent>
             </Card>
-            {user?.secret && (
+            {/* {user?.secret && (
               <Card className='bg-background border-primary'>
                 <CardHeader className='flex flex-row items-start gap-8'>
                   <div className='flex flex-col gap-2'>
@@ -129,7 +127,7 @@ export const Settings = () => {
                   />
                 </CardContent>
               </Card>
-            )}
+            )} */}
           </div>
         </div>
       </div>
