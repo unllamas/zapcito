@@ -1,4 +1,4 @@
-import NDK, { NDKEvent, NDKEventSerialized, NDKFilter, NDKSigner, NDKUserProfile } from '@nostr-dev-kit/ndk';
+import NDK, { NDKEvent, NDKFilter } from '@nostr-dev-kit/ndk';
 import { nip05, nip19 } from 'nostr-tools';
 
 import { RELAYS } from '@/config/constants';

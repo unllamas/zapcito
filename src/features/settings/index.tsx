@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { nip19 } from 'nostr-tools';

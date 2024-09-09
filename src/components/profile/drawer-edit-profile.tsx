@@ -22,8 +22,6 @@ interface EditProfileProps {
 }
 
 export function DrawerEditProfile({ profile }: EditProfileProps) {
-  if (!profile) return null;
-
   // Flow
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
@@ -34,6 +32,8 @@ export function DrawerEditProfile({ profile }: EditProfileProps) {
   // Libs and hooks
   const { activeUser } = useActiveUser();
   const { createNewEvent } = useNewEvent();
+
+  if (!profile) return null;
 
   const handleSave = async (): Promise<void> => {
     if (!activeUser) return;
