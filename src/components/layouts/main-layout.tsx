@@ -93,11 +93,7 @@ type MainLayoutProps = {
 };
 
 export function MainLayout({ children }: MainLayoutProps) {
-  useNostrHooks(ndk);
-  useAutoLogin();
-
   const { activeUser } = useActiveUser();
-  // const { logout } = useLogin();
 
   const getKeyUrl = useMemo(() => `/api/user?pubkey=${activeUser?.pubkey}`, [activeUser?.pubkey]);
   const { data: profile } = useSWR(getKeyUrl, fetcher);
@@ -105,51 +101,55 @@ export function MainLayout({ children }: MainLayoutProps) {
   return (
     <LaWalletProvider config={paymentConfig}>
       <div className='flex justify-center w-full'>
-        <nav className='z-10 fixed md:sticky bottom-0 md:top-0 w-full md:w-auto lg:w-full lg:max-w-[240px] h-16 md:h-full bg-black/65 md:bg-transparent backdrop-blur-lg'>
-          <div className='flex justify-end items-center md:items-start w-full h-full mx-auto px-4 md:p-4 lg:pt-0'>
-            <div className='flex md:flex-col justify-center items-center gap-2 w-full'>
+        <nav className='z-10 fixed md:sticky bottom-0 md:top-0 w-full md:w-auto lg:w-full lg:max-w-[240px] h-16 md:h-screen bg-black/65 md:bg-transparent backdrop-blur-lg'>
+          <div className='flex justify-end items-center md:items-center lg:items-start w-full h-full mx-auto px-4 md:p-4 lg:pt-0'>
+            <div className='flex md:flex-col justify-center items-center lg:items-start gap-2 w-full'>
               <div className='hidden lg:flex items-center w-full h-14 px-4'>
                 <Link href='/'>
                   <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
                 </Link>
               </div>
 
-              <Button className='w-12 h-12 lg:w-full lg:justify-start lg:px-4' variant='ghost' size='icon' asChild>
-                <Link href='/'>
-                  <HomeIcon className='w-6 h-6' />
-                  <span className='hidden lg:inline-flex ml-2'>Home</span>
-                </Link>
-              </Button>
-              <Button className='w-12 h-12 lg:w-full lg:justify-start lg:px-4' variant='ghost' size='icon' disabled>
-                {/* <Link href='/explore'> */}
+              <Link
+                className='flex-1 md:flex-initial flex justify-center items-center gap-2 w-12 h-12 lg:h-14 lg:w-auto lg:justify-start lg:px-4 lg:pr-8 rounded-full hover:bg-card font-semibold'
+                href='/'
+              >
+                <HomeIcon className='w-6 h-6' />
+                <span className='hidden lg:inline-flex ml-2'>Home</span>
+              </Link>
+              <button
+                className='flex-1 md:flex-initial flex justify-center items-center gap-2 w-12 h-12 lg:h-14 lg:w-auto lg:justify-start lg:px-4 lg:pr-8 rounded-full text-muted-foreground font-semibold'
+                disabled
+              >
                 <MagnifyingGlassIcon className='w-6 h-6' />
                 <span className='hidden lg:inline-flex ml-2'>Explore</span>
-                {/* </Link> */}
-              </Button>
-              <Button className='w-12 h-12 lg:w-full lg:justify-start lg:px-4' variant='ghost' size='icon' disabled>
+              </button>
+              <button
+                className='flex-1 md:flex-initial flex justify-center items-center gap-2 w-12 h-12 lg:h-14 lg:w-auto lg:justify-start lg:px-4 lg:pr-8 rounded-full text-muted-foreground font-semibold'
+                disabled
+              >
                 <PlusIcon className='w-6 h-6' />
                 <span className='hidden lg:inline-flex ml-2'>Publish</span>
-              </Button>
-              <Button className='w-12 h-12 lg:w-full lg:justify-start lg:px-4' variant='ghost' size='icon' disabled>
-                {/* <Link href='/messages'> */}
+              </button>
+              <button
+                className='flex-1 md:flex-initial flex justify-center items-center gap-2 w-12 h-12 lg:h-14 lg:w-auto lg:justify-start lg:px-4 lg:pr-8 rounded-full text-muted-foreground font-semibold'
+                disabled
+              >
                 <EnvelopeClosedIcon className='w-6 h-6' />
                 <span className='hidden lg:inline-flex ml-2'>Messages</span>
-                {/* </Link> */}
-              </Button>
+              </button>
 
               {activeUser && (
-                <Button variant='ghost' className='relative min-w-12 min-h-12 lg:w-full p-0 rounded-full' asChild>
-                  <Link
-                    className='flex md:justify-start items-center gap-2 pl-3 pr-4'
-                    href={`/p/${activeUser?.pubkey}`}
-                  >
-                    <Avatar src={profile?.picture} alt={profile?.displayName || profile?.name} />
-                    <div className='hidden lg:inline-flex flex-col space-y-1'>
-                      <p className='font-medium leading-none'>{profile?.displayName || profile?.name || 'Hello,'}</p>
-                      <p className='leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
-                    </div>
-                  </Link>
-                </Button>
+                <Link
+                  className='flex-1 md:flex-initial flex justify-center items-center gap-2 w-12 h-12 lg:h-14 lg:w-full lg:justify-start lg:pl-3 lg:pr-4 rounded-full hover:bg-card'
+                  href={`/p/${activeUser?.pubkey}`}
+                >
+                  <Avatar src={profile?.picture} alt={profile?.displayName || profile?.name} />
+                  <div className='hidden lg:inline-flex flex-col space-y-1 ml-1'>
+                    <p className='font-medium leading-none'>{profile?.displayName || profile?.name || 'Hello,'}</p>
+                    <p className='leading-none text-muted-foreground'>{profile?.lud16 || 'Anonymous'}</p>
+                  </div>
+                </Link>
               )}
             </div>
           </div>
@@ -167,9 +167,9 @@ export function MainLayout({ children }: MainLayoutProps) {
 
         <div className='hidden xl:block w-full max-w-sm h-auto px-8'>
           <div className='sticky top-8 flex flex-col gap-1 w-full mt-2'>
-            <h2 className='font-bold font-lg'>You might like</h2>
+            <h2 className='font-bold font-lg mb-2'>You might like</h2>
             {MOCK_BASE_PROFILES.map((profile) => (
-              <div key={profile?.pubkey} className='flex gap-2 items-center py-1 px-2 rounded-lg hover:bg-card'>
+              <div key={profile?.pubkey} className='flex gap-2 items-center py-1 pl-3 pr-2 rounded-full hover:bg-card'>
                 <div className='flex gap-2 items-center w-full'>
                   <Avatar src={profile?.image} />
                   <div className='flex flex-col'>

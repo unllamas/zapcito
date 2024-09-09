@@ -1,10 +1,13 @@
+'use client';
+
 // Packages
-// import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
 
 // Libs and hooks
 import { cn } from '@/lib/utils';
+import { ndk } from '@/lib/nostr-utils';
 
 // Components
 import { Toaster } from '@/components/ui/sonner';
@@ -21,6 +24,9 @@ interface RootLayoutProps {
 
 export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
+
+  useNostrHooks(ndk);
+  useAutoLogin();
 
   return (
     <html className='dark h-full scroll-smooth' lang='es' suppressHydrationWarning>
