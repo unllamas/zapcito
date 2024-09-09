@@ -4,7 +4,7 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useActiveUser, useAutoLogin, useNostrHooks } from 'nostr-hooks';
+import { useActiveUser } from 'nostr-hooks';
 import { LaWalletProvider } from '@lawallet/react';
 import useSWR from 'swr';
 import { ArrowTopRightIcon, EnvelopeClosedIcon, HomeIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
@@ -16,7 +16,6 @@ import { Avatar } from '@/components/profile/avatar';
 
 import { paymentConfig } from '@/config/payment';
 import fetcher from '@/config/fetcher';
-import { ndk } from '@/lib/nostr-utils';
 import { PlusIcon } from 'lucide-react';
 import { MOCK_BASE_PROFILES } from '@/config/constants';
 import { LightningAddress } from '../profile/lightning-address';

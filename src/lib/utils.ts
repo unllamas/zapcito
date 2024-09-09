@@ -96,18 +96,18 @@ export function timeAgo(timestamp: any) {
   const years = Math.floor(secondsAgo / 31536000);
 
   if (secondsAgo < 60) {
-    return `${secondsAgo} ${secondsAgo === 1 ? 'second' : 'seconds'}`;
+    return `${secondsAgo}s ago'}`;
   } else if (minutes < 60) {
-    return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+    return `${minutes}m ago`;
   } else if (hours < 24) {
-    return `${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+    return `${hours}h ago`;
   } else if (days < 7) {
-    return `${days} ${days === 1 ? 'day' : 'days'}`;
+    return `${days}d ago`;
   } else if (weeks < 4) {
-    return `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
+    return `${weeks}w ago`;
   } else if (months < 12) {
-    return `${months} ${months === 1 ? 'month' : 'months'}`;
+    return `${months}m ago`;
   } else {
-    return `${years} ${years === 1 ? 'year' : 'years'}`;
+    return `${years}y ago`;
   }
 }
