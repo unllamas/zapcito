@@ -46,7 +46,7 @@ export function OnboardingModal() {
 
   const handleCloseOnboarding = () => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('onboarding', 'false');
+      localStorage.removeItem('onboarding');
     }
 
     setIsOpen(false);

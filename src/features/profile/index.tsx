@@ -30,9 +30,9 @@ interface ProfileProps {
 
 export const Profile: React.FC<ProfileProps> = ({ value }) => {
   // Localstorage
-  let onboarding = '';
+  let onboarding;
   if (typeof window !== 'undefined') {
-    onboarding = localStorage.getItem('onboarding') || '';
+    onboarding = localStorage.getItem('onboarding');
   }
 
   // Libs and hooks
