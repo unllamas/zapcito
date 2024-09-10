@@ -1,25 +1,27 @@
 'use client';
 
 // import { useState } from 'react';
+import { useState } from 'react';
 import { nip19 } from 'nostr-tools';
+import { hexToBytes } from '@noble/hashes/utils';
 import { useActiveUser } from 'nostr-hooks';
+
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-// import { hexToBytes } from '@noble/hashes/utils';
-// import { Switch } from '@/components/ui/switch';
+import { Switch } from '@/components/ui/switch';
 
 export const Settings = () => {
   // Localstorage
-  // let secret = '';
-  // if (typeof window !== 'undefined') {
-  //   secret = localStorage.getItem('secret-key') || '';
-  // }
+  let secret = '';
+  if (typeof window !== 'undefined') {
+    secret = localStorage.getItem('secret-key') || '';
+  }
 
   const { activeUser } = useActiveUser();
 
   // Flow
-  // const [showSecret, setShowSecret] = useState<boolean>(false);
+  const [showSecret, setShowSecret] = useState<boolean>(false);
 
   const npub = nip19.npubEncode(activeUser?.pubkey || '');
 
@@ -53,7 +55,7 @@ export const Settings = () => {
                     <Textarea placeholder='npub' value={npub} readOnly />
                   </CardContent>
                 </Card>
-                {/* {secret && (
+                {secret && (
                   <Card className='bg-background border-primary'>
                     <CardHeader className='flex flex-row items-start gap-8'>
                       <div className='flex flex-col gap-2'>
@@ -73,7 +75,7 @@ export const Settings = () => {
                       />
                     </CardContent>
                   </Card>
-                )} */}
+                )}
               </div>
             </TabsContent>
             <TabsContent value='network'>

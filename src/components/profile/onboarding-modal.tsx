@@ -45,9 +45,9 @@ export function OnboardingModal() {
   const [currentStep, setCurrentStep] = useState<number>(0);
 
   const handleCloseOnboarding = () => {
-    // if (typeof window !== 'undefined') {
-    //   localStorage.setItem('onboarding', 'false');
-    // }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('onboarding', 'false');
+    }
 
     setIsOpen(false);
   };

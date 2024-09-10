@@ -65,9 +65,9 @@ export function Login() {
         secretKey,
         onSuccess: (signer) => {
           signer.user().then((user) => {
-            // if (typeof window !== 'undefined') {
-            //   localStorage.setItem('onboarding', 'true');
-            // }
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('onboarding', 'true');
+            }
 
             setSigner(signer);
             router.push(`/p/${user?.pubkey}`);

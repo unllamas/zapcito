@@ -16,7 +16,7 @@ import { Name } from '@/components/profile/name';
 import { Banner } from '@/components/profile/banner';
 import { Notes } from '@/components/notes';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-// import { OnboardingModal } from '@/components/profile/onboarding-modal';
+import { OnboardingModal } from '@/components/profile/onboarding-modal';
 import { Following } from '@/components/profile/following';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DrawerEditProfile } from '@/components/profile/drawer-edit-profile';
@@ -30,10 +30,10 @@ interface ProfileProps {
 
 export const Profile: React.FC<ProfileProps> = ({ value }) => {
   // Localstorage
-  // let onboarding = 'false';
-  // if (typeof window !== 'undefined') {
-  //   onboarding = localStorage.getItem('onboarding') || 'false';
-  // }
+  let onboarding = 'false';
+  if (typeof window !== 'undefined') {
+    onboarding = localStorage.getItem('onboarding') || 'false';
+  }
 
   // Libs and hooks
   const { activeUser } = useActiveUser();
@@ -111,7 +111,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         </Tabs>
       </div>
 
-      {/* {onboarding && <OnboardingModal />} */}
+      {onboarding && <OnboardingModal />}
     </>
   );
 };
