@@ -3,7 +3,7 @@
 // Packages
 import { Montserrat } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
-import { useAutoLogin, useNostrHooks } from 'nostr-hooks';
+import { useNostrHooks } from 'nostr-hooks';
 
 // Libs and hooks
 import { cn } from '@/lib/utils';
@@ -26,7 +26,6 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   useNostrHooks(ndk);
-  useAutoLogin();
 
   return (
     <html className='dark h-full scroll-smooth' lang='es' suppressHydrationWarning>

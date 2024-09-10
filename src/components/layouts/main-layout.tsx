@@ -4,7 +4,7 @@
 import { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useActiveUser } from 'nostr-hooks';
+import { useActiveUser, useAutoLogin } from 'nostr-hooks';
 import { LaWalletProvider } from '@lawallet/react';
 import useSWR from 'swr';
 import { ArrowTopRightIcon, EnvelopeClosedIcon, HomeIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
@@ -92,6 +92,8 @@ type MainLayoutProps = {
 };
 
 export function MainLayout({ children }: MainLayoutProps) {
+  useAutoLogin();
+
   const { activeUser } = useActiveUser();
 
   const getKeyUrl = useMemo(() => `/api/user?pubkey=${activeUser?.pubkey}`, [activeUser?.pubkey]);
