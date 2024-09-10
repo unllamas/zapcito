@@ -2,7 +2,6 @@
 
 import React, { useCallback, useMemo } from 'react';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
-import { useLocalStorage } from 'usehooks-ts';
 import useSWR from 'swr';
 
 import { convertToHex } from '@/lib/utils';
@@ -31,7 +30,10 @@ interface ProfileProps {
 
 export const Profile: React.FC<ProfileProps> = ({ value }) => {
   // Localstorage
-  const [onboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
+  let onboarding = '';
+  if (typeof window !== 'undefined') {
+    onboarding = localStorage.getItem('onboarding') || '';
+  }
 
   // Libs and hooks
   const { activeUser } = useActiveUser();
@@ -109,7 +111,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         </Tabs>
       </div>
 
-      {onboarding && <OnboardingModal />}
+      {!!onboarding && <OnboardingModal />}
     </>
   );
 };

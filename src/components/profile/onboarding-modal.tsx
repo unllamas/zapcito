@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import { useLocalStorage } from 'usehooks-ts';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
@@ -45,11 +44,12 @@ export function OnboardingModal() {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [currentStep, setCurrentStep] = useState<number>(0);
 
-  const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
-
   const handleCloseOnboarding = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('onboarding', 'false');
+    }
+
     setIsOpen(false);
-    setOnboarding(false);
   };
 
   const handleNext = () => {

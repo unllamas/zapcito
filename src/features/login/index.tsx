@@ -4,10 +4,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useActiveUser, useLogin, useSigner } from 'nostr-hooks';
 import { generateSecretKey } from 'nostr-tools';
 import { bytesToHex } from '@noble/hashes/utils';
-import { useLocalStorage } from 'usehooks-ts';
 import { EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
@@ -29,7 +29,6 @@ export function Login() {
   const { activeUser } = useActiveUser();
   const { loginWithExtention, loginWithSecretKey } = useLogin();
   const { setSigner } = useSigner();
-  const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
   if (activeUser) {
     router.push(`/p/${activeUser?.pubkey}`);
@@ -66,8 +65,11 @@ export function Login() {
         secretKey,
         onSuccess: (signer) => {
           signer.user().then((user) => {
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('onboarding', 'true');
+            }
+
             setSigner(signer);
-            setOnboarding(true);
             router.push(`/p/${user?.pubkey}`);
           });
         },
@@ -106,9 +108,10 @@ export function Login() {
     <>
       <div className='flex justify-center'>
         <div className='flex flex-col items-center gap-4 max-w-md px-4'>
-          <Image src='/img/lock.png' alt='Lock icon by Yassine Design' width={200} height={200} />
-          <div className='flex flex-col gap-2 text-center'>
-            <h2 className='text-bold text-xl'>Login</h2>
+          <div className='flex flex-col items-center gap-4 text-center'>
+            <Link href='/'>
+              <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
+            </Link>
             <p className='text-muted-foreground'>Connect and access all the features we have to offer.</p>
           </div>
 
