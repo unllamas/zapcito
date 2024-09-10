@@ -1,4 +1,7 @@
+'use client';
+
 import dynamic from 'next/dynamic';
+import { useAutoLogin } from 'nostr-hooks';
 
 const MainLayout = dynamic(() => import('@/components/layouts/main-layout').then((mod) => mod.MainLayout), {
   loading: () => (
@@ -10,5 +13,7 @@ const MainLayout = dynamic(() => import('@/components/layouts/main-layout').then
 });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  useAutoLogin();
+
   return <MainLayout>{children}</MainLayout>;
 }

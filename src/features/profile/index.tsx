@@ -30,9 +30,9 @@ interface ProfileProps {
 
 export const Profile: React.FC<ProfileProps> = ({ value }) => {
   // Localstorage
-  let onboarding = 'false';
+  let onboarding = '';
   if (typeof window !== 'undefined') {
-    onboarding = localStorage.getItem('onboarding') || 'false';
+    onboarding = localStorage.getItem('onboarding') || '';
   }
 
   // Libs and hooks
@@ -111,7 +111,7 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         </Tabs>
       </div>
 
-      {onboarding && <OnboardingModal />}
+      {!!onboarding && <OnboardingModal />}
     </>
   );
 };
