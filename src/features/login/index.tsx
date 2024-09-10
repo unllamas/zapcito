@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { useActiveUser, useLogin, useSigner } from 'nostr-hooks';
 import { generateSecretKey } from 'nostr-tools';
 import { bytesToHex } from '@noble/hashes/utils';
-import { useLocalStorage } from 'usehooks-ts';
 import { EyeOpenIcon, EyeClosedIcon, ClipboardIcon, TrashIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
@@ -30,7 +29,6 @@ export function Login() {
   const { activeUser } = useActiveUser();
   const { loginWithExtention, loginWithSecretKey } = useLogin();
   const { setSigner } = useSigner();
-  const [_, setOnboarding] = useLocalStorage('onboarding', false, { initializeWithValue: false });
 
   if (activeUser) {
     router.push(`/p/${activeUser?.pubkey}`);
@@ -67,8 +65,11 @@ export function Login() {
         secretKey,
         onSuccess: (signer) => {
           signer.user().then((user) => {
+            // if (typeof window !== 'undefined') {
+            //   localStorage.setItem('onboarding', 'true');
+            // }
+
             setSigner(signer);
-            setOnboarding(true);
             router.push(`/p/${user?.pubkey}`);
           });
         },

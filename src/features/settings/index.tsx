@@ -1,26 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import { nip19 } from 'nostr-tools';
 import { useActiveUser } from 'nostr-hooks';
-import { useLocalStorage } from 'usehooks-ts';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { hexToBytes } from '@noble/hashes/utils';
-import { Switch } from '@/components/ui/switch';
+// import { hexToBytes } from '@noble/hashes/utils';
+// import { Switch } from '@/components/ui/switch';
 
 export const Settings = () => {
   // Localstorage
-  const [secret] = useLocalStorage('secret-key', '', { initializeWithValue: true });
+  // let secret = '';
+  // if (typeof window !== 'undefined') {
+  //   secret = localStorage.getItem('secret-key') || '';
+  // }
 
   const { activeUser } = useActiveUser();
 
   // Flow
-  const [showSecret, setShowSecret] = useState<boolean>(false);
+  // const [showSecret, setShowSecret] = useState<boolean>(false);
 
   const npub = nip19.npubEncode(activeUser?.pubkey || '');
-  const nsec = nip19.nsecEncode(hexToBytes(secret));
 
   return (
     <>
@@ -52,7 +53,7 @@ export const Settings = () => {
                     <Textarea placeholder='npub' value={npub} readOnly />
                   </CardContent>
                 </Card>
-                {secret && (
+                {/* {secret && (
                   <Card className='bg-background border-primary'>
                     <CardHeader className='flex flex-row items-start gap-8'>
                       <div className='flex flex-col gap-2'>
@@ -67,12 +68,12 @@ export const Settings = () => {
                     <CardContent>
                       <Textarea
                         placeholder='npub'
-                        value={!showSecret ? '********************************' : nsec}
+                        value={!showSecret ? '********************************' : nip19.nsecEncode(hexToBytes(secret))}
                         readOnly
                       />
                     </CardContent>
                   </Card>
-                )}
+                )} */}
               </div>
             </TabsContent>
             <TabsContent value='network'>
