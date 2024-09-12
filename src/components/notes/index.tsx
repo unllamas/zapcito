@@ -50,17 +50,17 @@ export function Notes(props: ComponentProps) {
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
       <div className='flex flex-row items-center justify-between gap-2 p-2 pb-0'>
-        <div className='flex flex-row items-center gap-2'>
+        <div className='flex-1 flex flex-row items-center gap-2'>
           {isLoading ? (
             <Skeleton className='w-8 h-8 bg-card rounded-full' />
           ) : (
             <Avatar src={profile?.picture} alt={profile?.name} />
           )}
-          <div className='flex flex-col'>
-            {isLoading ? (
+          <div className='flex flex-col w-full'>
+            {isLoading || !profile?.name || !profile?.nip05 ? (
               <>
-                <Skeleton className='w-full h-6 bg-card rounded-full' />
-                <Skeleton className='w-fukk h-4 bg-card rounded-full' />
+                <Skeleton className='w-full max-w-[64px] h-5 bg-card rounded-full' />
+                <Skeleton className='w-full max-w-[128px] h-3 mt-1 bg-card rounded-full' />
               </>
             ) : (
               <>
