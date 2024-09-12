@@ -64,6 +64,9 @@ GOOGLE_TAG_MANAGER_KEY='GTM-...'
 
 # Generic
 SIGNER_RANDOM_PRIV_KEY='Secret key on kex'
+
+# Giphy
+NEXT_PUBLIC_GIPHY_API_KEY='Generate API for Giphy'
 ```
 
 ## 🗄️ Project Structure
