@@ -2,7 +2,7 @@
 
 ![Zapcito](./assets/banner.png)
 
-[![MIT License](https://img.shields.io/github/license/unllamas/zapcito)](https://github.com/unllamas/zapcito/blob/main/LICENSE)
+[![AGPL-3.0 License](https://img.shields.io/github/license/unllamas/zapcito)](https://github.com/unllamas/zapcito/blob/main/LICENSE)
 ![Stars](https://badgen.net/github/stars/unllamas/zapcito/?color=yellow)
 
 A starter kit for building [Nostr](https://nostr.com/) clients with Lightning payments.
@@ -133,7 +133,7 @@ features                # Or: page, screen
 
 ## License
 
-**Zapcito** is open-source software licensed under the MIT license.
+**Zapcito** is open-source software licensed under the AGPL-3.0 license.
 
 ## 🩷 Donations
 
