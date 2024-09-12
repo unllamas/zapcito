@@ -26,7 +26,7 @@ export const Avatar = (props: AvatarProps) => {
   return (
     <div
       className={cn(
-        `overflow-hidden bg-background rounded-full`,
+        `overflow-hidden flex-none bg-background rounded-full`,
         variant === 'default' ? 'w-8 h-8 max-h-8' : 'w-28 h-28 max-h-28 border-4 border-background',
       )}
     >

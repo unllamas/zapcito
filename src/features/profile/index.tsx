@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useMemo } from 'react';
+import { useActiveUser } from 'nostr-hooks';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import useSWR from 'swr';
 
@@ -20,9 +21,9 @@ import { OnboardingModal } from '@/components/profile/onboarding-modal';
 import { Following } from '@/components/profile/following';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DrawerEditProfile } from '@/components/profile/drawer-edit-profile';
+import { PublishNote } from '@/components/notes/publish-note';
 
 import fetcher from '@/config/fetcher';
-import { useActiveUser } from 'nostr-hooks';
 
 interface ProfileProps {
   value: string;
@@ -30,9 +31,9 @@ interface ProfileProps {
 
 export const Profile: React.FC<ProfileProps> = ({ value }) => {
   // Localstorage
-  let onboarding = '';
+  let onboarding;
   if (typeof window !== 'undefined') {
-    onboarding = localStorage.getItem('onboarding') || '';
+    onboarding = localStorage.getItem('onboarding');
   }
 
   // Libs and hooks
@@ -94,6 +95,12 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
       <div className='flex items-center mt-4 space-x-4 px-4'>
         <Following pubkey={pubkeyToHex} />
       </div>
+
+      {activeUser?.pubkey === pubkeyToHex && (
+        <div className='p-4'>
+          <PublishNote profile={profile} />
+        </div>
+      )}
 
       <div className='mt-4 px-4'>
         <Tabs defaultValue='feed' className='w-full'>

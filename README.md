@@ -64,6 +64,9 @@ GOOGLE_TAG_MANAGER_KEY='GTM-...'
 
 # Generic
 SIGNER_RANDOM_PRIV_KEY='Secret key on kex'
+
+# Giphy
+NEXT_PUBLIC_GIPHY_API_KEY='Generate API for Giphy'
 ```
 
 ## 🗄️ Project Structure
@@ -85,7 +88,7 @@ src
 └── index.(css)
 ```
 
-For Next > v13.x we recommend using the `features` folder which simulates a `page` or `screen` folder. This in turn can contain the following structure:
+For `next@^13.x` we recommend using the `features` folder which simulates a `pages` or `screens` folder. This in turn can contain the following structure:
 
 ```sh
 features                # Or: page, screen
@@ -98,18 +101,21 @@ features                # Or: page, screen
 
 ## 📋 Roadmap
 
-- [x] Database Structure
-    - [x] Auth
-    - [x] Profiles
-- [x] Auth system
-    - [x] Generate new private key
-    - [x] Login with private key
-    - [x] Login with extension
-    - [x] Autologin
+- [x] Account system
 - [ ] Profile
     - [x] Get profile
-    - [ ] Edit profile
+    - [x] Edit profile
+    - [ ] Follow profile
     - [ ] Zap profile
+- [ ] Notes
+    - [ ] Publish note
+    - [x] Get notes
+    - [ ] Reaction to note
+    - [ ] Repost note
+- [ ] Lightning Payments
+- [ ] Messages
+- [ ] Badges
+- [ ] Zap goals
 - [ ] Relays
     - [ ] Add or remove relays
 

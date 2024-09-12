@@ -33,8 +33,6 @@ export function DrawerEditProfile({ profile }: EditProfileProps) {
   const { activeUser } = useActiveUser();
   const { createNewEvent } = useNewEvent();
 
-  if (!profile) return null;
-
   const handleSave = async (): Promise<void> => {
     if (!activeUser) return;
     setIsUpdating(true);
