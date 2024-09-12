@@ -70,7 +70,9 @@ export const Settings = () => {
                     <CardContent>
                       <Textarea
                         placeholder='npub'
-                        value={!showSecret ? '********************************' : nip19.nsecEncode(hexToBytes(secret))}
+                        value={
+                          !showSecret ? '********************************' : nip19.nsecEncode(hexToBytes(secret || ''))
+                        }
                         readOnly
                       />
                     </CardContent>
