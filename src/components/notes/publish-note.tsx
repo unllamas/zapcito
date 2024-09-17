@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Avatar } from '../profile/avatar';
 import { DrawerGifSearch } from './drawer-gif-search';
 
+const isGiphyIntegrated = process.env.NEXT_PUBLIC_GIPHY_API_KEY as string;
+
 export function PublishNote({ profile }: { profile: NDKUserProfile }) {
   const [content, setContent] = useState('');
   const [isPublishing, setIsPublishing] = useState(false);
@@ -92,7 +94,7 @@ export function PublishNote({ profile }: { profile: NDKUserProfile }) {
               </div>
             )}
             <div className='flex justify-end items-center gap-2 w-full'>
-              <DrawerGifSearch onGifSelect={handleGifSelect} />
+              {isGiphyIntegrated && <DrawerGifSearch onGifSelect={handleGifSelect} />}
               <Button onClick={handlePublish} disabled={isPublishing || !content.trim()}>
                 {isPublishing ? 'Publishing...' : 'Publish'}
               </Button>

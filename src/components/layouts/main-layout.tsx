@@ -111,7 +111,7 @@ export function MainLayout({ children }: MainLayoutProps) {
 
               <Link
                 className='flex-1 md:flex-initial flex justify-center items-center gap-2 w-12 h-12 lg:h-14 lg:w-auto lg:justify-start lg:px-4 lg:pr-8 rounded-full hover:bg-card font-semibold'
-                href='/'
+                href='/feed'
               >
                 <HomeIcon className='w-6 h-6' />
                 <span className='hidden lg:inline-flex ml-2'>Home</span>
