@@ -43,6 +43,13 @@ export async function validateAndNormalizePubkey(pubkey: string): Promise<string
   throw new Error('Invalid pubkey format');
 }
 
+export async function fetchNostrEvent(filter: NDKFilter): Promise<NDKEvent | null> {
+  const ndk = await connectToNDK();
+  const event = await ndk.fetchEvent(filter);
+
+  return event || null;
+}
+
 export async function fetchNostrEvents(filter: NDKFilter): Promise<NDKEvent[]> {
   const ndk = await connectToNDK();
   const events = await ndk.fetchEvents(filter);
