@@ -49,7 +49,7 @@ export function Notes(props: ComponentProps) {
 
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
-      <div className='flex flex-row items-center justify-between gap-2 p-2 pb-0'>
+      <div className='flex flex-row items-center justify-between gap-2 p-4 pb-0'>
         <div className='flex-1 flex flex-row items-center gap-2'>
           {isLoading ? (
             <Skeleton className='w-8 h-8 bg-card rounded-full' />
@@ -72,7 +72,7 @@ export function Notes(props: ComponentProps) {
         </div>
         <span className='text-sm text-muted-foreground'>{timeAgo(post.created_at)}</span>
       </div>
-      <div className='p-2'>
+      <div className='p-4 pt-2'>
         {fullContent.length > 0 &&
           fullContent?.map((parsed, i) => {
             if (isNewline(parsed)) {

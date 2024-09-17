@@ -71,7 +71,7 @@ export function PublishNote({ profile }: { profile: NDKUserProfile }) {
   }, [content]);
 
   return (
-    <div className='w-full max-w-full mt-2'>
+    <div className='w-full max-w-full p-4'>
       <div className='flex flex-col items-start space-x-4'>
         <div className='flex gap-2 w-full'>
           <Avatar src={profile?.picture as string} alt={profile?.name as string} />
