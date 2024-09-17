@@ -96,19 +96,15 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
         <Following pubkey={pubkeyToHex} />
       </div>
 
-      {activeUser?.pubkey === pubkeyToHex && (
-        <div className='p-4'>
-          <PublishNote profile={profile} />
-        </div>
-      )}
+      {activeUser?.pubkey === pubkeyToHex && <PublishNote profile={profile} />}
 
-      <div className='mt-4 px-4'>
+      <div className='mt-4'>
         <Tabs defaultValue='feed' className='w-full'>
           <TabsContent className='flex flex-col gap-4' value='feed'>
             {isLoadingNotes ? (
               <Skeleton className='w-full h-[100px] bg-card rounded-xl' />
             ) : (
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col'>
                 {notes &&
                   notes.length > 0 &&
                   notes.map((post: any, key: any) => <Notes key={key} post={post} pubkey={pubkeyToHex} />)}

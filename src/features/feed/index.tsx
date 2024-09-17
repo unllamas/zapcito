@@ -19,14 +19,22 @@ export const Feed: React.FC = () => {
 
   const { data: notes, isLoading } = useSWR(urlKey, fetcher);
 
+  const profileKey = useCallback(() => {
+    return `/api/user?pubkey=${activeUser?.pubkey}`;
+  }, [activeUser?.pubkey]);
+
+  const { data: profile } = useSWR(profileKey, fetcher);
+
   if (!activeUser) {
     return <div className='text-center py-4'>Please log in to view your feed.</div>;
   }
 
+  console.log('profile', profile);
+
   return (
     <div className='flex justify-center w-full'>
-      <div className='flex flex-col gap-2 w-full max-w-lg'>
-        <PublishNote profile={activeUser?.profile as NDKUserProfile} />
+      <div className='flex flex-col w-full'>
+        <PublishNote profile={profile as NDKUserProfile} />
         {!isLoading && notes?.length === 0 && <div className='text-center py-2'>No notes to display</div>}
         {notes &&
           notes?.length > 0 &&
