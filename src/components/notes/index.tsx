@@ -50,7 +50,7 @@ export function Notes(props: ComponentProps) {
   return (
     <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
       <div className='flex flex-row items-center justify-between gap-2 p-4 pb-0'>
-        <div className='flex-1 flex flex-row items-center gap-2'>
+        <Link href={`/p/${key}`} className='flex-1 flex flex-row items-center gap-2'>
           {isLoading ? (
             <Skeleton className='w-8 h-8 bg-card rounded-full' />
           ) : (
@@ -69,7 +69,7 @@ export function Notes(props: ComponentProps) {
               </>
             )}
           </div>
-        </div>
+        </Link>
         <span className='text-sm text-muted-foreground'>{timeAgo(post.created_at)}</span>
       </div>
       <div className='p-4 pt-2'>
