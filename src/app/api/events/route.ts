@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { NDKFilter } from '@nostr-dev-kit/ndk';
 import { fetchNostrEvent } from '@/lib/nostr-utils';
 
 export async function GET(request: NextRequest) {
