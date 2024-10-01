@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Link from 'next/link';
 import {
   parse,
@@ -30,32 +30,29 @@ import { Iframe } from './iframe';
 
 import fetcher from '@/config/fetcher';
 
-interface ComponentProps {
-  post: any;
-  pubkey: any;
-}
-
-export function Notes(props: ComponentProps) {
+export function Notes(props: { post: any; pubkey: any }) {
   const { post, pubkey } = props;
 
-  if (!post) null;
-
-  const { data: profile, isLoading } = useSWR(`/api/user?pubkey=${pubkey}`, fetcher);
-
-  // @ts-ignore
   const key = useMemo(() => pubkey, [pubkey]);
+  const { data: profile, isLoading } = useSWR(`/api/user?pubkey=${key}`, fetcher);
+
+  if (!post) return null;
 
   const fullContent = parse(post);
+  const isReply = post.tags.filter((tag: any) => tag[0] === 'e');
 
   return (
-    <div className='overflow-hidden pb-2 border-b-[1px] border-border last:border-none'>
+    <div {...props} className='overflow-hidden pb-2'>
       <div className='flex flex-row items-center justify-between gap-2 p-4 pb-0'>
-        <Link href={`/p/${key}`} className='flex-1 flex flex-row items-center gap-2'>
-          {isLoading ? (
-            <Skeleton className='w-8 h-8 bg-card rounded-full' />
-          ) : (
-            <Avatar src={profile?.picture} alt={profile?.name} />
-          )}
+        <Link href={`/p/${key}`} className='flex flex-row items-center gap-2'>
+          <div className='relative flex justify-center'>
+            {isLoading ? (
+              <Skeleton className='w-8 h-8 bg-card rounded-full' />
+            ) : (
+              <Avatar src={profile?.picture} alt={profile?.name} />
+            )}
+            {isReply?.length > 0 && <div className='absolute bottom-full w-[2px] h-full mx-auto bg-border' />}
+          </div>
           <div className='flex flex-col w-full'>
             {isLoading || !profile?.name || !profile?.nip05 ? (
               <>
