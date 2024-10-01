@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useCallback } from 'react';
+import Link from 'next/link';
+import useSWR from 'swr';
 import { NDKEvent, NDKUserProfile } from '@nostr-dev-kit/ndk';
+import { useActiveUser } from 'nostr-hooks';
 
 import { PublishNote } from '@/components/notes/publish-note';
 
-import { useActiveUser } from 'nostr-hooks';
 import { Notes } from '@/components/notes';
 import fetcher from '@/config/fetcher';
-import useSWR from 'swr';
 
 export const Feed: React.FC = () => {
   const { activeUser } = useActiveUser();
@@ -29,8 +30,6 @@ export const Feed: React.FC = () => {
     return <div className='text-center py-4'>Please log in to view your feed.</div>;
   }
 
-  console.log('profile', profile);
-
   return (
     <div className='flex justify-center w-full'>
       <div className='flex flex-col w-full'>
@@ -40,7 +39,14 @@ export const Feed: React.FC = () => {
           notes?.length > 0 &&
           notes?.map((post: NDKEvent) => {
             if (!post) return null;
-            return <Notes key={post?.id} post={post} pubkey={post?.pubkey} />;
+
+            const isReply = post.tags.find((tag: any) => tag[0] === 'e');
+            return (
+              <Link key={post?.id} href={`/e/${post?.id}`} className='border-b-[1px] border-border last:border-none'>
+                {isReply && <div className='p-4 bg-border text-sm'>See reply to...</div>}
+                <Notes post={post} pubkey={post?.pubkey} />
+              </Link>
+            );
           })}
       </div>
     </div>

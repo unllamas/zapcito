@@ -130,6 +130,7 @@ features                # Or: page, screen
 - [ ] NIP-57: Lightning Zaps
 - [ ] NIP-58: Badges
 - [ ] NIP-75: Zap Goals
+- [ ] NIP-96: HTTP File Storage Integration
 
 ## License
 

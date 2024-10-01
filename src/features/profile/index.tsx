@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useMemo } from 'react';
+import Link from 'next/link';
 import { useActiveUser } from 'nostr-hooks';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';
 import useSWR from 'swr';
@@ -107,7 +108,15 @@ export const Profile: React.FC<ProfileProps> = ({ value }) => {
               <div className='flex flex-col'>
                 {notes &&
                   notes.length > 0 &&
-                  notes.map((post: any, key: any) => <Notes key={key} post={post} pubkey={pubkeyToHex} />)}
+                  notes.map((post: any, key: any) => {
+                    const isReply = post.tags.find((tag: any) => tag[0] === 'e');
+                    return (
+                      <Link key={key} href={`/e/${post?.id}`} className='border-b-[1px] border-border last:border-none'>
+                        {isReply && <div className='p-4 bg-border text-sm'>See reply to...</div>}
+                        <Notes post={post} pubkey={pubkeyToHex} />
+                      </Link>
+                    );
+                  })}
               </div>
             )}
           </TabsContent>
