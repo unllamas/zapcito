@@ -15,7 +15,7 @@ export function Home() {
     <div className='flex flex-col gap-8 px-4'>
       <div className='flex flex-col justify-center items-center gap-6 max-w-sm h-full mx-auto'>
         <div className='flex flex-col items-center gap-4 text-center'>
-          <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
+          <img src='/img/logo.png' width={115} height={30} alt='Zapcito logo' />
           <p className='text-lg'>A starter kit for building Nostr clients with Lightning payments.</p>
         </div>
       </div>

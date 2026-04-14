@@ -67,13 +67,7 @@ export function OnboardingModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className='p-0' onPointerDownOutside={(e) => e.preventDefault()}>
-        <Image
-          className='mx-auto'
-          src={steps[currentStep].image}
-          alt='Icon by Yassine Design'
-          width={200}
-          height={200}
-        />
+        <img className='mx-auto' src={steps[currentStep].image} alt='Icon by Yassine Design' width={200} height={200} />
         <div className='flex items-center justify-center gap-1 w-full'>
           {steps.map((_, index) => (
             <StepDot

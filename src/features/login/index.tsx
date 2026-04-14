@@ -110,7 +110,7 @@ export function Login() {
         <div className='flex flex-col items-center gap-4 max-w-md px-4'>
           <div className='flex flex-col items-center gap-4 text-center'>
             <Link href='/'>
-              <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
+              <img src='/img/logo.png' width={115} height={30} alt='Zapcito logo' />
             </Link>
             <p className='text-muted-foreground'>Connect and access all the features we have to offer.</p>
           </div>

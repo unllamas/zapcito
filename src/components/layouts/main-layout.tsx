@@ -105,7 +105,7 @@ export function MainLayout({ children }: MainLayoutProps) {
             <div className='flex md:flex-col justify-center items-center lg:items-start gap-2 w-full'>
               <div className='hidden lg:flex items-center w-full h-14 px-4'>
                 <Link href='/'>
-                  <Image src='/img/logo.png' width={115} height={30} alt='Zapcito logo' priority />
+                  <img src='/img/logo.png' width={115} height={30} alt='Zapcito logo' />
                 </Link>
               </div>
 

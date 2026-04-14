@@ -33,15 +33,15 @@ export const Avatar = (props: AvatarProps) => {
       {!src ? (
         <Skeleton className={`w-full h-full bg-border`} />
       ) : (
-        <Image
+        <img
           {...props}
           className={`w-full h-full max-h-full object-cover`}
           width={size}
           height={size}
           src={src}
           alt={alt || ''}
-          quality={70}
-          priority
+          // quality={70}
+          // priority
         />
       )}
     </div>
